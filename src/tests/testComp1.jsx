@@ -1,21 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-function Button({ color, size, btnText, round, btnstyle }) {
+function Button1({ color, size, btnText, round, btnstyle }) {
     return (
         <CommonBtn color={color} btnstyle={btnstyle} size={size} round={round}>
             {btnText}
         </CommonBtn>
     );
 }
-
-// function Button({ color, btnText, primary }) {
-//     return (
-//         <CommonBtn color={color} $primary={primary}>
-//             {btnText}
-//         </CommonBtn>
-//     );
-// }
 
 const CommonBtn = styled.button`
     display: inline-block;
@@ -142,4 +134,4 @@ const CommonBtn = styled.button`
     }}; */
 `;
 
-export default Button;
+export default Button1;

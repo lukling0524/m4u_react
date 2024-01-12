@@ -1,13 +1,14 @@
+import styled from 'styled-components';
 import './css/style.css';
 import './css/user.css';
-import BtnWrap from './pages/Btns';
-import SignUp from './pages/SignUp';
+import Tweentest from './pages/Gsap';
+// import BtnWrap from './pages/Btns';
 
 function App() {
     return (
         <>
-            <BtnWrap></BtnWrap>
-            <SignUp></SignUp>;
+            {/* <BtnWrap></BtnWrap> */}
+            <Tweentest></Tweentest>
         </>
     );
 }
