@@ -1,17 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import styled from 'styled-components';
 // import { ScrollMagic, Controller, Scene } from 'scrollmagic';
-import { Controller, Scene } from 'react-scrollmagic';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import * as ScrollMagic from 'scrollmagic';
+// import { Controller, Scene } from 'react-scrollmagic';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // import { Tween } from 'gsap/gsap-core';
-import { Tween } from 'react-gsap';
+// import { Tween } from 'react-gsap';
+import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
+import { ScrollMagicPluginIndicator } from 'scrollmagic-plugins';
 
-gsap.registerPlugin(ScrollTrigger);
+ScrollMagicPluginIndicator(ScrollMagic);
+ScrollMagicPluginGsap(ScrollMagic, gsap);
 
 function Tweentest() {
     const style = {
-        height: '1500px',
+        marginTop: '500px',
+        height: '300px',
         border: '1px solid #000000',
     };
 
@@ -20,18 +25,20 @@ function Tweentest() {
     useEffect(() => {
         tl.to('.testtest', { duration: 2, x: 500 }, 'queue').to('.testtest2', { duration: 2, x: 500 }, 'queue+=0.2');
 
-        //         const section03Animation = tl
-        //             .to('#section03 .section__title', 0.5, { y: 20, opacity: 0, ease: 'easeOutQuint' }, 'queue')
-        //             .to('#section03 .section__desc', 0.8, { y: 20, opacity: 0, ease: 'easeOutQuint' }, 'queue+=0.2')
-        //             .to('#section03 .panel', 0.8, { y: 20, opacity: 0, ease: 'easeOutQuint' }, 'queue+=0.5');
-        //
-        //         new ScrollMagic.Scene({
-        //             triggerElement: '.triggerTest',
-        //             triggerHook: 0.7,
-        //         })
-        //             .setTween(section03Animation)
-        //             .addTo(tl);
-    });
+        const scrollControler = new ScrollMagic.Controller();
+
+        let timelineTest = tl
+            .to('.testtest5', { duration: 2, x: 500, overwrite: false, immediateRender: false }, 'queue')
+            .to('.testtest6', { duration: 2, x: 500, overwrite: false, immediateRender: false }, 'queue+=0.2');
+
+        new ScrollMagic.Scene({
+            triggerElement: '#target',
+            triggerHook: 0.2,
+        })
+            .setTween(timelineTest)
+            .addIndicators({ name: 'section 222' })
+            .addTo(scrollControler);
+    }, []);
 
     return (
         <>
@@ -39,30 +46,33 @@ function Tweentest() {
             <Box02 className="testtest2"></Box02>
             <div style={style}></div>
             <div id="target"></div>
-            <Controller>
+            {/* <Controller>
                 <Scene triggerElement="#target">
                     {(progress) => (
                         <Tween
-                            to={{
-                                x: '500px',
-                                scrollTrigger: {
-                                    trigger: '#target',
-                                    markers: true,
-
-                                    // start: ' center',
-                                    // end: ' center',
-                                    // scrub: 0.5,
-                                },
-                            }}
-                            stagger={0.5}
+                        //                             to={{
+                        //                                 x: '500px',
+                        //                                 scrollTrigger: {
+                        //                                     trigger: '#target',
+                        //                                     markers: true,
+                        //
+                        //                                     // start: ' center',
+                        //                                     // end: ' center',
+                        //                                     // scrub: 0.5,
+                        //                                 },
+                        //                             }}
+                        //                             stagger={0.5}
                         >
                             <Box01 className="testtest3"></Box01>
                             <Box02 className="testtest4"></Box02>
                         </Tween>
                     )}
                 </Scene>
-            </Controller>
-            <div style={style}></div>
+            </Controller> */}
+            <div id="target2" style={style}>
+                <Box01 className="testtest5"></Box01>
+                <Box02 className="testtest6"></Box02>
+            </div>
         </>
     );
 }

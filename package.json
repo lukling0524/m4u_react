@@ -14,6 +14,8 @@
     "react-scripts": "5.0.1",
     "react-scrollmagic": "^2.3.0",
     "scrollmagic": "^2.0.8",
+    "scrollmagic-plugin-gsap": "^1.0.4",
+    "scrollmagic-plugins": "^1.0.8",
     "styled-components": "^6.1.1",
     "web-vitals": "^2.1.4"
   },

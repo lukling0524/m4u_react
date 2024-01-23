@@ -1,0 +1,193 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= react datepicker
+= react-datepicker.css 보다 아래에 선언되어야 함
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 달력 디자인
+--------------------- */
+.react-datepicker-popper {
+    z-index: 100;
+}
+
+/* 달력 우측 오픈 */
+.react-datepicker-popper.rightside {
+    z-index: 100;
+}
+
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle::before,
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle::after {
+    border-bottom-color: #fff;
+}
+
+.react-datepicker {
+    border: none !important;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+.react-datepicker__header {
+    border-bottom: none;
+    background-color: #fff;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+    padding-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.react-datepicker__year-wrapper {
+    max-width: 228px;
+}
+
+/*---------------------
+--- 화살표 아이콘
+--------------------- */
+.react-datepicker__navigation {
+    top: 8px;
+}
+
+.react-datepicker__navigation-icon::before {
+    width: 28px;
+    height: 28px;
+    top: -1px !important;
+    border: none;
+    background-image: url('../images/ico-pagination.svg');
+    border-radius: 4px;
+}
+
+.react-datepicker__navigation-icon--previous::before {
+    right: -14px;
+    transform: rotate(0);
+    background-position: top left -28px;
+}
+
+.react-datepicker__navigation-icon--next::before {
+    left: -14px;
+    transform: rotate(0);
+    background-position: top left 56px;
+}
+
+.react-datepicker__day-names {
+    padding-top: 8px;
+}
+
+/*---------------------
+--- 날짜 폰트, 선택된 날짜, hover
+--------------------- */
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+    color: #595959;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.react-datepicker__day-name {
+    font-weight: 600;
+}
+
+.react-datepicker__month {
+    margin: 0 12px 8px;
+}
+
+.react-datepicker__month .react-datepicker__month-text,
+.react-datepicker__month .react-datepicker__quarter-text {
+    line-height: 24px;
+}
+
+.react-datepicker__day--outside-month {
+    color: #bfbfbf !important;
+}
+
+.react-datepicker__day:first-child {
+    color: #f90000;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+    background-color: #f8f4ff;
+}
+
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+    background-color: #e1d4f7;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range {
+    color: #fff;
+    background-color: #6a27d8;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover,
+.react-datepicker__month-text--selected:hover,
+.react-datepicker__month-text--in-selecting-range:hover,
+.react-datepicker__month-text--in-range:hover,
+.react-datepicker__quarter-text--selected:hover,
+.react-datepicker__quarter-text--in-selecting-range:hover,
+.react-datepicker__quarter-text--in-range:hover,
+.react-datepicker__year-text--selected:hover,
+.react-datepicker__year-text--in-selecting-range:hover,
+.react-datepicker__year-text--in-range:hover {
+    background-color: #551fad;
+}
+
+/*---------------------
+--- Month picker
+--------------------- */
+.react-datepicker__month-wrapper {
+    margin: 20px 6px;
+}
+
+/*---------------------
+--- Year picker
+--------------------- */
+.react-datepicker__year .react-datepicker__year-text {
+    margin: 10px 6px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+/*---------------------
+--- disabled
+--------------------- */
+.react-datepicker .react-datepicker__day--disabled,
+.react-datepicker .react-datepicker__month-text--disabled,
+.react-datepicker .react-datepicker__quarter-text--disabled,
+.react-datepicker .react-datepicker__year-text--disabled {
+    color: #cccccc;
+    background-color: transparent;
+}
+
+.react-datepicker .react-datepicker__day--disabled:hover,
+.react-datepicker .react-datepicker__month-text--disabled:hover,
+.react-datepicker .react-datepicker__quarter-text--disabled:hover,
+.react-datepicker .react-datepicker__year-text--disabled:hover {
+    color: #cccccc;
+    background-color: transparent;
+}
