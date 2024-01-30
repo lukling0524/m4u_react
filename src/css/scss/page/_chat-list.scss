@@ -1,0 +1,86 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / chat-list
+= 채팅내역
+=============================================================
+=============================================================
+=============================================================*/
+.chat-list {
+    $height: calc(100vh - 140px);
+
+    height: $height !important;
+    min-height: $height !important;
+
+    @media (max-height: 860px) {
+        $height: calc(100vh - 124px);
+
+        height: $height !important;
+        min-height: $height !important;
+    }
+
+    &__item {
+        width: 100%;
+        display: flex;
+        padding: 20px 16px;
+        border-bottom: 1px solid $c-f0;
+        cursor: pointer;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: $c-primary-light;
+            transition: $duration;
+        }
+    }
+
+    .avatar {
+        $size: 38px;
+
+        width: $size;
+        height: $size;
+        margin-right: 16px;
+        font-size: 0;
+        background-image: url('#{$path-image}/profile-default.svg');
+        background-size: $size;
+    }
+
+    &__contents {
+        padding-right: 20px;
+        flex: 1;
+    }
+
+    &__wrap {
+        overflow-y: auto;
+
+        @include scrollbar(6px);
+    }
+
+    &__title {
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    &__sub {
+        display: flex;
+
+        .bedge {
+            margin-left: 4px;
+            background-color: $c-secondary;
+        }
+    }
+
+    &__text {
+        max-width: 800px;
+        color: $c-8c;
+        font-size: 13px;
+        @include ellipsis;
+    }
+
+    &__date {
+        color: $c-8c;
+        font-size: 13px;
+    }
+}

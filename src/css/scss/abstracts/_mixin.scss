@@ -1,0 +1,164 @@
+// ---
+// mixin
+// ---
+
+@mixin laptop {
+    @media (max-width: 1400px) {
+        @content;
+    }
+}
+
+@mixin pc-1920 {
+    @media (max-height: 1080px) {
+        @content;
+    }
+}
+
+//Pseudo class
+@mixin pseudo($content, $width, $height) {
+    content: $content;
+    display: block;
+    width: $width;
+    height: $height;
+}
+
+// position
+@mixin position($position, $top, $right, $bottom, $left) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+//position center
+@mixin positionCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//Flex center align
+@mixin flexCenter($justify) {
+    display: flex;
+    justify-content: $justify;
+    align-items: center;
+}
+
+// animating - show
+@mixin animatedShow {
+    opacity: 1;
+    max-height: 100%;
+    transition: opacity 0.6s, max-height 0s;
+}
+
+// animating - hide
+@mixin animatedHide {
+    opacity: 0.01;
+    max-height: 0px;
+    transition: opacity 0.6s, max-height 0s 0.6s;
+}
+
+//clear
+@mixin clearBoth {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+//text ellipsis
+@mixin ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+//text ellipsis
+@mixin ellipsisMulti($line) {
+    display: -webkit-box !important;
+    -webkit-line-clamp: $line; // 여러줄 이상 ellipsis
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    vertical-align: baseline;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@mixin firefox {
+    @-moz-document url-prefix() {
+        @content;
+    }
+}
+
+@mixin safari-pc {
+    @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
+            @content;
+        }
+    }
+}
+
+@mixin scrollbar($size) {
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+
+    &::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $c-bf;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $c-fa;
+    }
+
+    &::-webkit-scrollbar-button:start:decrement,
+    &::-webkit-scrollbar-button:end:increment {
+        display: none !important;
+        width: 0;
+        height: 0;
+    }
+}
+
+@mixin shadowSm01 {
+    box-shadow: 0px 0px 2px 0px rgba(14, 31, 53, 0.12);
+}
+
+@mixin shadowSm02 {
+    box-shadow: 0px 1px 4px 0px rgba(14, 31, 53, 0.06), 0px 0px 2px 0px rgba(14, 31, 53, 0.12);
+}
+
+@mixin shadowSm03 {
+    box-shadow: 0px 4px 8px 0px rgba(14, 31, 53, 0.08), 0px 1px 4px 0px rgba(14, 31, 53, 0.12);
+}
+
+@mixin shadowSm04 {
+    box-shadow: 0px 6px 12px 0px rgba(14, 31, 53, 0.08), 0px 4px 8px 0px rgba(14, 31, 53, 0.1), 0px 1px 4px 0px rgba(14, 31, 53, 0.12);
+}
+
+@mixin shadowMd01 {
+    box-shadow: 0px 12px 20px 0px rgba(14, 31, 53, 0.06), 0px 6px 12px 0px rgba(14, 31, 53, 0.08), 0px 2px 4px 0px rgba(14, 31, 53, 0.06);
+}
+
+@mixin shadowMd02 {
+    box-shadow: 0px 14px 24px 0px rgba(14, 31, 53, 0.08), 0px 6px 12px 0px rgba(14, 31, 53, 0.12), 0px 3px 6px 0px rgba(14, 31, 53, 0.08);
+}
+
+@mixin shadowMd03 {
+    box-shadow: 0px 16px 28px -1px rgba(14, 31, 53, 0.1), 0px 8px 16px 0px rgba(14, 31, 53, 0.16), 0px 4px 8px 0px rgba(14, 31, 53, 0.1);
+}
+
+@mixin shadowMd04 {
+    box-shadow: 0px 20px 40px -1px rgba(14, 31, 53, 0.12), 0px 12px 18px 0px rgba(14, 31, 53, 0.2), 0px 6px 10px 0px rgba(14, 31, 53, 0.12);
+}
+
+@mixin shadowLg03 {
+    box-shadow: 0px 32px 64px -2px rgba(14, 31, 53, 0.08), 0px 24px 32px -1px rgba(14, 31, 53, 0.16), 0px 10px 20px 0px rgba(14, 31, 53, 0.16), 0px 5px 10px 0px rgba(14, 31, 53, 0.08);
+}

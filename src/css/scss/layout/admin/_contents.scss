@@ -1,0 +1,322 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= admin/contents
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 레이아웃
+--------------------- */
+.admin {
+    min-width: $admin-min-width;
+
+    .container {
+        margin-top: $h-header;
+    }
+
+    .contents {
+        height: 100%;
+        padding: 56px 7.5%;
+        margin-left: $w-sidebar-close;
+
+        @include laptop {
+            padding: 40px 24px 64px;
+        }
+
+        @at-root {
+            /*사이드바 토글에 따라 컨텐츠영역 가변 */
+            .sidebar {
+                &.is-open + .contents {
+                    margin-left: $w-sidebar;
+                }
+            }
+        }
+    }
+
+    .pagination {
+        margin-bottom: 24px;
+    }
+
+    .btn-box {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+/*---------------------
+--- 레이아웃 (새창으로 열었을 때)
+--------------------- */
+.new-window {
+    height: 100%;
+    min-height: 100%;
+
+    .container {
+        margin-top: 0;
+    }
+
+    .admin .contents {
+        margin-left: 0;
+    }
+}
+
+/*---------------------
+--- 레이아웃 2 columns
+--------------------- */
+.admin {
+    .multi-cols {
+        $iconWidth: 40px;
+        $arrowSpace: 24px;
+        $arrowWidth: calc($iconWidth + ($arrowSpace * 2));
+
+        $iconWidthLaptop: 32px;
+        $arrowSpaceLaptop: 16px;
+        $arrowWidthLaptop: $iconWidthLaptop + ($arrowSpaceLaptop * 2);
+
+        display: flex;
+        align-items: flex-start;
+
+        &__item {
+            &.left {
+                @at-root {
+                    /* 컬럼 레이아웃 별 너비 클래스 */
+
+                    @for $i from 2 through 18 {
+                        $width: 5 * $i;
+
+                        &.col-#{$width}p {
+                            $changeToPercentage: $width * 1%;
+                            $colsWidth: calc($changeToPercentage - ($arrowWidth * 0.5));
+
+                            width: $colsWidth;
+                        }
+                    }
+
+                    @include laptop {
+                        @for $i from 2 through 18 {
+                            $width: 5 * $i;
+
+                            &.col-#{$width}p {
+                                $changeToPercentage: $width * 1%;
+                                $colsWidth: calc($changeToPercentage - ($arrowWidthLaptop * 0.5));
+
+                                width: $colsWidth;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.right {
+                flex: 1;
+
+                .data-area {
+                    width: calc(100% - $arrowWidth);
+
+                    @include laptop {
+                        width: calc(100% - $arrowWidthLaptop);
+                    }
+                }
+            }
+        }
+
+        .input-area table {
+            border-right: none;
+        }
+
+        .arrow-section {
+            width: $iconWidth;
+            margin: 0 $arrowSpace;
+
+            @include laptop {
+                width: $iconWidthLaptop;
+                margin: 0 $arrowSpaceLaptop;
+            }
+
+            &__icon {
+                height: $iconWidth;
+                background-image: url('#{$path-image}/arrow-section.svg');
+                background-size: 100%;
+
+                @include laptop {
+                    height: $iconWidthLaptop;
+                }
+            }
+        }
+
+        .popup.show {
+            flex: 1;
+
+            .popup__wrap {
+                width: 100%;
+                animation: none;
+                position: static;
+                top: unset;
+                left: unset;
+                transform: unset;
+            }
+
+            .modal {
+                &__cont {
+                    max-height: 100%;
+                }
+
+                &__body {
+                    overflow-y: unset;
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 관리자 화면 페이지 타이틀
+--------------------- */
+.page-title {
+    display: flex;
+    align-items: center;
+
+    &__text {
+        margin-left: $space;
+        font-size: 32px;
+        font-weight: 700;
+
+        @include laptop {
+            font-size: 28px;
+        }
+    }
+}
+
+/*---------------------
+--- breadcrumb
+--------------------- */
+.breadcrumb {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+    cursor: default;
+
+    &__item {
+        position: relative;
+        font-size: 13px;
+        color: $c-bf;
+        font-weight: 600;
+
+        & + & {
+            margin-left: 20px;
+
+            &::before {
+                @include pseudo('>', 10px, auto);
+                position: absolute;
+                top: -1px;
+                left: -13px;
+                color: $c-bf;
+            }
+        }
+
+        &.current {
+            color: $c-primary;
+        }
+    }
+}
+
+/*---------------------
+--- 관리자 화면 조회조건 영역
+--------------------- */
+$inputMarginBottom: 34px;
+
+.input-area {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $inputMarginBottom;
+    border-radius: 4px;
+    border: 1px solid $c-f0;
+
+    table {
+        border-right: 1px solid $c-f0;
+        text-align: left;
+    }
+
+    tr + tr {
+        border-top: 1px solid $c-f0;
+    }
+
+    th {
+        padding: 16px;
+        background-color: $c-f5;
+    }
+
+    td {
+        padding: 12px;
+    }
+
+    .checkbox-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .checkbox__item--left,
+    .radio__item--left {
+        padding-right: 10px;
+    }
+
+    .input-inner {
+        display: flex;
+    }
+
+    .btn-wrap {
+        padding: 8px 16px;
+
+        .btn {
+            height: 100%;
+            padding: 6px 20px 6px 16px;
+            @include flexCenter(center);
+        }
+
+        .icon {
+            margin-right: 4px;
+        }
+    }
+}
+
+/*---------------------
+--- 관리자 화면 조회조건 높이값 고정 클래스
+--------------------- */
+$height: 62px;
+
+@for $line from 1 through 5 {
+    .input-item__line-#{$line} {
+        min-height: ($height * $line) - ($line - 1);
+    }
+}
+
+.input-space {
+    margin-bottom: $inputMarginBottom;
+}
+
+/*---------------------
+--- 관리자 화면 데이터 출력 영역
+--------------------- */
+.admin {
+    .search-result {
+        $height: 20px;
+
+        height: $height;
+        font-size: 14px;
+        line-height: $height;
+
+        .num {
+            position: relative;
+            top: -1px;
+            color: $c-secondary;
+        }
+    }
+
+    .data-area {
+        margin: 16px 0 24px;
+    }
+}

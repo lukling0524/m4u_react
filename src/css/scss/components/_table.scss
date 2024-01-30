@@ -1,0 +1,93 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= table
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- pagination
+--------------------- */
+
+.pagination {
+    $iconSize: 28px;
+
+    @include flexCenter(center);
+
+    button {
+        border-radius: 4px;
+    }
+
+    &__move {
+        display: flex;
+    }
+
+    &__list {
+        margin: 0 4px;
+    }
+
+    &__btn {
+        width: $iconSize;
+        height: $iconSize;
+
+        background-image: url('#{$path-image}/ico-pagination.svg');
+        background-repeat: no-repeat;
+
+        &:hover {
+            background-color: $c-primary-light;
+            transition: $duration;
+        }
+
+        &--first {
+            background-position: 0 -#{$iconSize};
+        }
+
+        &--prev {
+            background-position: -#{$iconSize} -#{$iconSize};
+        }
+
+        &--next {
+            background-position: -#{$iconSize*2} -#{$iconSize};
+        }
+
+        &--last {
+            background-position: -#{$iconSize*3} -#{$iconSize};
+        }
+
+        &.disabled,
+        &:disabled {
+            background-position-y: 0;
+            cursor: default;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &__numbers {
+        display: flex;
+    }
+
+    &__page {
+        $size: 26px;
+
+        min-width: $size;
+        height: $size;
+        padding: 0 4px;
+        font-size: 14px;
+
+        &:hover {
+            background-color: $c-primary-light;
+            transition: $duration;
+        }
+
+        &.active {
+            color: $c-white;
+            background-color: $c-primary;
+        }
+    }
+
+}

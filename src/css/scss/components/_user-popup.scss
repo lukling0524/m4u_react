@@ -1,0 +1,2093 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= popup, loading spinner
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- 로딩 스피너
+--------------------- */
+.loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 9999;
+    @include animatedShow;
+
+    &.blur {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+    }
+
+    &.done {
+        @include animatedHide;
+    }
+}
+
+.loading-spinner {
+    width: 100px;
+    @include positionCenter;
+}
+
+/*---------------------
+--- 팝업창
+--------------------- */
+.popup {
+    position: relative;
+    z-index: 2000;
+
+    .layer {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba($color: $c-black, $alpha: 0.5);
+        z-index: 1200;
+        display: none;
+    }
+
+    &__wrap {
+        width: 360px;
+        padding: 24px 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 8px;
+        background-color: $c-white;
+        @include shadowMd01;
+        z-index: 1300;
+        display: none;
+        overflow: hidden;
+
+        &.confirm-popup {
+            width: 336px !important;
+        }
+    }
+
+    &.show {
+        .layer {
+            display: block;
+        }
+
+        .popup__wrap {
+            display: block;
+            animation: popup 0.2s cubic-bezier(0, 0, 0.36, 1.11) 0.1s both;
+
+            &.hide {
+                display: none;
+            }
+        }
+    }
+
+    @keyframes popup {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0);
+        }
+    }
+
+    &__title {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    &__text {
+        color: $c-8c;
+        font-size: 14px;
+    }
+
+    .btn-box {
+        $gap: 8px;
+
+        @include flexCenter(space-between);
+        gap: $gap;
+        margin-top: 30px;
+
+        .btn {
+            flex: 1;
+
+            + .btn {
+                margin: unset;
+
+                @include safari-pc {
+                    margin-left: $gap;
+                }
+            }
+        }
+
+        .btn__small.btn__tertiary {
+            font-size: 13px;
+            text-decoration: underline;
+        }
+    }
+}
+
+/*---------------------
+--- 시스템 팜업
+--------------------- */
+.popup.system {
+    .system {
+        &__icon {
+            $size: 56px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-image: url('#{$path-image}/ico-system_alert.svg');
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+    }
+
+    &__success .popup__title {
+        color: $c-positive;
+    }
+
+    &__warning {
+        .system__icon {
+            background-position: center;
+        }
+
+        .popup__title {
+            color: $c-warning;
+        }
+    }
+
+    &__danger {
+        .system__icon {
+            background-position: bottom;
+        }
+
+        .popup__title {
+            color: $c-error;
+        }
+    }
+}
+
+/*---------------------
+--- snackbar
+--------------------- */
+.snackbar {
+    min-width: 320px;
+    height: 48px;
+    position: fixed;
+    left: 40px;
+    bottom: 40px;
+    @include flexCenter(space-between);
+    padding: 6px 16px;
+    border-radius: 4px;
+    background-color: $c-1f;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+
+    display: none;
+
+    &.show {
+        animation: snackbarOpen 0.5s cubic-bezier(0, 0, 0.36, 1.11) 0.2s both;
+    }
+
+    &.hide {
+        animation: snackbarClose 0.2s cubic-bezier(0, 0, 0.36, 1.11) both;
+    }
+
+    @keyframes snackbarOpen {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes snackbarClose {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+    }
+
+    &__message {
+        color: $c-white;
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    &__close {
+        padding: 6px 16px;
+        color: $c-secondary;
+        font-weight: 600;
+
+        &--icon {
+            $size: 20px;
+
+            width: $size;
+            height: $size;
+            margin-left: 20px;
+            padding: 0;
+            text-indent: -9999px;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-image: icon(closeBtn, 'FFFFFF');
+        }
+    }
+}
+
+/*---------------------
+--- snackbar system popup
+--------------------- */
+.snackbar-system {
+    $snackbarSystem: &;
+
+    min-width: 400px;
+    @include flexCenter(space-between);
+    padding: 16px;
+    border-radius: 4px;
+    background-color: $c-white;
+    @include shadowSm04;
+
+    .icon {
+        $size: 42px;
+        width: $size;
+        height: $size;
+
+        background-size: 100%;
+        background-image: url('#{$path-image}/ico-system_alert.svg');
+        background-repeat: no-repeat;
+    }
+
+    .text-box {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    &.success {
+        .icon {
+            background-position: top;
+        }
+
+        .popup__title {
+            color: $c-positive;
+            line-height: 30px;
+        }
+
+        .popup__text {
+            line-height: 20px;
+        }
+    }
+
+    &.warning {
+        .icon {
+            background-position: center;
+        }
+
+        .popup__title {
+            color: $c-warning;
+        }
+    }
+
+    &.danger {
+        .icon {
+            background-position: bottom;
+        }
+
+        .popup__title {
+            color: $c-warning-feature;
+        }
+    }
+
+    .snackbar__close {
+        align-self: flex-start;
+        background-image: icon(closeBtn, '000000');
+    }
+}
+
+/*---------------------
+--- tooltip
+--------------------- */
+.tooltip {
+    $tooltip: &;
+
+    &__content {
+        position: relative;
+        padding: 4px 8px;
+        color: $c-white;
+        font-size: 13px;
+        background-color: $c-primary;
+        border-radius: 2px;
+        @include shadowSm03;
+        opacity: 0;
+        transition: 0.3s;
+
+        @at-root {
+            .tooltip:hover .tooltip__content {
+                opacity: 1;
+            }
+        }
+
+        &.tail {
+            &::before {
+                @include pseudo('', 12px, 6px);
+                position: absolute;
+                background-image: icon(tooltip, '551FAD');
+            }
+
+            &__down::before {
+                left: 50%;
+                bottom: -6px;
+                transform: translateX(-50%);
+                filter: drop-shadow(2px 1px 4px rgba(0, 0, 0, 0.1));
+            }
+
+            &__up::before {
+                left: 50%;
+                top: -6px;
+                transform: translateX(-50%) rotate(180deg);
+            }
+
+            &__left::before {
+                top: 50%;
+                left: -9px;
+                transform: translateY(-50%) rotate(90deg);
+            }
+
+            &__right::before {
+                top: 50%;
+                right: -9px;
+                transform: translateY(-50%) rotate(-90deg);
+            }
+        }
+    }
+
+    &.light {
+        #{$tooltip}__content {
+            color: $c-primary;
+            background-color: $c-primary-light;
+
+            &.tail::before {
+                background-image: icon(tooltip, 'F8F4FF');
+            }
+        }
+    }
+}
+
+/*---------------------
+--- modal popup (관리자화면)
+--------------------- */
+.modal {
+    $height: 70px;
+
+    .popup__wrap {
+        width: 90vw;
+        padding: 0;
+    }
+
+    &__cont {
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header {
+        height: $height;
+        @include flexCenter(space-between);
+
+        padding: 16px 20px;
+        border-bottom: 1px solid $c-d9;
+    }
+
+    .tabs {
+        padding: 16px 20px 0;
+
+        & + .modal__body {
+            /* 탭메뉴 있는 모달창 레이아웃 */
+            display: block;
+        }
+    }
+
+    .page-title__text {
+        margin-left: 0;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    &__body {
+        display: block;
+        gap: 8px;
+        padding: 10px 14px 10px 20px;
+        margin: 10px 6px 10px 0;
+
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+            border-radius: 10px;
+        }
+    }
+
+    .panel {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .input-wrap {
+        height: 100%;
+        flex: 1;
+
+        & + & {
+            border-left: 1px solid red;
+        }
+    }
+
+    .input-area {
+        margin: 0;
+
+        table {
+            width: 100%;
+            border-right: none;
+        }
+    }
+
+    &__footer {
+        height: $height;
+        @include flexCenter(flex-end);
+        padding: 16px 20px;
+    }
+}
+
+/*---------------------
+--- 랜딩페이지 popup 
+--------------------- */
+.user {
+    &.popup {
+        width: 336px;
+
+        .btn {
+            padding: 10px 16px;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 24px;
+        }
+    }
+
+    .popup {
+        &__wrap {
+            padding: 20px;
+        }
+
+        &__title {
+            margin-bottom: 4px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        &__text {
+            line-height: 1.5;
+        }
+    }
+
+    .btn-box {
+        margin-top: 30px;
+
+        // button {
+        //     height: 50px;
+        //     font-size: 18px;
+        // }
+    }
+}
+
+/*---------------------
+--- 회원화면 popup 
+--------------------- */
+.member {
+    .popup {
+        &__title {
+            font-size: 18px;
+        }
+
+        &__text {
+            margin-top: 6px;
+            font-size: 15px;
+            line-height: 1.46;
+        }
+    }
+    .btn-box {
+        margin-top: 36px;
+    }
+}
+
+/*---------------------
+--- 유저화면 popup type2 
+--------------------- */
+.type2 {
+    .popup {
+        &__wrap {
+            padding: 0;
+            text-align: left;
+        }
+    }
+
+    .modal__header {
+        height: 58px;
+
+        .page-title__text {
+            font-weight: 600;
+        }
+    }
+
+    .modal__box {
+        font-size: 15px;
+    }
+
+    .modal__cont {
+        // height: 90vh;
+        // max-height: 640px;
+
+        max-height: 640px;
+
+        @media (max-height: 778px) {
+            max-height: 90vh !important;
+        }
+    }
+
+    .page-title {
+        display: flex;
+        align-items: center;
+
+        &__text {
+            font-size: 18px;
+        }
+    }
+
+    .color-orange {
+        margin-left: 8px;
+        color: $c-secondary;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .half {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .btn-box {
+            width: 50%;
+        }
+    }
+
+    .modal__footer {
+        border-top: 1px solid $c-f0;
+    }
+}
+
+/*---------------------
+--- filter popup type2 
+--------------------- */
+.filter-modal {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &.cols1 {
+        width: 508px !important;
+    }
+
+    &.cols2 {
+        width: 828px !important;
+    }
+
+    &.cols3 {
+        width: 1240px !important;
+    }
+
+    .filter-box {
+        padding: 20px;
+        display: flex;
+
+        &__area {
+            flex: 1;
+        }
+
+        &__title {
+            margin-bottom: 4px;
+            color: $c-8c;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        &__item {
+            width: 100%;
+            padding: 8px;
+            text-align: left;
+
+            &:hover {
+                background-color: $c-fa;
+                transition: $duration;
+            }
+
+            &.is-active {
+                background-color: $c-primary-light;
+            }
+
+            &:disabled,
+            &.disabled {
+                color: $c-disabled;
+                background-color: $c-white;
+            }
+        }
+    }
+
+    .modal {
+        &__body {
+            display: block;
+
+            height: 260px;
+            margin: 0;
+            padding: 0;
+            border: 1px solid $c-d9;
+
+            @at-root {
+                .filter-box__area + .filter-box__area .modal__body {
+                    border-left: none;
+                }
+            }
+        }
+
+        &__footer {
+            @include flexCenter(space-between);
+        }
+    }
+}
+
+/*---------------------
+--- 입금계좌등록 팝업
+--------------------- */
+.popup.partner_signup {
+    padding: 0;
+}
+
+.partner_signup,
+.member_mypage {
+    &.type2 .popup__wrap {
+        width: 460px;
+    }
+
+    .account-reg {
+        /* 입금계좌등록 팝업 - 계좌 선택 전 */
+        display: block;
+
+        .textfield {
+            margin-top: 24px;
+        }
+
+        &__text {
+            padding: 16px;
+            background: $c-f0;
+            border: 1px solid $c-f0;
+            border-radius: 8px;
+
+            &--title {
+                color: $c-59;
+                font-size: 14px;
+                font-weight: 600;
+                padding-left: 22px;
+                background-size: 16px;
+                background-repeat: no-repeat;
+                background-image: icon(errorIcon, 'F90000');
+                background-position: left center;
+            }
+
+            &--desc {
+                margin-top: 8px;
+                color: $c-8c;
+                font-size: 13px;
+                line-height: 1.4;
+
+                strong {
+                    color: $c-59;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .label {
+            margin-bottom: 6px;
+        }
+
+        .btn-box {
+            margin-top: 96px;
+
+            .btn {
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+
+        .half {
+            .btn {
+                height: 40px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .account-confirm {
+        /* 입금계좌등록 팝업 - 계좌 선택 후 인증번호 입력 */
+        display: block;
+
+        &__msg {
+            text-align: center;
+
+            * {
+                font-weight: 600;
+            }
+
+            .color-purple {
+                transform: translateY(-2px);
+            }
+
+            &--title {
+                margin-bottom: 4px;
+
+                * {
+                    font-size: 20px;
+                    letter-spacing: 0.3px;
+                }
+
+                .color-purple {
+                    color: $c-brand-03;
+                }
+            }
+
+            &--desc {
+                line-height: 1.4;
+
+                * {
+                    font-size: 15px;
+                    color: $c-8c;
+                }
+
+                .color-purple {
+                    color: $c-brand-04;
+                }
+            }
+        }
+
+        &__img {
+            width: 100%;
+            margin: 48px 0 36px;
+            text-align: center;
+
+            img {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        &__info {
+            margin: 16px 0 96px;
+            padding: 16px;
+            background-color: $c-f5;
+            border: 1px solid $c-f0;
+            border-radius: 8px;
+
+            &--list {
+                position: relative;
+                padding-left: 24px;
+                color: $c-8c;
+                font-size: 13px;
+
+                &:before {
+                    @include pseudo('', 4px, 4px);
+                    position: absolute;
+                    top: 50%;
+                    left: 8px;
+                    transform: translateY(-50%);
+                    background-color: $c-8c;
+                    border-radius: 100%;
+                }
+            }
+        }
+
+        .btn-box {
+            margin-top: 96px;
+
+            .btn {
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .bank-option {
+        $optionGap: 24px;
+
+        display: flex;
+        gap: $optionGap;
+    }
+
+    .bank-btn {
+        color: $c-bf;
+
+        &.selected {
+            color: $c-26;
+        }
+    }
+
+    &.company-info {
+        /* 기업정보 변경 팝업 */
+
+        .modal__cont {
+            max-height: 80vh;
+        }
+
+        // .btn-box {
+        //     margin-top: 0;
+        // }
+    }
+
+    span[name='helptext-modal-acnt'] {
+        /* 법인등록번호 등록 안내 help text */
+        margin-top: 10px;
+    }
+}
+
+/*---------------------
+--- 은행/증권사 선택 팝업
+--------------------- */
+.partner_signup,
+.member_mypage {
+    .bank-modal {
+        $bankGap: 8px;
+
+        .financial {
+            &__type {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            &__list {
+                width: 50%;
+                border: 1px solid $c-f0;
+                border-bottom: none;
+
+                &:nth-last-child(1),
+                &:nth-last-child(2) {
+                    border-bottom: 1px solid $c-f0;
+                }
+
+                &:nth-child(even) {
+                    border-left: none;
+                }
+            }
+
+            &__item {
+                width: 100%;
+                height: 70px;
+                @include flexCenter(flex-start);
+                gap: $bankGap;
+                padding: 24px;
+
+                &:hover {
+                    background-color: $c-primary-light;
+                    transition: $duration;
+                }
+            }
+
+            &__name {
+                font-size: 15px;
+
+                @include safari-pc {
+                    margin-left: $bankGap;
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 파일 리스트 팝업
+--------------------- */
+.popup.file-list {
+    .popup__wrap {
+        width: 596px;
+    }
+
+    .modal__body {
+        height: 352px;
+    }
+
+    .file-list {
+        &__item {
+            @include flexCenter(space-between);
+            padding: 12px 16px;
+            border: 1px solid $c-d9;
+            border-radius: 4px;
+
+            & + .file-list__item {
+                margin-top: 8px;
+            }
+        }
+
+        &__name {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            @include ellipsis;
+        }
+
+        &__size {
+            margin-left: 10px;
+            color: $c-8c;
+            font-size: 14px;
+        }
+
+        &__icon {
+            $size: 20px;
+
+            width: $size;
+            height: $size;
+            margin-left: 8px;
+            font-size: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            &.download {
+                background-size: 16px;
+                background-image: icon(downloadIcon, '595959');
+            }
+
+            &.delete {
+                background-image: url('#{$path-image}/ico-delete.svg');
+            }
+        }
+    }
+
+    .modal__footer {
+        justify-content: space-between;
+
+        .material-edit-btn {
+            background-image: icon(plusIcon, 'FF7009');
+        }
+
+        .download-btn {
+            padding-left: 36px;
+            background-image: icon(downloadIcon, 'fafafa');
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+        }
+    }
+}
+
+/*---------------------
+--- 공장 포트폴리오 - 소재/가공방식 팝업
+--------------------- */
+.popup.material {
+    .popup__wrap {
+        width: 520px;
+    }
+
+    .modal__body {
+        max-height: 280px;
+    }
+
+    .material__list {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            position: relative;
+            padding: 0 14px 6px 10px;
+            // padding-left: 10px;
+            // padding-right: 14px;
+            color: $c-59;
+
+            &::before {
+                $size: 3px;
+
+                @include pseudo('', $size, $size);
+                position: absolute;
+                top: 12px;
+                left: 0;
+                background-color: $c-59;
+                border-radius: 100%;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 공장 포트폴리오 팝업
+--------------------- */
+.popup.portfolio {
+    .popup__wrap {
+        width: 1060px;
+        padding: 0;
+    }
+
+    .page-title__text {
+        font-size: 18px;
+    }
+
+    .modal {
+        &__cont {
+            flex-direction: row;
+            max-height: 702px;
+
+            .image-area,
+            .text-area {
+                flex: 1;
+            }
+        }
+
+        &__header {
+            height: 58px;
+        }
+
+        &__body {
+            height: 480px;
+            text-align: left;
+        }
+
+        &__box {
+            white-space: pre-wrap;
+        }
+    }
+
+    .image-area {
+        background-color: $c-fa;
+    }
+
+    .text-area {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-box {
+        display: flex;
+        gap: 16px;
+        margin-top: 0;
+        padding: 16px 20px;
+
+        .btn {
+            @include flexCenter(center);
+            flex: 1;
+            @include safari-pc {
+                .btn + .btn {
+                    margin-left: 16px;
+                }
+            }
+
+            &.chat-btn {
+                .icon {
+                    margin-right: 6px;
+                    background-image: icon(chatIcon, '8C8C8C');
+                    background-repeat: no-repeat;
+                }
+            }
+        }
+    }
+
+    .portfolio__tag {
+        height: 104px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 8px 20px 16px;
+        overflow: hidden;
+
+        &--wrap,
+        li {
+            height: 32px;
+            @include flexCenter(space-between);
+            margin-top: 8px;
+            margin-right: 8px;
+            padding: 6px 12px;
+            color: $c-59;
+            font-size: 14px;
+            line-height: 1.3;
+            background-color: $c-white;
+            border: 1px solid $c-d9;
+            border-radius: 100px;
+
+            p {
+                color: $c-59;
+            }
+        }
+
+        &--delete {
+            $size: 16px;
+
+            width: $size;
+            height: $size;
+            margin-left: 8px;
+            font-size: 0;
+            line-height: 1;
+            background-image: icon(closeBtn, '595959');
+            background-position: center;
+        }
+    }
+
+    .tag-input {
+        padding: 8px 20px 16px;
+    }
+}
+
+/*---------------------
+--- 공장 포트폴리오 팝업 - 포트폴리오 수정
+--------------------- */
+.popup.portfolio-edit,
+.popup.portfolio-upload {
+    .portfolio-edit__title {
+        padding: 16px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modal {
+        &__body {
+            flex: 1;
+            margin: 0 6px 0 0;
+            padding-right: 0;
+        }
+
+        &__box {
+            display: block;
+            height: 100%;
+            padding-right: 14px;
+            font-size: 16px;
+            line-height: 1.6;
+
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 공장 포트폴리오 팝업 - 포트폴리오 업로드
+--------------------- */
+.popup.portfolio-upload {
+    $size: 490px;
+
+    .image-area__wrap {
+        width: $size;
+        height: $size;
+        position: relative;
+        margin: 16px 20px;
+
+        > .image-upload__button {
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-upload__thumb--large {
+            width: 100%;
+            height: 100%; // 정방형이 아닌 이미지 대응
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .image-upload__area {
+            position: absolute;
+            left: 8px;
+            bottom: 8px;
+        }
+    }
+
+    .image-upload__area {
+        width: calc(100% - 8px);
+        flex-wrap: nowrap;
+    }
+
+    .thumbnail {
+        $gap: 10px;
+
+        &__container {
+            position: relative;
+            // width: calc(100% - 90px);
+            display: flex;
+            align-items: center;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        &__wrap {
+            width: 100%;
+        }
+
+        &__box {
+            display: flex;
+            gap: $gap;
+
+            div[aria-roledescription='carousel'] {
+                width: 100%;
+            }
+        }
+    }
+
+    .slide-arrow {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        font-size: 0;
+        background-color: rgba($color: $c-black, $alpha: 0.4);
+        background-image: icon(arrow, 'FFFFFF');
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 8px;
+
+        &.prev {
+            left: 0;
+        }
+
+        &.next {
+            right: 0;
+        }
+
+        &:hover {
+            background-color: rgba($color: $c-black, $alpha: 0.6);
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 견적 상세 팝업
+--------------------- */
+.estimate-popup {
+    .popup__wrap {
+        width: 800px;
+        text-align: left;
+    }
+
+    .modal__header {
+        height: 78px;
+        padding: 24px 16px;
+
+        .page-title__text {
+            font-size: 20px;
+        }
+    }
+
+    .modal__body {
+        padding: 20px 14px 20px 20px;
+        margin: 0;
+        background-color: $c-f5;
+    }
+
+    .tab {
+        @include flexCenter(space-between);
+        padding: 4px;
+        background-color: $c-d9;
+        border-radius: 8px;
+
+        &__list {
+            width: calc(50% - 4px);
+        }
+
+        &__btn {
+            width: 100%;
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 4px;
+
+            &.is-active {
+                color: $c-brand-04;
+                background-color: $c-white;
+                transition: $duration;
+            }
+        }
+    }
+
+    .partner-box {
+        @include flexCenter(space-between);
+        margin: 16px 0;
+
+        &__name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        &__btns {
+            display: flex;
+
+            .btn {
+                min-width: 120px;
+
+                & + .btn {
+                    margin-left: 8px;
+                }
+            }
+        }
+    }
+
+    .summary {
+        background-color: $c-43;
+        border-radius: 8px;
+        @include shadowMd02;
+        overflow: hidden;
+
+        &__box {
+            padding: 20px 24px;
+        }
+
+        &__header {
+            @include flexCenter(space-between);
+
+            * {
+                font-size: 20px;
+                font-weight: 600;
+            }
+        }
+
+        &__title {
+            color: $c-white;
+        }
+
+        &__price {
+            color: #ff9b04;
+        }
+
+        &__info {
+            margin-bottom: 12px;
+
+            * {
+                vertical-align: baseline;
+                color: $c-bf;
+                font-size: 12px;
+                font-weight: 300;
+            }
+
+            &--title {
+                color: $c-waiting;
+            }
+        }
+
+        .announce {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 24px;
+            background-color: $c-white;
+
+            &__icon {
+                $size: 80px;
+
+                width: $size;
+                height: $size;
+                font-size: 0;
+                background-image: url('#{$path-image}/ico-document.svg');
+            }
+
+            &__title {
+                margin: 4px 0;
+                padding: 4px 8px;
+                color: $c-brand-04;
+                font-size: 13px;
+                font-weight: 600;
+                background-color: $c-f5;
+                border-radius: 2px;
+            }
+
+            &__text {
+                font-weight: 600;
+
+                &--sub {
+                    color: $c-8c;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    .info-box__title {
+        color: $c-26;
+    }
+
+    .estimate-info__footer {
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+
+        .btn {
+            min-width: 120px;
+        }
+    }
+
+    .input-wrap {
+        /* input type=number의 단위 지정을 위한 디자인 */
+        position: relative;
+        flex: 1;
+
+        input[type='number'] {
+            padding-right: 36px;
+            // text-align: right;
+        }
+
+        &::after {
+            @include pseudo(attr(data-unit), 20px, 20px);
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            color: $c-8c;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+    }
+
+    .estimate-confirm__label,
+    .estimate-confirm__label--desc {
+        color: $c-59 !important;
+    }
+
+    .partner-estimate {
+        height: 146px;
+        flex: 1;
+        padding: 14px 20px;
+        background-color: $c-f5;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .filter-tag {
+            &__list {
+                & + .filter-tag__list {
+                    margin-top: 14px;
+                }
+            }
+            &__depth {
+                color: $c-59;
+                font-size: 15px;
+                font-weight: 600;
+
+                &:last-child {
+                    padding-right: 20px;
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 견적 상세 - 파트너 정보 팝업
+--------------------- */
+.partner-info-popup {
+    .popup__wrap {
+        width: auto;
+        padding: 0;
+    }
+
+    .partner-info {
+        padding: 20px;
+        box-shadow: none;
+
+        &__header {
+            height: 58px;
+            padding: 16px 20px;
+            border-bottom: 1px solid $c-d9;
+        }
+
+        &__profile {
+            margin-top: 0;
+
+            &--name {
+                word-break: break-all;
+                text-align: left;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 견적 상세 - 텍스트 수정 팝업
+--------------------- */
+.file-list {
+    .text-form {
+        height: 100%;
+    }
+}
+
+.modal__footer.estimate {
+    .btn {
+        min-width: 120px;
+    }
+}
+
+/*---------------------
+--- 모달 안에 팝업이 뜰 때 레이어
+--------------------- */
+.modal + .popup {
+    .layer {
+        opacity: 0.5;
+    }
+}
+
+/*---------------------
+--- 견적 상세 - 파트너 견적 회신 전
+--------------------- */
+.not-returned {
+    .popup__wrap {
+        height: 90vh;
+        max-height: 880px;
+    }
+
+    .modal {
+        &__cont {
+            height: 100%;
+        }
+
+        &__body {
+            height: 100%;
+            padding: 20px;
+            margin: 0;
+        }
+    }
+
+    &.contents-area {
+        height: calc(100% - 50px);
+
+        @include flexCenter(center);
+        flex-direction: column;
+        padding: 15% 0;
+
+        .icon {
+            $size: 104px;
+
+            width: $size;
+            height: $size;
+            background-image: url('#{$path-image}/ico-file.svg');
+        }
+
+        .text {
+            margin: 16px 0;
+            text-align: center;
+            color: $c-8c;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .btn {
+            width: 120px;
+        }
+    }
+}
+
+/*---------------------
+--- 최종결제 확인 창
+--------------------- */
+.payment-confirm {
+    .popup__wrap {
+        width: 440px;
+    }
+
+    .modal__body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .alert-info {
+        border: none;
+        border-radius: 0;
+    }
+
+    &__container {
+        padding: 10px 14px 10px 20px;
+        margin: 10px 6px 10px 0;
+    }
+
+    .modal__cont {
+        max-height: 90vh;
+    }
+
+    &__box {
+        padding: 16px 0;
+
+        & + & {
+            border-top: 2px solid $c-f0;
+        }
+    }
+
+    &__wrap {
+        & + & {
+            margin-top: 12px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 8px;
+        color: $c-black;
+        font-weight: 600;
+    }
+
+    &__sub {
+        color: $c-8c;
+        font-size: 15px;
+    }
+
+    &__data {
+        font-size: 15px;
+        line-height: 1.45;
+
+        &.date {
+            padding-left: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            background-image: icon(clockIcon, 'BFBFBF');
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+    }
+
+    &__delivery {
+        padding: 4px 8px;
+        color: $c-brand-04;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid $c-d9;
+        border-radius: 2px;
+    }
+
+    .estimate-confirm {
+        &__label {
+            color: $c-59;
+        }
+
+        &__footer {
+            border-width: 2px;
+        }
+    }
+
+    .info-box__title {
+        color: $c-43;
+        font-size: 18px;
+    }
+
+    .alert-info {
+        background-position: left 16px top 18px;
+
+        &__title {
+            color: $c-59;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        &__text {
+            margin-top: 6px;
+            color: $c-8c;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+    }
+}
+
+/*---------------------
+--- 동의 체크박스
+--------------------- */
+
+.modal,
+.popup {
+    .requirement {
+        padding: 20px;
+    }
+}
+
+/*---------------------
+--- 결제취소 팝업
+--------------------- */
+.payment-cancel {
+    .color-red {
+        vertical-align: baseline;
+        color: $c-error;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    &__reason {
+        .popup__wrap {
+            width: 460px;
+        }
+
+        .modal__body {
+            min-height: 240px;
+        }
+
+        .title {
+            margin-bottom: 4px;
+            color: $c-59;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .sub {
+            color: $c-8c;
+            font-size: 14px;
+        }
+
+        .select-box {
+            margin: 16px 0 8px;
+        }
+
+        .text-form {
+            height: 320px;
+        }
+    }
+}
+
+/*---------------------
+--- 진행중거래 - 물품검수 팝업
+--------------------- */
+.inspection-popup {
+    .popup__wrap {
+        width: 690px;
+    }
+
+    .modal__header {
+        height: 58px;
+    }
+
+    .modal__body {
+        background-color: $c-white;
+    }
+
+    .amount {
+        width: 100%;
+        text-align: right;
+        color: $c-8c;
+        font-weight: 600;
+
+        .num {
+            vertical-align: baseline;
+            margin-right: 8px;
+            color: $c-59;
+        }
+    }
+
+    .info-box__header {
+        margin-bottom: 0;
+        border-bottom: none;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .info-box__body + .info-box__header {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 2px solid $c-f0;
+    }
+}
+
+.popup.partner_signup {
+}
+
+/*---------------------
+--- 파트너 심사 프로세스 이탈 후 재 로그인 시 팝업 (partner_process_02.html)
+--- 파트너 심사 이탈 후 재 접속시 팝업  (partner_process_03.html)
+--------------------- */
+.user.partner-process {
+    .popup__wrap {
+        width: 496px;
+        padding: 40px 72px;
+    }
+}
+
+.partner-process {
+    &__box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+
+        &--icon {
+            width: 110px;
+            height: 100px;
+            font-size: 0;
+            background-image: url('#{$path-image}/ico-docs_partner.svg');
+        }
+
+        &--title {
+            font-size: 24px;
+            font-weight: 700;
+
+            .user-name {
+                vertical-align: baseline;
+                font-size: 24px;
+                font-weight: 700;
+            }
+        }
+
+        &--sub {
+            color: $c-8c;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        &--msg {
+            margin-top: 8px;
+            padding: 4px 8px;
+            color: $c-secondary;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: $c-f5;
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+    }
+
+    .step {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 36px 0 56px;
+
+        &__list {
+            position: relative;
+
+            &.is-active {
+                /* 현재 active된 스탭 스타일 */
+
+                .step {
+                    &__text {
+                        color: $c-brand-04;
+                        font-weight: 700;
+                    }
+
+                    &__symbol {
+                        background-color: rgba(85, 31, 173, 0.22);
+
+                        &::after {
+                            background-color: $c-white;
+                            border-color: $c-brand-05;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__text {
+            padding: 2px 8px;
+            text-align: center;
+            color: $c-bf;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        &__symbol {
+            $size: 22px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            font-size: 0;
+            border-radius: 100%;
+
+            &::after {
+                $size: 16px;
+                $position: 3px;
+
+                @include pseudo('', $size, $size);
+                position: relative;
+                top: $position;
+                left: $position;
+                border: 2px solid $c-bf;
+                border-radius: 100%;
+            }
+        }
+
+        &__divider {
+            width: 100%;
+            height: 2px;
+            position: relative;
+            top: 8px;
+            font-size: 0;
+            border-radius: 100px;
+
+            &::after {
+                @include pseudo('', calc(100% + 40px), 2px);
+                position: absolute;
+                left: -22px;
+                background-color: $c-f0;
+            }
+        }
+    }
+
+    &__text {
+        color: $c-brand-04;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .partner-btn {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .close-btn {
+        padding: 8px;
+        color: $c-59;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+            color: $c-8c;
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 회원가입 후 파트너신청 화면으로 넘어올 때 팝업 (partner_process_04.html)
+--------------------- */
+.partner-accepted {
+    .icon {
+        $size: 54px;
+
+        width: $size;
+        height: $size;
+        margin: 0 auto 10px;
+        font-size: 0;
+        background-image: icon(checkCircle, '29CC6A');
+        background-size: $size;
+    }
+
+    .popup {
+        &__title {
+            color: $c-positive;
+            font-size: 24px;
+        }
+
+        &__text {
+            margin-top: 4px;
+            color: $c-59;
+            font-size: 15px;
+        }
+    }
+
+    .btn-box {
+        display: block;
+    }
+
+    .close-btn {
+        padding: 8px;
+        margin: 8px auto 0;
+        color: $c-59;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+            color: $c-8c;
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 파트너모듈 진행중인거래 - 제작 시작 confirm 팝업
+--------------------- */
+
+.popup.work-begin {
+    .popup__wrap {
+        width: 420px;
+    }
+
+    .popup__text {
+        margin-bottom: 24px;
+    }
+
+    .alert-info {
+        text-align: left;
+    }
+}
+
+/*---------------------
+--- 비밀번호 변경 안내 팝업
+--------------------- */
+.password-reset {
+    .popup__wrap {
+        width: 500px;
+        padding: 0;
+    }
+
+    &__header {
+        padding: 16px;
+        color: $c-white;
+        font-size: 32px;
+        font-weight: 700;
+        background-color: $c-30;
+
+        span {
+            vertical-align: bottom;
+            font-weight: 700;
+            color: $c-waiting;
+        }
+    }
+
+    &__body {
+        padding: 24px 24px 8px;
+    }
+
+    .text-box {
+        margin: 24px 0;
+        padding: 24px 0;
+        line-height: 1.45;
+        background-color: $c-f0;
+        border-radius: 8px;
+
+        p {
+            color: $c-59;
+
+            & + p {
+                margin-top: 16px;
+            }
+        }
+    }
+
+    &__footer {
+        @include flexCenter(space-between);
+        padding: 24px;
+
+        .checkbox {
+            text-align: left;
+        }
+    }
+}

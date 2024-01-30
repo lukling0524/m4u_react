@@ -1,0 +1,122 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= admin/sidebar
+=============================================================
+=============================================================
+=============================================================*/
+$toggleSize: #{$space*4};
+$w-sidebar-close: 56px;
+$box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.25) inset;
+$w-scroll : 4px;
+
+.sidebar {
+    $sidebar: &;
+
+    height: calc(100% - #{$h-header});
+    position: fixed;
+    top: $h-header;
+    z-index: 100;
+
+    &__wrap {
+        position: relative;
+        width: $w-sidebar-close;
+        height: 100%;
+        padding: $space;
+        background-color: $c-white;
+        box-shadow: $box-shadow;
+        z-index: 100;
+
+        &::before {
+            /* 토글 아이콘 그림자 숨기기 */
+            @include pseudo('', 2px, $toggleSize);
+            background-color: $c-white;
+            position: absolute;
+            top: 20px;
+            right: 0;
+        }
+
+        &.is-open {
+            width: $w-sidebar;
+        }
+    }
+
+    &__container {
+        /* 사이드바 box-shadow를 위해 -1px */
+        width: calc(100% - 1px);
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        @include firefox {
+            padding: $space;
+        }
+
+        padding: $space 0 $space $space;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        // 사이드바 스크롤바 설정
+        &::-webkit-scrollbar {
+
+            width: $w-scroll;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba($color: $c-d9, $alpha: 0.5);
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $c-white;
+        }
+
+        /* Firefox 브라우저 대응 */
+        scrollbar-width: none;
+    }
+}
+
+/*---------------------
+--- 토글 버튼
+--------------------- */
+.sidebar {
+    $sidebar: &;
+
+    &__toggle {
+        width: $toggleSize;
+        height: $toggleSize;
+        position: absolute;
+        top: 20px;
+        right: -20px;
+        background-color: $c-white;
+        box-shadow: $box-shadow;
+        border-radius: 100%;
+        z-index: 90;
+        cursor: pointer;
+
+
+        &::after {
+            /* 토글버튼 아이콘 */
+            $size: 18px;
+
+            @include pseudo('', $size, $size);
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%) rotate(180deg);
+
+            background-image: url('#{$path-image}/ico-sidebar.svg');
+        }
+
+        &--item {
+            position: absolute;
+
+            &:checked+#{$sidebar}__toggle::after {
+                /* 토글버튼 클릭 시 화살표 방향 전환 */
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

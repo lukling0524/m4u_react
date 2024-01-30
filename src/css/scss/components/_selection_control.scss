@@ -1,0 +1,177 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= toggle button, checkbox, radio button
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- 토글버튼
+--------------------- */
+.toggle-switch {
+    $toggle-switch: &;
+
+    display: flex;
+    align-items: center;
+
+    &__label {
+        padding-right: 24px;
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__button {
+        display: block;
+        width: 51px;
+        height: 28px;
+        position: relative;
+        border-radius: 100px;
+        background-color: $c-8c;
+        transition: 0.3s;
+        cursor: pointer;
+
+        #{$toggle-switch}__input:checked + & {
+            /* toggle on */
+            background-color: $c-brand-04;
+        }
+
+        &::after {
+            $size: 24px;
+            @include pseudo('', $size, $size);
+            position: absolute;
+            top: 50%;
+            transform: translate(2px, -50%);
+            background-color: $c-white;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        #{$toggle-switch}__input:checked + &::after {
+            /* toggle on */
+            transform: translate(25px, -50%);
+        }
+    }
+}
+
+/*---------------------
+--- 체크박스
+--------------------- */
+input[type='checkbox'] {
+    display: none;
+}
+
+.checkbox {
+    $checkboxPadding: 28px;
+
+    &__item {
+        position: relative;
+        padding-left: $checkboxPadding;
+        cursor: pointer;
+
+        &::after {
+            $size: 18px;
+
+            @include pseudo('', $size, $size);
+            position: absolute;
+            top: 1px;
+            left: 0;
+            background-image: url('#{$path-image}/ico-checkbox_user.svg');
+            background-position: top;
+        }
+
+        @at-root {
+            /* 체스박스 체크시 아이콘 */
+            input[type='checkbox']:checked + .checkbox__item::after {
+                background-position: bottom;
+            }
+        }
+
+        &.right {
+            /* 우측 체크박스 */
+            padding-left: 0;
+            padding-right: $checkboxPadding;
+
+            &::after {
+                left: unset;
+                right: 0;
+            }
+        }
+    }
+}
+
+/* 관리자화면 체크박스 */
+.admin {
+    .checkbox {
+        &__item {
+            font-weight: 500;
+            color: $c-26;
+
+            &:after {
+                background-image: url('#{$path-image}/ico-checkbox.svg');
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 라디오 버튼
+--------------------- */
+input[type='radio'] {
+    display: none;
+}
+
+.radio {
+    $radioPadding: 28px;
+
+    &__item {
+        position: relative;
+        padding-left: $radioPadding;
+        cursor: pointer;
+
+        &::after {
+            $size: 18px;
+
+            @include pseudo('', $size, $size);
+            position: absolute;
+            top: 1px;
+            left: 0;
+            background-image: url('#{$path-image}/ico-radio_user-stroke.svg');
+            background-position: top;
+        }
+
+        @at-root {
+            /* 라디오버튼 선택시 아이콘 */
+            input[type='radio']:checked + .radio__item::after {
+                background-position: bottom;
+            }
+        }
+
+        &.right {
+            /* 우측 라디오 버튼 */
+            padding-left: 0;
+            padding-right: $radioPadding;
+
+            &::after {
+                left: unset;
+                right: 0;
+            }
+        }
+    }
+}
+
+/* 관리자화면 라디오박스 */
+.admin {
+    .radio {
+        &__item {
+            font-weight: 500;
+            color: $c-26;
+
+            &:after {
+                background-image: url('#{$path-image}/ico-radio.svg');
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / member_mypage
+= 회원정보 수정
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 회원정보 수정
+--------------------- */
+.member_mypage_00 {
+    // padding: 48px;
+
+    .cols2 {
+        display: flex;
+        gap: $info-box-gap;
+
+        .info-box {
+            flex: 1;
+            margin: 0;
+
+            @include safari-pc {
+                &:nth-child(2) {
+                    margin-left: $info-box-gap;
+                }
+            }
+        }
+    }
+
+    .allSave-btn {
+        min-width: 120px;
+    }
+
+    .info-box__body {
+        &.noti {
+            @include flexCenter(space-between);
+        }
+
+        &.account {
+            @include flexCenter(space-between);
+
+            .account-info {
+                $gap: 8px;
+
+                display: flex;
+                gap: $gap;
+
+                @include safari-pc {
+                    *:not(.financial__icon) {
+                        margin-left: $gap;
+                    }
+                }
+            }
+
+            .account-username {
+                vertical-align: baseline;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .member-type {
+        @include flexCenter(space-between);
+    }
+}
+
+/*---------------------
+--- 회원탈퇴 버튼
+--------------------- */
+.withdraw-btn {
+    width: 120px;
+    margin-top: $info-box-gap;
+}

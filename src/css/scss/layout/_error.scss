@@ -1,0 +1,83 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= error
+=============================================================
+=============================================================
+=============================================================*/
+
+.error-page {
+    height: 100vh;
+    min-height: 450px;
+    background-color: $c-white;
+
+    &__wrap {
+        height: 100%;
+        padding: 20px;
+        @include flexCenter(center);
+        flex-direction: column;
+    }
+
+    &__img {
+        margin: 24px 0 16px;
+    }
+
+    .message {
+        margin-bottom: 24px;
+        text-align: center;
+
+        &__title {
+            margin-bottom: 8px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        &__sub {
+            color: $c-8c;
+            line-height: 1.42;
+        }
+    }
+
+    &__link {
+        min-width: 240px;
+    }
+}
+
+/* 미지원 브라우저 */
+.browser {
+    .message {
+        margin: 24px 0 36px;
+
+        &__title {
+            margin-bottom: 12px;
+            color: $c-59;
+            font-size: 44px;
+        }
+
+        &__sub {
+            color: $c-59;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        &__text {
+            margin-top: 16px;
+            color: $c-bf;
+        }
+    }
+
+    .chrome {
+        $size: 124px;
+
+        width: $size;
+        min-height: $size;
+        @include flexCenter(center);
+        background-color: $c-f0;
+        border-radius: 100%;
+    }
+
+    .download {
+        margin-top: 24px;
+    }
+}

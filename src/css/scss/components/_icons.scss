@@ -1,0 +1,199 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= icons
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- mini icons
+--------------------- */
+
+.icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-position: top;
+    text-indent: -9999px;
+
+    &.on {
+        background-position: bottom;
+    }
+
+    &.hide {
+        opacity: 0;
+    }
+}
+
+/* 화살표 */
+.icon.arrow {
+    transform: rotate(90deg);
+    background-image: icon(sidebarArrow, '000000');
+    background-position: center !important;
+
+    &.on {
+        /* 서브메뉴 오픈 시 화살표 방향 변경 */
+        transform: rotate(-90deg);
+    }
+}
+
+/* 대시보드 */
+.ico-dash {
+    background-image: url('#{$path-image}/ico-sidebar_dash.svg');
+}
+
+/* 시스템 */
+.ico-system {
+    background-image: url('#{$path-image}/ico-sidebar_system.svg');
+}
+
+/* 사용자 */
+.ico-user {
+    background-image: url('#{$path-image}/ico-sidebar_user.svg');
+}
+
+/* 파트너 */
+.ico-partner {
+    background-image: url('#{$path-image}/ico-sidebar_partner.svg');
+}
+
+/* 견적 */
+.ico-quote {
+    background-image: url('#{$path-image}/ico-sidebar_quote.svg');
+}
+
+/* 거래 */
+.ico-deal {
+    background-image: url('#{$path-image}/ico-sidebar_deal.svg');
+}
+
+/* 메세지 */
+.ico-message {
+    background-image: url('#{$path-image}/ico-sidebar_message.svg');
+}
+
+/* 약관 */
+.ico-term {
+    background-image: url('#{$path-image}/ico-sidebar_term.svg');
+}
+
+/* 알림 */
+.ico-notification {
+    background-image: url('#{$path-image}/ico-notification.svg');
+}
+
+/* 채팅 */
+.ico-chat {
+    background-image: icon(chatIcon, '595959');
+
+    &.on {
+        background-image: icon(chatIcon, 'FFFFFF');
+    }
+}
+
+/* 검색 */
+.ico-search {
+    width: 20px;
+    height: 20px;
+    background-image: url('#{$path-image}/ico-search.svg');
+}
+
+/* title bullet */
+.ico-title_bullet {
+    width: 20px;
+    height: 20px;
+    background-image: url('#{$path-image}/ico-bullet.svg');
+}
+
+/* 닫기 */
+.ico-close {
+    background-image: url('#{$path-image}/ico-close.svg');
+}
+
+/* 완료 */
+.ico-check {
+    background-image: icon(checkIcon, '29CC6A');
+    background-position: center;
+}
+
+/* 견적(회원 / 파트너) */
+.ico-quote_member {
+    background-image: url('#{$path-image}/ico-quote_member.svg');
+}
+
+/* 채팅(회원 / 파트너) */
+.ico-chat_member {
+    background-image: url('#{$path-image}/ico-chat_member.svg');
+}
+
+/* 사용자(회원 / 파트너) */
+.ico-user_member {
+    background-image: url('#{$path-image}/ico-user_member.svg');
+}
+
+/* 거래(회원 / 파트너) */
+.ico-deal_member {
+    background-image: url('#{$path-image}/ico-deal_member.svg');
+}
+
+/* 알림(회원 / 파트너) */
+.ico-notification_member {
+    background-image: url('#{$path-image}/ico-notification_member.svg');
+}
+
+/* 시스템(회원 / 파트너) */
+.ico-system_member {
+    background-image: url('#{$path-image}/ico-system_member.svg');
+}
+
+/*---------------------
+--- input icon
+--------------------- */
+.input-icon {
+    &__search {
+        /* 검색 */
+        background-image: url('#{$path-image}/ico-search.svg');
+    }
+
+    &__arrow {
+        /* 화살표 */
+        background-image: icon(sidebarArrow, '595959');
+    }
+
+    &__calender {
+        /* 달력 */
+        background-image: url('#{$path-image}/ico-calender.svg');
+    }
+
+    &__upload {
+        /* 업로드 */
+        background-image: url('#{$path-image}/ico-upload.svg');
+    }
+
+    &__download {
+        /* 다운로드 */
+        background-image: icon(downloadIcon, '000000');
+    }
+
+    &__link {
+        /* 링크 */
+        background-image: url('#{$path-image}/ico-link.svg');
+    }
+
+    &__attach {
+        /* 파일 */
+        background-image: icon(attachIcon, '8C8C8C');
+    }
+}
+
+input {
+    &:disabled {
+        &.input-icon {
+            &__arrow {
+                /* 화살표 */
+                background-image: icon(sidebarArrow, 'BFBFBF');
+            }
+        }
+    }
+}

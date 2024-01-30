@@ -1,0 +1,139 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= list
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 메인 메뉴
+--------------------- */
+.list {
+    $list: &;
+    padding: 8px;
+
+    &__main {
+        overflow: hidden;
+
+        &+& {
+            margin-top: $space;
+        }
+
+        &--item {
+            display: flex;
+            width: 100%;
+            min-height: 40px;
+            text-align: left;
+            padding: $space ;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: $c-primary-light;
+                transition: $duration;
+            }
+
+
+            &.is-active {
+                background-color: $c-primary;
+
+                #{$list}__main--title {
+                    color: $c-white;
+                }
+
+                .icon.arrow {
+                    /* active된 메인 메뉴 화살표 색상 변경 */
+                    background-image: icon(sidebarArrow, 'FFFFFF');
+                }
+            }
+        }
+
+        &--title {
+            display: block;
+            flex: 1;
+            margin-left: $space;
+            text-align: left;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+    }
+}
+
+/*---------------------
+--- 서브 메뉴
+--------------------- */
+.list {
+    $list: &;
+
+    &__sub {
+        height: 0;
+        padding-left: #{$space*2};
+        overflow: hidden;
+
+        #{$list}__main--item.is-open+& {
+            /* 메인 메뉴 active 시 하위 메뉴 오픈 */
+            height: 100%;
+        }
+
+        &--list {
+            position: relative;
+            padding: calc($space / 2) $space;
+
+            &:first-child {
+                margin-top: $space;
+            }
+
+            &:hover {
+                opacity: 0.5;
+                transition: $duration;
+            }
+        }
+
+        &--item {
+            display: block;
+        }
+
+        .current-page {
+            color: $c-primary;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &::before {
+                @include pseudo('', 2px, 18px);
+                position: absolute;
+                top: 7px;
+                left: 0;
+                background-color: $c-primary;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 리스트 아이콘
+--------------------- */
+.list {
+    &__icon {
+        padding-left: #{$space*4};
+
+        &::before {
+            /* 아이콘 영역 */
+            $size: 24px;
+            @include pseudo('', $size, $size);
+            position: absolute;
+            /* ↓↓↓ 텍스트가 긴 메뉴명 대응을 위해 px로 고정 */
+            top: 8px;
+            left: $space;
+        }
+
+        @at-root {
+            .list__main--item.is-open::after {
+                /* 하위 메뉴 열린 상태일 때 화살표 방향*/
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}

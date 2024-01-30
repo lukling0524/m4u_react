@@ -1,0 +1,189 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / partner-signup
+= 파트너 신청
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 파트너 신청 공통
+--------------------- */
+.partner_signup {
+    padding: 56px 0;
+    display: flex;
+    justify-content: center;
+
+    .box-layout {
+        width: 578px;
+        // margin: 56px 0;
+        padding: 56px;
+        border: 1px solid $c-f0;
+        background-color: $c-white;
+        border-radius: 12px;
+    }
+
+    .textfield {
+        margin-top: 36px;
+    }
+}
+
+.admin,
+.member {
+    .partner_signup {
+        padding: 0;
+    }
+}
+
+/*---------------------
+--- 입금계좌
+--------------------- */
+
+.partner_signup {
+    .account-verification {
+        /* 계좌 등록하기 */
+        display: flex;
+        justify-content: center;
+        margin-left: 0 !important;
+
+        > * {
+            color: $c-brand-04 !important;
+        }
+
+        .ico-plus {
+            background-image: icon(plusIcon, '8852e0');
+            background-position: center;
+        }
+
+        &:disabled {
+            color: $c-positive !important;
+            background-color: $c-fa;
+            border: 1px solid $c-d9;
+
+            > * {
+                color: $c-positive !important;
+            }
+
+            &:hover {
+                background-color: $c-fa;
+            }
+        }
+    }
+
+    .account {
+        /* 계좌등록 후 */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        &__text {
+            width: 100%;
+            padding: 16px;
+            background-color: $c-fa;
+            border: 1px solid $c-d9;
+            border-radius: 4px;
+        }
+
+        .label {
+            margin-bottom: 0;
+            color: $c-8c;
+        }
+
+        &__info {
+            vertical-align: baseline;
+            color: $c-59;
+            font-size: 15px;
+
+            & + .account__info {
+                margin-left: 6px;
+            }
+        }
+
+        /* 계좌 수정 */
+        &__edit {
+            width: fit-content;
+            margin-top: 8px;
+            padding-left: 40px;
+            background-image: icon(editIcon, '8852E0');
+            background-position: center left 16px;
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+/*---------------------
+--- 영업시간
+--------------------- */
+.partner_signup {
+    .business-hour {
+        $selectGap: 8px;
+
+        &__title {
+            display: block;
+        }
+
+        &__type {
+            color: $c-59;
+        }
+
+        &__wrap {
+            @include flexCenter(space-between);
+        }
+
+        &__item {
+            flex: 1;
+        }
+
+        &__sub {
+            color: $c-bf;
+            font-size: 13px;
+        }
+
+        &__select {
+            display: flex;
+            gap: $selectGap;
+        }
+
+        &__list {
+            flex: 1;
+        }
+
+        .symbol {
+            position: relative;
+            top: 8px;
+            padding: 10px;
+        }
+
+        &__modify {
+            margin-top: 16px;
+            padding-left: 26px;
+            font-size: 13px;
+            font-weight: 600;
+            background-position: center left;
+            background-repeat: no-repeat;
+
+            &.add {
+                color: $c-brand-04;
+                background-image: icon(plusIcon, '8852E0');
+
+                &:hover {
+                    color: $c-brand-03;
+                    background-image: icon(plusIcon, 'A67DE8');
+                    transition: $duration;
+                }
+            }
+
+            &.remove {
+                color: $c-59;
+                background-image: icon(minusIcon, '000000');
+
+                &:hover {
+                    color: $c-8c;
+                    background-image: icon(minusIcon, '8C8C8C');
+                    transition: $duration;
+                }
+            }
+        }
+    }
+}

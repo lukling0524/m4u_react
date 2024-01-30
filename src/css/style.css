@@ -140,7 +140,8 @@ button {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	appearance: none;
+	-moz-appearance: none;
+	     appearance: none;
 	-webkit-appearance: none;
 	font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 	font-size: 100%;
@@ -163,7 +164,6 @@ label,
 select,
 summary,
 textarea {
-	-ms-touch-action: manipulation;
 	touch-action: manipulation;
 	outline: 0;
 }
@@ -187,11 +187,9 @@ input {
 	font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 	vertical-align: middle;
 	box-sizing: border-box;
-	-webkit-border-radius: 0px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	-webkit-border-radius: 0;
 	border-radius: 0;
 	background-color: transparent;
 	border: 1px solid transparent;
@@ -199,6 +197,7 @@ input {
 
 textarea {
 	box-sizing: border-box;
+	resize: none;
 }
 
 input,
@@ -300,6 +299,10 @@ textarea::-webkit-scrollbar-button:end:increment {
 	display: none !important;
 }
 
+.visibility-hidden {
+	visibility: hidden !important;
+}
+
 /* 스크립트 개행을 위한 클래스 */
 .pre-wrap {
 	white-space: pre-wrap !important;
@@ -389,6 +392,9 @@ textarea::-webkit-scrollbar-button:end:increment {
 /* 채팅 */
 .ico-chat {
 	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='24' fill='none'%3E%3Cpath stroke='%23595959' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M9.125 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.75m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12.5m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m5.25 0c0 4.556-4.03 8.25-9 8.25a9.767 9.767 0 0 1-2.555-.337 5.972 5.972 0 0 1-4.509.992 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C4.43 16.178 3.5 14.189 3.5 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z'/%3E%3C/svg%3E");
+}
+.ico-chat.on {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='24' fill='none'%3E%3Cpath stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M9.125 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.75m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12.5m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m5.25 0c0 4.556-4.03 8.25-9 8.25a9.767 9.767 0 0 1-2.555-.337 5.972 5.972 0 0 1-4.509.992 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C4.43 16.178 3.5 14.189 3.5 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z'/%3E%3C/svg%3E");
 }
 
 /* 검색 */
@@ -488,7 +494,7 @@ input:disabled.input-icon__arrow {
 =============================================================
 = components
 = bank logo
-= sprite image의 순서는 [코드정의서_v1.7_20231018] - 기관유형 순서대로 지정되었습니다. 
+= (23.12.27)sprite image의 순서는 [코드정의서_v2.8_20231227] - 기관유형 순서대로 지정되었습니다. 
 =============================================================
 =============================================================
 =============================================================*/
@@ -1933,6 +1939,11 @@ input[type=radio]:checked + .radio__item::after {
 	max-height: 100%;
 	transition: opacity 0.6s, max-height 0s;
 }
+.loading.blur {
+	background-color: rgba(255, 255, 255, 0.1);
+	-webkit-backdrop-filter: blur(4px);
+	        backdrop-filter: blur(4px);
+}
 .loading.done {
 	opacity: 0.01;
 	max-height: 0px;
@@ -2052,6 +2063,9 @@ input[type=radio]:checked + .radio__item::after {
 	width: 4px;
 	border-radius: 10px;
 }
+.modal__box {
+	white-space: pre-wrap;
+}
 .modal .panel {
 	width: 100%;
 	display: flex;
@@ -2147,6 +2161,9 @@ textarea {
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+input::-moz-placeholder, select::-moz-placeholder, textarea::-moz-placeholder {
+	color: #bfbfbf;
+}
 input::placeholder,
 select::placeholder,
 textarea::placeholder {
@@ -2168,6 +2185,13 @@ select:active,
 textarea:focus,
 textarea:active {
 	border: 1px solid #8852e0;
+}
+
+input:-moz-read-only {
+	color: rgba(140, 140, 140, 0.7);
+	border: 1px solid #f0f0f0 !important;
+	background-color: #f5f5f5;
+	cursor: default;
 }
 
 input.readonly, input:read-only {
@@ -2249,19 +2273,7 @@ textarea::-webkit-scrollbar {
 	background-color: #ffffff;
 	border-color: #d9d9d9 !important;
 }
-.textfield input.disedit {
-	color: #262626 !important;
-	border: 1px solid #f0f0f0 !important;
-	background-color: #f5f5f5;
-	cursor: default;
-}
-.textfield.disedit {
-	color: #262626 !important;
-	border: 1px solid #f0f0f0 !important;
-	background-color: #f5f5f5;
-	cursor: default;
-}
-.textfield.disedit input.disedit {
+.textfield.disedit input {
 	color: #262626 !important;
 	border: 1px solid #f0f0f0 !important;
 	background-color: #f5f5f5;
@@ -3446,12 +3458,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--0 {
 	padding-top: 0px !important;
 }
+
 .pd__right--0 {
 	padding-right: 0px !important;
 }
+
 .pd__bottom--0 {
 	padding-bottom: 0px !important;
 }
+
 .pd__left--0 {
 	padding-left: 0px !important;
 }
@@ -3459,12 +3474,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--8 {
 	padding-top: 8px !important;
 }
+
 .pd__right--8 {
 	padding-right: 8px !important;
 }
+
 .pd__bottom--8 {
 	padding-bottom: 8px !important;
 }
+
 .pd__left--8 {
 	padding-left: 8px !important;
 }
@@ -3472,12 +3490,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--16 {
 	padding-top: 16px !important;
 }
+
 .pd__right--16 {
 	padding-right: 16px !important;
 }
+
 .pd__bottom--16 {
 	padding-bottom: 16px !important;
 }
+
 .pd__left--16 {
 	padding-left: 16px !important;
 }
@@ -3485,12 +3506,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--24 {
 	padding-top: 24px !important;
 }
+
 .pd__right--24 {
 	padding-right: 24px !important;
 }
+
 .pd__bottom--24 {
 	padding-bottom: 24px !important;
 }
+
 .pd__left--24 {
 	padding-left: 24px !important;
 }
@@ -3498,12 +3522,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--32 {
 	padding-top: 32px !important;
 }
+
 .pd__right--32 {
 	padding-right: 32px !important;
 }
+
 .pd__bottom--32 {
 	padding-bottom: 32px !important;
 }
+
 .pd__left--32 {
 	padding-left: 32px !important;
 }
@@ -3511,12 +3538,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--40 {
 	padding-top: 40px !important;
 }
+
 .pd__right--40 {
 	padding-right: 40px !important;
 }
+
 .pd__bottom--40 {
 	padding-bottom: 40px !important;
 }
+
 .pd__left--40 {
 	padding-left: 40px !important;
 }
@@ -3524,12 +3554,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--48 {
 	padding-top: 48px !important;
 }
+
 .pd__right--48 {
 	padding-right: 48px !important;
 }
+
 .pd__bottom--48 {
 	padding-bottom: 48px !important;
 }
+
 .pd__left--48 {
 	padding-left: 48px !important;
 }
@@ -3537,12 +3570,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--56 {
 	padding-top: 56px !important;
 }
+
 .pd__right--56 {
 	padding-right: 56px !important;
 }
+
 .pd__bottom--56 {
 	padding-bottom: 56px !important;
 }
+
 .pd__left--56 {
 	padding-left: 56px !important;
 }
@@ -3550,12 +3586,15 @@ input[type=number]::-webkit-inner-spin-button {
 .pd__top--64 {
 	padding-top: 64px !important;
 }
+
 .pd__right--64 {
 	padding-right: 64px !important;
 }
+
 .pd__bottom--64 {
 	padding-bottom: 64px !important;
 }
+
 .pd__left--64 {
 	padding-left: 64px !important;
 }
@@ -3566,12 +3605,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--0 {
 	margin-top: 0px !important;
 }
+
 .mg__right--0 {
 	margin-right: 0px !important;
 }
+
 .mg__bottom--0 {
 	margin-bottom: 0px !important;
 }
+
 .mg__left--0 {
 	margin-left: 0px !important;
 }
@@ -3579,12 +3621,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--8 {
 	margin-top: 8px !important;
 }
+
 .mg__right--8 {
 	margin-right: 8px !important;
 }
+
 .mg__bottom--8 {
 	margin-bottom: 8px !important;
 }
+
 .mg__left--8 {
 	margin-left: 8px !important;
 }
@@ -3592,12 +3637,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--16 {
 	margin-top: 16px !important;
 }
+
 .mg__right--16 {
 	margin-right: 16px !important;
 }
+
 .mg__bottom--16 {
 	margin-bottom: 16px !important;
 }
+
 .mg__left--16 {
 	margin-left: 16px !important;
 }
@@ -3605,12 +3653,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--24 {
 	margin-top: 24px !important;
 }
+
 .mg__right--24 {
 	margin-right: 24px !important;
 }
+
 .mg__bottom--24 {
 	margin-bottom: 24px !important;
 }
+
 .mg__left--24 {
 	margin-left: 24px !important;
 }
@@ -3618,12 +3669,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--32 {
 	margin-top: 32px !important;
 }
+
 .mg__right--32 {
 	margin-right: 32px !important;
 }
+
 .mg__bottom--32 {
 	margin-bottom: 32px !important;
 }
+
 .mg__left--32 {
 	margin-left: 32px !important;
 }
@@ -3631,12 +3685,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--40 {
 	margin-top: 40px !important;
 }
+
 .mg__right--40 {
 	margin-right: 40px !important;
 }
+
 .mg__bottom--40 {
 	margin-bottom: 40px !important;
 }
+
 .mg__left--40 {
 	margin-left: 40px !important;
 }
@@ -3644,12 +3701,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--48 {
 	margin-top: 48px !important;
 }
+
 .mg__right--48 {
 	margin-right: 48px !important;
 }
+
 .mg__bottom--48 {
 	margin-bottom: 48px !important;
 }
+
 .mg__left--48 {
 	margin-left: 48px !important;
 }
@@ -3657,12 +3717,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--56 {
 	margin-top: 56px !important;
 }
+
 .mg__right--56 {
 	margin-right: 56px !important;
 }
+
 .mg__bottom--56 {
 	margin-bottom: 56px !important;
 }
+
 .mg__left--56 {
 	margin-left: 56px !important;
 }
@@ -3670,12 +3733,15 @@ input[type=number]::-webkit-inner-spin-button {
 .mg__top--64 {
 	margin-top: 64px !important;
 }
+
 .mg__right--64 {
 	margin-right: 64px !important;
 }
+
 .mg__bottom--64 {
 	margin-bottom: 64px !important;
 }
+
 .mg__left--64 {
 	margin-left: 64px !important;
 }
@@ -3831,8 +3897,9 @@ input[type=number]::-webkit-inner-spin-button {
 	width: 100% !important;
 }
 
-/* 컨텐츠 길이에 따라서 가변 */
+/* 컨텐츠 너비에 따라서 가변 */
 .width-fit {
+	width: -moz-fit-content;
 	width: fit-content;
 }
 
@@ -3841,11 +3908,18 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 /* 높이값 */
+.height-100p {
+	height: 100% !important;
+}
+
+/* 컨텐츠 길이에 따라서 가변 */
 .height-fit {
+	height: -moz-fit-content;
 	height: fit-content;
 }
 
 .maxheight-fit {
+	max-height: -moz-fit-content !important;
 	max-height: fit-content !important;
 }
 

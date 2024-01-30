@@ -1,0 +1,108 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= Chips and bedge
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 상태 알림 (dot) 
+--------------------- */
+
+.dot {
+    $size: 6px;
+
+    width: $size;
+    height: $size;
+    font-size: 0;
+    border-radius: 100%;
+    background-color: $c-not-started;
+
+    &__done,
+    &__green {
+        background-color: $c-done;
+    }
+
+    &__error,
+    &__red {
+        background-color: $c-warning-feature;
+    }
+
+    &__processing,
+    &__blue {
+        background-color: $c-in-progress;
+    }
+
+    &__warning,
+    &__yellow {
+        background-color: $c-waiting;
+    }
+
+    &__start,
+    &__purple {
+        background-color: $c-start;
+    }
+
+
+}
+
+/*---------------------
+--- bedge
+--------------------- */
+
+.bedge {
+    $size: 20px;
+    min-width: $size;
+    height: $size;
+    padding: 0 6px;
+    background-color: $c-warning-feature;
+    border-radius: 100px;
+
+    >span {
+        display: block;
+        font-size: 12px;
+        line-height: $size;
+        text-align: center;
+        color: $c-white;
+    }
+
+    &__small {
+        $size: 16px;
+        min-width: $size;
+        height: $size;
+
+        >span {
+            line-height: $size;
+        }
+    }
+
+    &__red {
+        background-color: $c-warning-feature;
+    }
+
+    &__green {
+        background-color: $c-done;
+    }
+
+    &__gray {
+        background-color: $c-f0;
+
+        >span {
+            color: rgba($color: $c-black, $alpha: 0.45);
+        }
+    }
+
+    &__blue {
+        background-color: $c-in-progress;
+    }
+
+    &__light-blue {
+        background-color: #E6F7FF;
+
+        >span {
+            color: $c-in-progress;
+        }
+    }
+}

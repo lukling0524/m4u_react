@@ -1,0 +1,439 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= user/contents
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 레이아웃
+--------------------- */
+#wrap.user {
+    min-width: $user-min-width;
+
+    .contents {
+        width: $user-contents-width;
+    }
+}
+
+.user {
+    .section {
+        display: flex;
+        justify-content: center;
+
+        &:nth-of-type(even) {
+            background-color: $c-primary-light;
+        }
+
+        .contents {
+            padding: 80px 0;
+        }
+    }
+}
+
+/*---------------------
+--- 섹션 타이틀
+--------------------- */
+.section {
+    &__title {
+        color: $c-secondary;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    &__desc {
+        font-size: 34px;
+        font-weight: 600;
+        line-height: 1.25;
+    }
+
+    &__text {
+        color: $c-8c;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+}
+
+/*---------------------
+--- 섹션 타이틀
+--------------------- */
+
+.section {
+    &__head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 36px;
+    }
+}
+
+/*---------------------
+--- 섹션 1
+--------------------- */
+.section-01 {
+    .contents {
+        @include flexCenter(space-between);
+    }
+
+    .section {
+        &__title {
+            color: $c-26;
+            font-size: 34px;
+            font-weight: 600;
+        }
+
+        &__desc {
+            color: $c-8c;
+            font-size: 18px;
+            line-height: 1.45;
+        }
+    }
+
+    .search-area {
+        width: 412px;
+
+        &__wrap {
+            @include flexCenter(space-between);
+            margin: 24px 0 12px;
+            // padding: 16px 60px 16px 12px;
+            border: 2px solid $c-brand-04;
+            border-radius: 4px;
+        }
+
+        &__input {
+            height: 56px;
+            font-size: 16px;
+            background-position: center right 12px;
+            background-repeat: no-repeat;
+            border: none;
+        }
+
+        &__btn {
+            height: 56px;
+            padding: 0 16px;
+            font-size: 0;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: $c-primary-light;
+                transition: 0.3s;
+            }
+
+            &--icon {
+                width: 32px;
+            }
+        }
+    }
+
+    .keyword {
+        $keywordGap: 8px;
+
+        height: 34px;
+        display: flex;
+        gap: $keywordGap;
+        flex-wrap: wrap;
+        overflow: hidden;
+
+        .btn {
+            padding: 6px 12px;
+            margin: 0;
+            color: $c-brand-04;
+            border: 1px solid $c-brand-03;
+
+            &:hover {
+                background-color: $c-primary-light;
+                transition: $duration;
+            }
+        }
+
+        @include safari-pc {
+            .btn + .btn {
+                margin-left: $keywordGap;
+            }
+        }
+    }
+
+    .banner {
+        border-radius: 8px;
+        @include shadowMd01;
+    }
+}
+
+/*---------------------
+--- 섹션 2
+--------------------- */
+.section-02 {
+    .view-more {
+        padding-right: 20px;
+        font-size: 14px;
+        background-position: center right;
+        background-repeat: no-repeat;
+        background-image: icon(sidebarArrow, '595959');
+
+        &:hover {
+            color: $c-8c;
+            background-image: icon(sidebarArrow, '8C8C8C');
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 섹션 3
+--------------------- */
+.section-03 {
+    .btn {
+        padding: 14px 36px;
+        color: $c-59;
+        font-size: 24px;
+        border-radius: 12px;
+
+        &.is-active {
+            color: $c-brand-04;
+            background-color: $c-primary-light;
+        }
+
+        & + .btn {
+            margin-left: 16px;
+        }
+    }
+
+    .panel {
+        $panelHeight: 402px;
+        $wrapGap: 20px;
+        $stepGap: 24px;
+
+        &__wrap {
+            @include flexCenter(space-between);
+            gap: $wrapGap;
+        }
+
+        &__img {
+            width: 736px;
+            height: $panelHeight;
+
+            @include safari-pc {
+                margin-right: $wrapGap;
+            }
+
+            font-size: 0;
+            border-radius: 8px;
+            background-image: url('#{$path-image}/img-section3_1.png');
+            background-size: contain;
+        }
+
+        &__vid {
+            width: 736px;
+            height: $panelHeight;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px 0px rgba(14, 31, 53, 0.04), 0px 1px 4px 0px rgba(14, 31, 53, 0.06);
+
+            &--item {
+                width: 100%;
+            }
+        }
+
+        &__step {
+            height: $panelHeight;
+            display: flex;
+            flex-direction: column;
+            gap: $stepGap;
+            flex: 1;
+        }
+
+        &__item {
+            padding: 28px 24px;
+            @include flexCenter(flex-start);
+            flex: 1;
+            gap: $stepGap;
+            background-color: $c-white;
+            border-radius: 6px;
+            border: 1px solid $c-f5;
+            @include shadowSm03;
+            cursor: default;
+            opacity: 0.33;
+
+            &.is-active {
+                opacity: 1;
+                transition: $duration;
+            }
+
+            @include safari-pc {
+                & + .panel__item {
+                    margin-top: $stepGap;
+                }
+            }
+
+            &--num {
+                $size: 44px;
+
+                width: $size;
+                height: $size;
+                text-align: center;
+                line-height: $size;
+                color: $c-secondary;
+                font-size: 20px;
+                font-weight: 700;
+                background-color: rgb(255, 208, 154, 0.5);
+                border-radius: 100%;
+
+                @include safari-pc {
+                    margin-right: $stepGap;
+                }
+            }
+
+            &--title {
+                color: $c-black;
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            &--desc {
+                color: $c-59;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 섹션 4
+--------------------- */
+.section-04 {
+    $sectionGap: 78px;
+
+    .contents {
+        @include flexCenter(space-between);
+        gap: $sectionGap;
+    }
+
+    .section__text {
+        margin: 36px 0 24px;
+    }
+
+    .contact {
+        $contactGap: 20px;
+
+        display: flex;
+        gap: $contactGap;
+
+        &__box {
+            display: block;
+            width: 100%;
+            flex: 1;
+            padding: 20px;
+            background-color: $c-white;
+            border-radius: 8px;
+            @include shadowMd02;
+
+            @include safari-pc {
+                & + .contact__box {
+                    margin-left: $contactGap;
+                }
+            }
+        }
+
+        &__icon {
+            $size: 40px;
+
+            width: $size;
+            height: $size;
+            margin-bottom: 16px;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-image: url('#{$path-image}/ico-contact.svg');
+
+            &.email {
+                background-position: top;
+            }
+
+            &.phone {
+                background-position: bottom;
+            }
+        }
+
+        &__title {
+            color: $c-59;
+            font-size: 14px;
+        }
+
+        &__item {
+            font-size: 20px;
+            font-weight: 600;
+
+            &:hover {
+                color: $c-brand-04;
+                transition: $duration;
+            }
+        }
+    }
+
+    .section-img {
+        flex: 1;
+        border-radius: 12px;
+        @include shadowMd01;
+
+        @include safari-pc {
+            margin-left: $sectionGap;
+        }
+    }
+}
+
+/*---------------------
+--- 섹션 5
+--------------------- */
+.section-05 {
+    .review {
+        $reviewGap: 20px;
+
+        margin: 36px 0;
+        display: flex;
+        gap: $reviewGap;
+
+        &__item {
+            min-height: 354px;
+            flex: 1;
+            padding: 32px 20px 32px 52px;
+            background-repeat: no-repeat;
+            background-image: url('#{$path-image}/ico-quote.svg');
+            background-position: top 34px left 20px;
+            background-color: $c-white;
+            border-radius: 12px;
+            @include shadowMd01;
+
+            @include safari-pc {
+                & + .review__item {
+                    margin-left: $reviewGap;
+                }
+            }
+        }
+
+        &__title {
+            color: $c-59;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        &__text {
+            color: $c-8c;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+    }
+
+    .signup {
+        display: inline-block;
+        height: 80px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        line-height: 50px;
+    }
+}

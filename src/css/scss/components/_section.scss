@@ -1,0 +1,67 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= section
+=============================================================
+=============================================================
+=============================================================*/
+.slot {
+    display: flex;
+    padding: 20px;
+
+    &__wrap {
+        width: 100%;
+        flex: 1;
+    }
+
+    &__item {
+        &+& {
+            margin-top: 16px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+
+/*---------------------
+--- 구분선
+--------------------- */
+.divider {
+    font-size: 0;
+
+    &.vertical {
+        width: 40px;
+
+        &::after {
+            @include pseudo('', 2px, 100%);
+            position: relative;
+            left: 19px;
+            background-color: $c-d9;
+        }
+
+        &.no-border {
+            width: 20px;
+
+            &::after {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &.horizontal {
+        height: 40px;
+
+        &::after {
+            @include pseudo('', 100%, 2px);
+            position: relative;
+            top: 19px;
+            background-color: $c-d9;
+        }
+    }
+}

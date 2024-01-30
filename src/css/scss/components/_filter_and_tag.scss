@@ -1,0 +1,176 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= compomnents
+= 가공방식, 소재 선택, 필터, 태그
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- 검색 필터 아이템 
+--------------------- */
+
+$iconSize: 16px;
+$filterHeight: 112px;
+
+.filter-tag__wrap {
+    height: $filterHeight;
+    background-color: $c-f5;
+}
+
+.filter-tag {
+    max-height: $filterHeight;
+    min-height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px 8px;
+
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &__item {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        margin: 8px 8px 0 0;
+        padding: 8px 16px;
+        border: 1px solid $c-d9;
+        background-color: $c-fa;
+        border-radius: 4px;
+
+        // &:hover {
+        //     background-color: $c-f0;
+        //     transition: $duration;
+        // }
+    }
+
+    &__list {
+        display: flex;
+    }
+
+    &__depth {
+        position: relative;
+        font-size: 13px;
+        line-height: 1;
+        white-space: nowrap !important;
+
+        & + .filter-tag__depth {
+            padding-left: 20px;
+
+            &::before {
+                @include pseudo('', $iconSize, $iconSize);
+                position: absolute;
+                top: -2px;
+                left: 2px;
+                background-image: icon(sidebarArrow, 'BFBFBF');
+                background-position: center;
+            }
+        }
+    }
+
+    &__delete {
+        width: $iconSize;
+        height: $iconSize;
+        margin-left: 8px;
+        font-size: 0;
+        line-height: 1;
+        background-image: icon(closeBtn, '595959');
+        background-position: center;
+    }
+}
+
+/*---------------------
+--- 필터초기화 
+--------------------- */
+.filter-reset {
+    $resetGap: 8px;
+
+    @include flexCenter(flex-end);
+    gap: $resetGap;
+    margin-top: 4px;
+    padding: 8px 0;
+
+    &__button {
+        padding-left: 22px;
+        color: $c-59;
+        font-size: 13px;
+        font-weight: 600;
+        background-image: icon(refreshIcon, '595959');
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position: center left;
+    }
+}
+
+/*---------------------
+--- 가공방식 / 소재 선택
+--------------------- */
+
+.option-select {
+    height: 200px;
+    margin-top: 8px;
+    padding: 8px 10px 8px 20px;
+    background-color: $c-f5;
+    overflow: hidden;
+
+    &__area {
+        height: 100%;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $c-bf;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $c-fa;
+        }
+    }
+
+    &__list + .option-select__list {
+        margin-top: 6px;
+    }
+
+    &__type {
+        /* 대메뉴 */
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    &__num {
+        /* 선택 개수 */
+        position: relative;
+        padding-left: 20px;
+        color: $c-primary;
+        font-size: 14px;
+        font-weight: 700;
+
+        &::before {
+            $size: 4px;
+
+            @include pseudo('', $size, $size);
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            background-color: $c-primary;
+            border-radius: 100%;
+        }
+    }
+}
+
+/*---------------------
+--- 공장태그
+--------------------- */
+.factory-tag {
+    height: auto;
+    margin-top: 4px;
+    // padding: 0;
+    background-color: transparent;
+}

@@ -1,0 +1,186 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / findID
+= 아이디/비밀번호 찾기
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 공통
+--------------------- */
+.findID {
+    // min-height: 100vh;
+
+    &.section {
+        height: calc(100vh - $h-header);
+        margin-top: 0;
+        align-items: center;
+
+        @media (max-height: 778px) {
+            height: 778px;
+        }
+    }
+
+    &__title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .box-layout {
+        width: 626px;
+        margin: 24px 0 56px;
+        // padding: 56px;
+        border: 1px solid $c-f0;
+        background-color: $c-white;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .tabs {
+        width: 100%;
+        display: flex;
+
+        &__list {
+            flex: 1;
+        }
+
+        &__item {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            text-align: center;
+            color: $c-8c;
+            font-weight: 600;
+            background-color: $c-f5;
+
+            &.is-active {
+                color: $c-59;
+                background-color: $c-white;
+            }
+        }
+    }
+
+    .panel {
+        height: 514px;
+        @include flexCenter(center);
+        padding: 56px;
+
+        &__wrap {
+            width: 100%;
+        }
+
+        &__title {
+            color: $c-59;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        &__desc {
+            margin-top: 6px;
+            color: $c-8c;
+            font-size: 15px;
+            font-weight: 600;
+        }
+    }
+
+    .form-field {
+        margin: 36px 0;
+    }
+}
+
+/*---------------------
+--- 아이디찾기 - 인증 전
+--------------------- */
+.findID {
+    .before-find {
+        padding: 46px;
+    }
+}
+
+/*---------------------
+--- 아이디찾기 - 인증 후
+--------------------- */
+.findID {
+    .after-find {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .panel__wrap {
+            pad: 56px;
+        }
+
+        .email-icon {
+            $size: 32px;
+
+            width: $size;
+            height: $size;
+            margin-bottom: 4px;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-image: url('#{$path-image}/ico-contact.svg');
+            background-size: $size;
+        }
+
+        .user {
+            &__account {
+                color: $c-59;
+                font-size: 15px;
+                line-height: 1.4;
+            }
+
+            &__date {
+                margin-bottom: 16px;
+                font-size: 13px;
+                line-height: 1.2;
+
+                * {
+                    color: $c-8c;
+                }
+            }
+
+            &__info {
+                font-size: 18px;
+                line-height: 1.4;
+                text-align: center;
+
+                * {
+                    color: $c-59;
+                    font-weight: 600;
+                }
+            }
+
+            &__email {
+                color: $c-brand-04;
+                word-break: break-all;
+            }
+        }
+
+        .btn-box {
+            display: flex;
+            margin-top: 36px;
+
+            .btn {
+                width: 146px;
+
+                & + .btn {
+                    margin-left: 16px;
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 하단 버튼 사이즈
+--------------------- */
+.findID_02,
+.findID_04 {
+    .btn {
+        height: 50px;
+        font-size: 18px;
+    }
+}

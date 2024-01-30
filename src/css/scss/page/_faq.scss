@@ -1,0 +1,114 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / faq
+= 이용안내
+=============================================================
+=============================================================
+=============================================================*/
+.faq {
+    .contents {
+        width: 482px !important;
+        padding-top: 48px !important;
+    }
+
+    &__title {
+        margin-bottom: 52px;
+        text-align: center;
+        color: $c-brand-05;
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    &__list {
+        border-bottom: 1px solid $c-d9;
+
+        &:hover {
+            background-color: $c-fa;
+            transition: $duration;
+        }
+
+        &.is-open {
+            .icon.arrow {
+                transform: rotate(-90deg);
+            }
+
+            .faq__answer {
+                height: 100%;
+                padding: 8px 16px 16px;
+            }
+        }
+    }
+
+    &__question {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 16px;
+        cursor: pointer;
+
+        p {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .icon.arrow {
+            font-size: 0;
+            background-image: icon(sidebarArrow, '8C8C8C');
+        }
+    }
+
+    &__answer {
+        height: 0;
+        padding: 0;
+        color: $c-59;
+        font-size: 15px;
+        line-height: 1.4;
+        overflow: hidden;
+
+        * {
+            color: $c-59;
+        }
+
+        p + p {
+            margin-top: 6px;
+        }
+
+        b {
+            font-weight: 700;
+        }
+
+        .introduce li {
+            line-height: 1.8;
+        }
+
+        .alert {
+            position: relative;
+            margin-top: 24px;
+            padding-left: 26px;
+            color: $c-warning-feature;
+            line-height: 1.5;
+
+            &::before {
+                @include pseudo('', 20px, 20px);
+                position: absolute;
+                top: 2px;
+                left: 0;
+                background-image: icon(errorIcon, 'ff4d4f');
+                background-size: 100%;
+            }
+        }
+
+        .bill {
+            color: $c-primary;
+        }
+
+        .info {
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+    }
+}

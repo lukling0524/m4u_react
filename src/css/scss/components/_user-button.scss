@@ -1,0 +1,741 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= button
+=============================================================
+=============================================================
+=============================================================*/
+
+.button-wrap {
+    display: flex;
+}
+
+.btn {
+    display: block;
+    padding: 10px 24px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.08px;
+    border-radius: 4px;
+    transition: background-color, color, $duration;
+    cursor: pointer;
+
+    & + & {
+        margin-left: 12px;
+    }
+}
+
+/*---------------------
+--- 버튼 사이즈 
+--------------------- */
+.btn {
+    $btn: &;
+
+    &__large {
+        padding: 16px 24px;
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    &__medium {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    &__small {
+        padding: 10px 16px;
+        font-size: 14px;
+        line-height: 20px;
+
+        &#{$btn}__icon {
+            &::after {
+                $size: 16px;
+
+                width: $size;
+                height: $size;
+            }
+
+            &--right {
+                padding-left: 16px;
+                padding-right: 32px;
+
+                &::after {
+                    right: 10px;
+                }
+
+                &:hover {
+                    &#{$btn}__icon::after {
+                        right: 8px;
+                    }
+
+                    // 버튼 disabled일 때 hover 시 화살표 이동 방지
+                    &#{$btn}__disabled::after {
+                        right: 10px;
+                    }
+                }
+            }
+
+            &--left {
+                padding-left: 32px;
+                padding-right: 16px;
+
+                &::after {
+                    left: 10px;
+                    transform: translateY(-50%) rotate(180deg);
+                }
+
+                &:hover {
+                    &#{$btn}__icon::after {
+                        left: 8px;
+                    }
+
+                    // 버튼 disabled일 때 hover 시 화살표 이동 방지
+                    &#{$btn}__disabled::after {
+                        left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 화살표 아이콘
+--------------------- */
+.btn {
+    $btn: &;
+
+    &__icon {
+        position: relative;
+
+        &::after {
+            $size: 24px;
+
+            @include pseudo('', $size, $size);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            transition: $duration;
+        }
+
+        &--right {
+            padding-left: 24px;
+            padding-right: 48px;
+
+            &::after {
+                right: 18px;
+            }
+
+            &:hover {
+                &#{$btn}__icon::after {
+                    right: 12px;
+                }
+
+                // 버튼 disabled일 때 hover 시 화살표 이동 방지
+                &#{$btn}__disabled::after,
+                &:disabled::after {
+                    right: 18px;
+                }
+            }
+        }
+
+        &--left {
+            padding-left: 48px;
+            padding-right: 24px;
+
+            &::after {
+                left: 18px;
+                transform: translateY(-50%) rotate(180deg);
+            }
+
+            &:hover {
+                &#{$btn}__icon::after {
+                    left: 12px;
+                }
+
+                // 버튼 disabled일 때 hover 시 화살표 이동 방지
+                &#{$btn}__disabled::after,
+                &:disabled::after {
+                    left: 18px;
+                }
+            }
+        }
+
+        &#{$btn}__primary::after {
+            background-image: icon(arrow, 'FFFFFF');
+        }
+
+        &#{$btn}__ghost::after {
+            background-image: icon(arrow, '551FAD');
+        }
+
+        &#{$btn}__solid::after {
+            background-image: icon(arrow, '551FAD');
+        }
+
+        &#{$btn}__outlined::after {
+            background-image: icon(arrow, '595959');
+        }
+
+        &#{$btn}__tertiary::after {
+            background-image: icon(arrow, '595959');
+        }
+
+        &#{$btn}__danger::after {
+            background-image: icon(arrow, 'F90000');
+        }
+
+        &#{$btn}__success::after {
+            background-image: icon(arrow, '52C41A');
+        }
+
+        &#{$btn}__disabled::after,
+        &:disabled::after {
+            background-image: icon(arrow, '8C8C8C');
+        }
+
+        &#{$btn}__user-primary {
+            &::after {
+                background-image: icon(arrow, 'FAFAFA');
+            }
+
+            &.disabled,
+            &:disabled {
+                &::after {
+                    background-image: icon(arrow, 'BFBFBF');
+                }
+            }
+        }
+
+        &#{$btn}__user-secondary {
+            &::after {
+                background-image: icon(arrow, '262626');
+            }
+
+            &.disabled,
+            &:disabled {
+                &::after {
+                    background-image: icon(arrow, 'BFBFBF');
+                }
+            }
+        }
+
+        &#{$btn}__user-secondary--stroke {
+            &::after {
+                background-image: icon(arrow, '8852E0');
+            }
+
+            &.disabled,
+            &:disabled {
+                &::after {
+                    background-image: icon(arrow, 'BFBFBF');
+                }
+            }
+        }
+
+        &#{$btn}__user-tertiary {
+            &::after {
+                background-image: icon(arrow, '8852E0');
+            }
+
+            &.disabled,
+            &:disabled {
+                &::after {
+                    background-image: icon(arrow, 'BFBFBF');
+                }
+            }
+        }
+
+        &#{$btn}__user-quaternary {
+            &::after {
+                background-image: icon(arrow, '434343');
+            }
+
+            &.disabled,
+            &:disabled {
+                &::after {
+                    background-image: icon(arrow, 'BFBFBF');
+                }
+            }
+        }
+
+        &#{$btn}__user-quaternary--stroke {
+            &::after {
+                background-image: icon(arrow, '434343');
+            }
+
+            &.disabled,
+            &:disabled {
+                &::after {
+                    background-image: icon(arrow, 'BFBFBF');
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 버튼 색상
+--------------------- */
+.btn {
+    $btn: &;
+
+    &__primary {
+        color: $c-white;
+        background-color: $c-brand-05;
+
+        &:hover {
+            color: $c-white;
+            background-color: $c-primary;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $c-brand-06;
+        }
+    }
+
+    &__ghost {
+        color: $c-brand-05;
+        background-color: $c-white;
+        border: 1px solid $c-brand-05;
+
+        &:hover {
+            color: $c-brand-05;
+            background-color: $c-primary-light;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $c-brand-01;
+        }
+    }
+
+    &__solid {
+        color: $c-primary;
+        background-color: $c-f5;
+
+        &:hover {
+            color: $c-primary;
+            background-color: $c-f0;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $c-d9;
+        }
+    }
+
+    &__outlined {
+        color: $c-59;
+        background-color: $c-white;
+        border: 1px solid $c-d9;
+
+        &:hover {
+            color: $c-59;
+            background-color: $c-fa;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $c-f0;
+        }
+    }
+
+    &__tertiary {
+        color: $c-59;
+        background-color: $c-white;
+
+        &:hover {
+            color: $c-59;
+            background-color: $c-fa;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $c-f5;
+        }
+    }
+
+    &__danger {
+        color: $c-error;
+        background-color: rgba($color: $c-error, $alpha: 0.05);
+        border: 1px solid rgba($color: $c-error, $alpha: 0.5);
+
+        &:hover {
+            color: $c-error;
+            background-color: rgba($color: $c-error, $alpha: 0.1);
+        }
+
+        &:active,
+        &:focus {
+            background-color: rgba($color: $c-error, $alpha: 0.15);
+        }
+    }
+
+    &__success {
+        color: $c-positive;
+        background-color: rgba($color: $c-positive, $alpha: 0.05);
+        border: 1px solid rgba($color: $c-positive, $alpha: 0.5);
+
+        &:hover {
+            color: $c-positive;
+            background-color: rgba($color: $c-positive, $alpha: 0.1);
+        }
+
+        &:active,
+        &:focus {
+            background-color: rgba($color: $c-positive, $alpha: 0.15);
+        }
+    }
+
+    &__disabled,
+    &:disabled {
+        color: $c-disabled !important;
+        background-color: $c-d9;
+        border: 0;
+        cursor: default;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $c-disabled;
+            background-color: $c-d9;
+        }
+    }
+
+    &__user-primary {
+        color: $c-fa;
+        background-color: $c-brand-04;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: $c-brand-05;
+        }
+
+        &.disabled,
+        &:disabled {
+            color: $c-bf !important;
+            background-color: $c-f0;
+            border: 0;
+            cursor: default;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-f0;
+            }
+        }
+    }
+
+    &__user-secondary {
+        background-color: $c-f0;
+        border: 1px solid $c-fa;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: $c-d9;
+        }
+
+        &.disabled,
+        &:disabled {
+            color: $c-bf !important;
+            background-color: $c-f0;
+            border: 0;
+            cursor: default;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-f0;
+            }
+        }
+    }
+
+    &__user-secondary--stroke {
+        color: $c-brand-04;
+        background-color: $c-white;
+        border: 1px solid $c-brand-03;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: $c-primary-light;
+        }
+
+        &.disabled,
+        &:disabled {
+            color: $c-bf !important;
+            background-color: $c-white;
+            border: 1px solid $c-d9;
+            cursor: default;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-white;
+            }
+        }
+    }
+
+    &__user-tertiary {
+        color: $c-brand-04;
+        background-color: $c-white;
+        border: 1px solid $c-d9;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: $c-fa;
+        }
+
+        &.disabled,
+        &:disabled {
+            color: $c-bf !important;
+            background-color: $c-white;
+            border: 1px solid $c-d9;
+            cursor: default;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-white;
+            }
+        }
+    }
+
+    &__user-quaternary {
+        color: $c-43;
+        background-color: $c-white;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: $c-fa;
+        }
+
+        &.disabled,
+        &:disabled {
+            color: $c-bf !important;
+            background-color: $c-f0;
+            border: 0;
+            cursor: default;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-f0;
+            }
+        }
+    }
+
+    &__user-quaternary--stroke {
+        color: $c-43;
+        background-color: $c-white;
+        border: 1px solid $c-d9;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: $c-fa;
+        }
+
+        &.disabled,
+        &:disabled {
+            color: $c-bf !important;
+            background-color: $c-white;
+            border: 1px solid $c-d9;
+            cursor: default;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-white;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 버튼 모양
+--------------------- */
+.btn {
+    &__round {
+        border-radius: 100px;
+    }
+}
+
+/*---------------------
+--- 제품이미지 업로드 버튼
+--------------------- */
+
+.image-upload {
+    $thumbSize: 74px;
+
+    margin-top: 16px !important;
+
+    &__desc {
+        margin-bottom: 8px;
+        color: $c-8c;
+        font-size: 13px;
+    }
+
+    &__button {
+        min-width: $thumbSize;
+        @include flexCenter(center);
+        flex-direction: column;
+        padding: 16px;
+        background-color: $c-white;
+        border: 1px solid $c-d9;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $c-fa;
+            transition: $duration;
+        }
+    }
+
+    &__icon {
+        $size: 24px;
+
+        width: $size;
+        height: $size;
+        font-size: 0;
+        background-image: url('#{$path-image}/ico-image_upload.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &__text {
+        margin: 4px 0 6px;
+        line-height: 1;
+
+        * {
+            color: $c-brand-04;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+
+    &__accept {
+        color: $c-8c;
+        font-size: 13px;
+    }
+
+    &__area {
+        $thumbGap: 16px;
+
+        display: flex;
+        gap: $thumbGap;
+        flex-wrap: wrap;
+
+        > li {
+            min-width: $thumbSize;
+            height: $thumbSize;
+        }
+
+        @include safari-pc {
+            li + li {
+                margin-left: $thumbGap;
+            }
+        }
+
+        .image-upload__text {
+            margin: 0;
+        }
+    }
+
+    &__thumb {
+        width: $thumbSize;
+        min-width: $thumbSize;
+        height: $thumbSize;
+        position: relative;
+        border: 1px solid $c-d9;
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: pointer;
+
+        &.is-active {
+            border-color: $c-secondary;
+        }
+
+        img {
+            width: 100%;
+            height: 100%; // 정방형이 아닌 이미지 대응
+            object-fit: cover;
+        }
+    }
+
+    &__delete-btn {
+        $size: 20px;
+
+        width: $size;
+        height: $size;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        font-size: 0;
+        background-image: icon(thumbDeleteBtn, '8C8C8C');
+
+        &:hover {
+            background-image: icon(thumbDeleteBtn, '595959');
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 수정 버튼
+--------------------- */
+/* 견적수정 */
+.edit-btn {
+    min-width: 120px;
+    padding-left: 36px;
+    background-image: icon(editIcon, '8852E0');
+    background-position: center left 16px;
+    background-repeat: no-repeat;
+}
+
+/* 소재 수정 */
+.material-edit-btn {
+    margin-left: 8px !important;
+    padding-right: 36px;
+    background-image: icon(plusIcon, '595959');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+/* 소재 선택 */
+.material-select-btn {
+    width: 100%;
+    @include flexCenter(center);
+    flex: 1;
+
+    .plus-icon {
+        $size: 20px;
+
+        display: inline-block;
+        width: $size;
+        height: $size;
+        margin-left: 4px;
+        font-size: 0;
+        background-image: icon(plusIcon, '8852E0');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+/* 텍스트 수정 */
+.text-edit-btn {
+    margin-left: 8px !important;
+    padding-left: 36px;
+    background-image: icon(editIcon, 'ff7009');
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+}

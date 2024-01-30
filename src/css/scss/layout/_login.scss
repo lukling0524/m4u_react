@@ -1,0 +1,42 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= login
+=============================================================
+=============================================================
+=============================================================*/
+.login-page {
+    height: 100vh;
+    min-height: 450px;
+    background-color: $c-f5;
+
+    &__wrap {
+        height: 100%;
+        padding: 20px;
+        @include flexCenter(center);
+        flex-direction: column;
+    }
+
+    .login {
+        width: 372px;
+        margin-top: 24px;
+        padding: 36px 36px 48px;
+        border-radius: 4px;
+        border: 1px solid $c-d9;
+        background-color: $c-white;
+
+        &__btn {
+            margin-top: 24px;
+
+            .btn {
+                width: 100%;
+                display: block;
+            }
+        }
+    }
+
+    li + li {
+        margin-top: 24px;
+    }
+}

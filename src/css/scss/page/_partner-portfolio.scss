@@ -1,0 +1,560 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / partner-portfolio
+= 공장 포트폴리오
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 공통 레이아웃
+--------------------- */
+.partner-portfolio {
+    .contents {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 34px !important;
+
+        &__area {
+            width: 650px;
+        }
+    }
+
+    .info-box {
+        /* 공장정보 영역 */
+        width: 470px;
+        padding: 24px;
+        border: 1px solid $c-f0;
+        border-radius: 6px;
+
+        & + .info-box {
+            margin-top: 24px;
+        }
+    }
+
+    .modal__box {
+        white-space: pre-wrap;
+    }
+}
+
+/*---------------------
+--- 썸네일
+--------------------- */
+.thumbnail {
+    display: flex;
+    justify-content: space-between;
+
+    &__mini {
+        $size: 82px;
+
+        width: $size;
+        height: $size;
+
+        li {
+            width: $size;
+            height: $size;
+            border-radius: 6px;
+            border: 2px solid $c-f0;
+            // background-color: $c-d9;
+            background-color: $c-white;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.55;
+            overflow: hidden;
+            cursor: pointer;
+
+            & + li {
+                margin-top: 8px;
+            }
+
+            &.is-active {
+                opacity: 1;
+                border-color: $c-secondary-light;
+                transition: $duration;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%; // 정방형이 아닌 이미지 대응
+            object-fit: cover;
+        }
+    }
+
+    &__large {
+        $size: 558px;
+
+        min-width: $size;
+        max-width: $size;
+        height: $size;
+        margin-left: 8px;
+        border: 1px solid $c-f0;
+        border-radius: 6px;
+
+        img {
+            width: 100%;
+            height: 100%; // 정방형이 아닌 이미지 대응
+            border-radius: 6px;
+            object-fit: cover;
+            overflow: hidden;
+        }
+    }
+}
+
+/*---------------------
+--- 포트폴리오
+--------------------- */
+.divider {
+    width: 100%;
+    margin: 32px 0;
+    background-color: $c-f5;
+
+    &__text {
+        display: inline-block;
+        height: 48px;
+        padding: 0 34px;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 48px;
+        background-color: $c-white;
+        border-top: 1px solid $c-f5;
+        border-bottom: 3px solid $c-secondary;
+
+        &.disabled {
+            color: $c-8c;
+            border-bottom: 1px solid $c-f5;
+        }
+    }
+
+    &__num {
+        color: $c-8c;
+        font-size: 13px;
+        font-weight: 600;
+    }
+}
+
+.portfolio {
+    display: flex;
+    flex-wrap: wrap;
+
+    &.empty {
+        height: 400px;
+        @include flexCenter(center);
+        flex-direction: column;
+        background-color: $c-fa;
+        border-radius: 12px;
+
+        .image {
+            width: 124px;
+            height: 124px;
+            font-size: 0;
+            background-image: url('#{$path-image}/img-no_portfolio.png');
+        }
+
+        .title {
+            margin-top: 24px;
+            color: $c-bf;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            margin-top: 4px;
+            text-align: center;
+            color: $c-brand-03;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+    }
+
+    &__item {
+        width: calc(33.3333% - 6px);
+        margin: 20px 9px 0 0;
+        padding: 8px 10px 10px 10px;
+        background-color: $c-white;
+        border: 1px solid $c-f0;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+            margin-top: 0;
+        }
+
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        &:hover {
+            @include shadowSm04;
+            transition: 0.3s;
+        }
+    }
+
+    &__thumb {
+        $size: 188px;
+
+        position: relative;
+        width: $size;
+        height: $size;
+
+        img {
+            width: 100%;
+            height: 100%; // 정방형이 아닌 이미지 대응
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        &--num {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            padding: 4px 8px;
+            color: $c-white;
+            font-weight: 600;
+            border-radius: 12px;
+            background-color: rgba($color: $c-26, $alpha: 0.4);
+        }
+    }
+
+    &__title {
+        margin-top: 8px;
+        font-weight: 600;
+        @include ellipsis;
+    }
+
+    &__tag {
+        height: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        overflow: hidden;
+
+        &--item {
+            height: 32px;
+            margin-right: 4px;
+            padding: 6px 12px;
+            color: $c-59;
+            font-size: 14px;
+            line-height: 1.3;
+            border: 1px solid $c-d9;
+            border-radius: 100px;
+        }
+    }
+}
+
+/*---------------------
+--- 공장정보
+--------------------- */
+.partner-portfolio {
+    $infoSpace: 24px;
+
+    .partner-info {
+        $iconSize: 20px;
+
+        &__name {
+            padding-bottom: $infoSpace;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        &__area {
+            margin-bottom: $infoSpace;
+            padding: $infoSpace 0;
+            border-top: 1px solid $c-f0;
+            border-bottom: 1px solid $c-f0;
+        }
+
+        &__table {
+            width: 100%;
+            font-size: 15px;
+
+            tr:not(:first-child) {
+                th,
+                td {
+                    padding-top: $infoSpace;
+                }
+
+                th::before {
+                    top: 26px;
+                }
+            }
+
+            th {
+                width: 120px;
+                position: relative;
+                padding-left: 26px;
+                color: $c-8c;
+                font-weight: 600;
+                vertical-align: baseline;
+
+                &::before {
+                    @include pseudo('', $iconSize, $iconSize);
+                    position: absolute;
+                    top: 2px;
+                    left: 0;
+                    background-image: url('#{$path-image}/ico-factory_info.svg');
+                    background-repeat: no-repeat;
+                }
+            }
+
+            @for $i from 1 through 5 {
+                tr:nth-child(#{$i}) th::before {
+                    background-position: center (-($i - 1) * $iconSize);
+                }
+            }
+
+            td {
+                text-align: left;
+                color: $c-26;
+                line-height: 1.45;
+            }
+
+            .color-orange {
+                margin-right: 8px;
+                vertical-align: baseline;
+                color: $c-secondary;
+            }
+
+            .hide-information {
+                /* 로그인 전 정보 숨김 */
+                position: relative;
+
+                &__blur {
+                    position: absolute;
+                    width: 100%;
+                    top: 8px;
+                    left: 0;
+                    padding: 12px;
+                    border-radius: 8px;
+                    background-color: rgba($color: $c-white, $alpha: 0.55);
+                    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+                    backdrop-filter: blur(6px);
+                }
+
+                &__text {
+                    text-align: center;
+                    color: $c-brand-04;
+                    font-size: 13px;
+                    font-weight: 600;
+                }
+
+                &__btn {
+                    width: fit-content;
+                    margin: 12px auto 0;
+                }
+            }
+        }
+
+        &__desc {
+            margin-top: 12px;
+            text-align: center;
+            color: $c-bf;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    }
+
+    .introduce {
+        position: relative;
+        max-height: 66px;
+        overflow: hidden;
+
+        &.over::after {
+            @include pseudo('...', 20px, 20px);
+            position: absolute;
+            right: 0;
+            bottom: 2px;
+            color: $c-26;
+        }
+
+        &.is-open {
+            height: 100%;
+            max-height: 100%;
+            display: block !important;
+        }
+
+        &-box {
+            white-space: pre-wrap;
+        }
+    }
+
+    .info-box {
+        &__title {
+            margin-bottom: 8px;
+            color: $c-8c;
+            font-size: 15px;
+            font-weight: 600;
+
+            &.material {
+                padding-left: 24px;
+                line-height: 20px;
+                background-image: url('#{$path-image}/ico-slide.svg');
+                background-repeat: no-repeat;
+                background-size: 20px;
+                background-position: left bottom;
+
+                &.method {
+                    background-position: left top;
+                }
+            }
+
+            @include safari-pc {
+                margin-bottom: 0;
+            }
+        }
+
+        &__keyword {
+            $flexGap: 8px;
+
+            display: flex;
+            gap: $flexGap;
+            flex-wrap: wrap;
+
+            .keyword {
+                padding: 6px 12px;
+                color: $c-59;
+                font-size: 14px;
+                border: 1px solid $c-d9;
+                border-radius: 100px;
+
+                @include safari-pc {
+                    margin-top: $flexGap;
+                    margin-right: $flexGap;
+                }
+            }
+        }
+
+        .material {
+            &__wrap {
+                height: 54px;
+                overflow: hidden;
+            }
+
+            &__list {
+                display: flex;
+                flex-wrap: wrap;
+
+                li {
+                    position: relative;
+                    padding-left: 10px;
+                    padding-right: 14px;
+                    color: $c-59;
+
+                    &::before {
+                        $size: 3px;
+
+                        @include pseudo('', $size, $size);
+                        position: absolute;
+                        top: 12px;
+                        left: 0;
+                        background-color: $c-59;
+                        border-radius: 100%;
+                    }
+                }
+            }
+        }
+
+        &.material .readmore-btn {
+            margin: 8px auto 0;
+
+            .icon {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 공장정보 버튼
+--------------------- */
+.partner-portfolio {
+    .btn-box {
+        margin-top: 0;
+        display: flex;
+
+        .btn {
+            @include flexCenter(center);
+            flex: 1;
+            padding: 16px;
+            background-image: none;
+
+            .icon {
+                margin-right: 6px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            &.chat-btn .icon {
+                background-image: icon(chatIcon, '8C8C8C');
+            }
+            &.edit-btn .icon {
+                background-image: url('#{$path-image}/ico-setting.svg');
+            }
+
+            &.upload-btn .icon {
+                background-image: url('#{$path-image}/ico-upload_2.svg');
+            }
+        }
+    }
+
+    .readmore-btn {
+        /* 더보기 버튼 */
+        position: relative;
+        padding: 4px 24px 4px 4px;
+        font-size: 0;
+        background-repeat: no-repeat;
+        background-position: center right;
+
+        &__text {
+            display: block;
+            color: $c-8c;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .icon {
+            position: absolute;
+            top: 3px;
+            right: 0;
+            background-image: icon(userSelectboxArrow, 'BFBFBF');
+            background-position: center;
+        }
+
+        &.is-open .icon {
+            transform: rotate(180deg);
+        }
+
+        &:hover {
+            text-decoration: underline;
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 포트폴리오 업로드 화면
+--------------------- */
+.partner-portfolio_upload {
+    min-width: $user-contents-width;
+
+    &.contents__wrap {
+        max-width: 1240px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .partner-info {
+        position: static;
+        box-shadow: none;
+    }
+
+    .portfolio.empty {
+        background-color: $c-white;
+    }
+}

@@ -1,0 +1,783 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / payment_mypage
+= 결제/견적
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- 결제/견적 공통 레이아웃
+--------------------- */
+$footerHeight: 90px;
+$boxSize: 362px;
+
+.user-mypage {
+    &.contents__wrap {
+        max-width: 1600px !important;
+        // min-height: calc(100vh - ($h-header + 80px));
+        min-height: 900px;
+        display: flex;
+        gap: 0 !important;
+        background-color: $c-white;
+        border: 1px solid $c-d9;
+        border-radius: 8px;
+        overflow: hidden;
+
+        @include pc-1920 {
+            min-height: 800px;
+        }
+
+        @media (max-height: 860px) {
+            min-height: 90vh;
+        }
+    }
+    .block-item {
+        width: 50%;
+        flex: 1;
+    }
+
+    .list-area {
+        $titleHeight: 82px;
+        $titleHeightSM: 64px;
+
+        &__title {
+            height: $titleHeight;
+            padding: 24px 16px;
+            font-size: 20px;
+            font-weight: 700;
+            border-bottom: 1px solid $c-f0;
+
+            @include pc-1920 {
+                height: $titleHeightSM;
+                padding: 16px;
+            }
+        }
+
+        &__container {
+            height: calc(100% - $titleHeight);
+            display: flex;
+            flex-direction: column;
+
+            @include pc-1920 {
+                height: calc(100% - $titleHeightSM);
+            }
+        }
+
+        &__total {
+            padding: 12px 16px;
+            font-size: 13px;
+
+            .num {
+                vertical-align: baseline;
+                color: $c-secondary;
+            }
+        }
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+        padding: 4px 8px 16px;
+
+        &__list {
+            margin: 0 12px;
+
+            &::after {
+                @include pseudo('', 100%, 3px);
+                background-color: $c-brand-04;
+                opacity: 0;
+            }
+
+            &.is-active::after {
+                opacity: 1;
+                transition: $duration;
+            }
+        }
+
+        &__item {
+            color: $c-59;
+            padding-top: 12px;
+            font-weight: 600;
+
+            &:hover {
+                color: $c-brand-04;
+                transition: $duration;
+            }
+        }
+    }
+
+    .table-area {
+        flex: 1;
+        font-size: 14px;
+        overflow-x: auto;
+
+        &::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        table {
+            width: 100%;
+            white-space: pre;
+
+            thead {
+                background-color: $c-fa;
+            }
+
+            tbody {
+                tr {
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $c-fa;
+                        transition: $duration;
+                    }
+
+                    &.is-active {
+                        background-color: $c-primary-light;
+                    }
+                }
+            }
+
+            .state,
+            .due-date {
+                width: 86px;
+            }
+
+            .state {
+                position: relative;
+
+                &::before {
+                    $size: 8px;
+                    @include pseudo('', $size, $size);
+                    position: absolute;
+                    top: 50%;
+                    left: 24px;
+                    transform: translateY(-50%);
+                    border-radius: 100%;
+                }
+
+                &__process::before {
+                    /* 작업대기, 작업진행, 작업완료 - color : yellow */
+                    background-color: $c-waiting;
+                }
+
+                &__delivery::before {
+                    /* 배송시작, 배송완료 - color : blue */
+                    background-color: $c-in-progress;
+                }
+
+                &__confirm::before {
+                    /* 구매확정, 정산중, 정산완료 - color : green */
+                    background-color: $c-done;
+                }
+
+                &__cancel::before {
+                    /* 취소, 환불 - color : red */
+                    background-color: $c-warning-feature;
+                }
+
+                &__estimate::before {
+                    /* 회원_견적 - color : light purple */
+                    background-color: $c-brand-02;
+                }
+
+                &__reestimate::before {
+                    /* 회원_재견적 - color : purple */
+                    background-color: $c-brand-04;
+                }
+
+                &__expired::before {
+                    /* 회원_만료, 파트너_만료 - color : gray */
+                    background-color: $c-8c;
+                }
+            }
+
+            .partner-name {
+                // max-width: 86px;
+                max-width: 148px;
+                width: 148px;
+                @include ellipsis;
+            }
+
+            .project-name {
+                max-width: 200px;
+                @include ellipsis;
+            }
+
+            .price {
+                width: 124px;
+            }
+        }
+
+        th {
+            padding: 8px;
+            color: $c-8c;
+            font-weight: 600;
+            border-top: 1px solid $c-f0;
+            border-bottom: 1px solid $c-f0;
+
+            &:first-child {
+                padding-left: 24px;
+            }
+
+            &:last-child {
+                padding-right: 16px;
+            }
+
+            &.price {
+                text-align: right;
+            }
+        }
+
+        tr td {
+            padding: 14px 8px;
+            color: $c-43;
+            font-size: 14px;
+            border-bottom: 1px solid $c-f0;
+            cursor: pointer;
+
+            &.state {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            &.price {
+                text-align: right;
+            }
+
+            &:first-child {
+                padding-left: 40px;
+            }
+
+            &:last-child {
+                padding-right: 16px;
+            }
+        }
+
+        .empty-data {
+            font-size: 20px;
+        }
+    }
+
+    .empty-data {
+        height: 588px;
+        @include flexCenter(center);
+        flex-direction: column;
+        color: $c-8c;
+        font-weight: 600;
+    }
+
+    .contents-area {
+        /* 진행중인 견적 화면에서 견적이 0건일 때 우측 출력 화면 */
+
+        .empty-data {
+            height: 100%;
+
+            &__icon {
+                $size: 104px;
+
+                width: $size;
+                height: $size;
+                font-size: 0;
+                background-image: url('#{$path-image}/ico-file.svg');
+            }
+
+            &__text {
+                margin-top: 16px;
+                color: $c-8c;
+                font-size: 18px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .pagination {
+        height: $footerHeight;
+
+        @include pc-1920 {
+            height: auto;
+            margin: 32px 0 20px;
+        }
+    }
+}
+
+/*---------------------
+--- 진행중인 거래
+--------------------- */
+.payment-mypage {
+    .contents-area {
+        display: flex;
+        flex-direction: column;
+        background-color: $c-f5;
+        border-left: 1px solid $c-d9;
+
+        &__container {
+            flex: 1;
+            padding: 24px;
+        }
+
+        &__info {
+            @include flexCenter(space-between);
+            margin-bottom: 16px;
+
+            &--name {
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+            .btn {
+                min-width: 120px;
+            }
+        }
+
+        &__box {
+            border: 1px solid $c-d9;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        &__header {
+            padding: 20px 24px;
+            background-color: $c-43;
+
+            &--state {
+                @include flexCenter(space-between);
+
+                .state {
+                    color: $c-white;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+
+                .time {
+                    color: $c-bf;
+                    font-size: 13px;
+                }
+            }
+
+            &--order {
+                margin-top: 4px;
+                color: $c-waiting;
+                font-size: 12px;
+                font-weight: 300;
+            }
+
+            &--num {
+                vertical-align: baseline;
+                color: $c-bf;
+            }
+
+            .due-date__box {
+                margin-top: 12px;
+            }
+        }
+
+        &__body {
+            $iconSize: 56px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 24px 56px;
+            background-color: $c-white;
+
+            &--icon {
+                width: $iconSize;
+                height: $iconSize;
+                font-size: 0;
+                background-image: url('#{$path-image}/ico-process.svg');
+                background-position: center;
+            }
+
+            @for $i from 1 through 9 {
+                &.step-#{$i} {
+                    .contents-area__body--icon {
+                        background-position-y: $iconSize * -($i - 1);
+                    }
+                }
+            }
+
+            &--state {
+                margin: 8px 0 4px;
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 1.4;
+            }
+
+            &.step-7 {
+                &.processing {
+                    /* 구매확정 (파트너 - 정산진행중) */
+                    .contents-area__body--confirm {
+                        color: $c-secondary;
+                        background-color: rgba($color: $c-secondary, $alpha: 0.08);
+                    }
+
+                    .accent {
+                        color: $c-secondary;
+                    }
+                }
+
+                &.completed {
+                    /* 구매확정 (파트너 - 정산완료) */
+                    .contents-area__body--confirm {
+                        color: $c-done;
+                        background-color: rgba($color: $c-done, $alpha: 0.08);
+                    }
+
+                    .accent {
+                        color: $c-done;
+                    }
+                }
+            }
+
+            &.step-8 {
+                /* 결제취소 */
+                .contents-area__body--state {
+                    color: $c-error;
+                }
+            }
+
+            &.step-9 {
+                /* 환불 */
+                .contents-area__body--state {
+                    color: $c-positive;
+                }
+            }
+
+            &--confirm {
+                margin: 4px 0 12px;
+                padding: 4px 16px;
+                font-size: 14px;
+                font-weight: 600;
+                border-radius: 4px;
+            }
+
+            &--text {
+                text-align: center;
+                font-size: 14px;
+                color: $c-59;
+                line-height: 1.4;
+
+                * {
+                    vertical-align: baseline;
+                    font-size: 14px;
+                    color: $c-59;
+                }
+            }
+
+            &--desc {
+                width: $boxSize;
+                margin-top: 8px;
+                font-size: 14px;
+                text-align: center;
+                color: $c-8c;
+                line-height: 1.35;
+            }
+
+            .due-date__box {
+                margin-top: 4px;
+            }
+
+            .alert-info {
+                width: $boxSize;
+                margin: 24px 0 16px;
+
+                * {
+                    color: $c-8c;
+                }
+
+                &__title {
+                    margin-bottom: 4px;
+                    color: $c-59;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+            .btn {
+                min-width: 150px;
+            }
+
+            .label {
+                margin-top: 8px;
+                color: $c-8c;
+                font-size: 14px;
+            }
+        }
+
+        @at-root {
+            .due-date__box {
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                padding: 4px 16px 4px 34px;
+                background-color: $c-59;
+                background-image: icon(clockIcon, 'F0F0F0');
+                background-repeat: no-repeat;
+                background-position: left 10px center;
+                border-radius: 4px;
+
+                &--title {
+                    margin-right: 8px;
+                    color: $c-d9;
+                    font-size: 15px;
+                }
+
+                &--date,
+                &--date * {
+                    vertical-align: baseline;
+                    color: $c-waiting;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                &--date.alert,
+                &--date.alert * {
+                    color: $c-secondary;
+                }
+            }
+        }
+
+        &__footer {
+            height: $footerHeight;
+            display: flex;
+            justify-content: space-between;
+            padding: 24px;
+            background-color: $c-white;
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+
+            .btn {
+                min-width: 120px;
+
+                @media (max-width: 1600px) {
+                    min-width: 90px;
+                }
+
+                & + .btn {
+                    margin-left: 8px;
+                }
+            }
+        }
+    }
+
+    .step {
+        // height: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        // margin-top: 16px;
+
+        margin-top: 20px;
+        padding: 0 20px;
+
+        &__list {
+            position: relative;
+
+            &.is-active {
+                /* 현재 active된 스탭 스타일 */
+
+                .step {
+                    &__text {
+                        color: #ffa215;
+
+                        &--bedge {
+                            margin-bottom: 4px;
+                            padding: 4px 8px;
+                            color: $c-white;
+                            background-color: $c-secondary;
+                            border-radius: 100px;
+
+                            // position: relative;
+                            margin-top: -4px;
+
+                            & + .step__text {
+                                top: 20px;
+                            }
+
+                            & ~ .step__symbol {
+                                margin-top: 54px;
+                            }
+
+                            &.hide {
+                                & + .step__text {
+                                    top: 0;
+                                }
+                                & ~ .step__symbol {
+                                    margin-top: 32px;
+                                }
+                            }
+                        }
+                    }
+
+                    &__symbol {
+                        background-image: none;
+                        border-color: $c-fa;
+                        background-color: $c-fa;
+                    }
+                }
+            }
+
+            &.is-active ~ .step__list {
+                /* active되기 전 스탭 스타일 */
+                .step {
+                    &__text {
+                        color: $c-d9;
+                    }
+
+                    &__symbol {
+                        background-image: none;
+                        border: 2px solid $c-59;
+                    }
+                }
+            }
+
+            &.is-active ~ .step__divider {
+                &::before,
+                &::after {
+                    /* active되기 전 스탭 구분선 */
+                    background-color: $c-59;
+                }
+            }
+
+            &.is-active + .step__divider {
+                &::after {
+                    /* active되기 전 스탭 fill animation */
+                    width: 50%;
+                    background-color: $c-bf;
+                    animation: divider 2.5s both;
+                }
+            }
+
+            @keyframes divider {
+                0% {
+                    width: 0;
+                }
+
+                100% {
+                    width: 50%;
+                }
+            }
+        }
+
+        &__text {
+            /* 완료된 스탭 스타일 */
+            padding: 2px 8px;
+            text-align: center;
+            color: $c-8c;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &__symbol {
+            /* 완료된 스탭 스타일 */
+            $size: 16px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            // margin-top: 12px;
+            font-size: 0;
+            border: 2px solid $c-bf;
+            border-radius: 100%;
+
+            background-image: icon(checkCircle, '52C41A');
+            background-position: center;
+            border-color: transparent;
+
+            margin-top: 32px;
+        }
+
+        &__divider {
+            width: 100%;
+            height: 2px;
+            position: relative;
+            top: -8px;
+            font-size: 0;
+            border-radius: 100px;
+
+            &::before,
+            &::after {
+                // @include pseudo('', calc(100% + 28px), 2px);
+                position: absolute;
+                // left: -14px;
+                background-color: $c-bf;
+
+                @include pseudo('', 80%, 2px);
+                left: 10%;
+            }
+        }
+    }
+
+    .payment-info {
+        width: $boxSize;
+        min-width: 362px;
+        margin: 24px 0 16px;
+        padding: 16px;
+        border: 1px solid $c-f0;
+        border-radius: 8px;
+
+        .payment-info {
+            &__title {
+                margin-bottom: 8px;
+                padding-bottom: 8px;
+                font-weight: 600;
+                border-bottom: 1px solid $c-f0;
+            }
+
+            &__wrap {
+                width: 100%;
+                font-size: 15px;
+
+                tr:not(:first-child) {
+                    th,
+                    td {
+                        padding-top: 16px;
+                    }
+                }
+
+                th {
+                    max-width: 108px;
+                    padding-right: 8px;
+                    vertical-align: baseline;
+                    color: $c-8c;
+                    font-weight: 600;
+                }
+
+                td {
+                    text-align: right;
+                    font-weight: 600;
+                    line-height: 1.5;
+                }
+            }
+        }
+
+        &__footer {
+            height: $footerHeight;
+            display: flex;
+            justify-content: space-between;
+            padding: 24px;
+            background-color: $c-white;
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+
+            .btn {
+                min-width: 120px;
+
+                @media (max-width: 1600px) {
+                    min-width: 90px;
+                }
+
+                & + .btn {
+                    margin-left: 8px;
+                }
+            }
+        }
+    }
+}

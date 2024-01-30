@@ -1,0 +1,231 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= custom react-slideshow-image
+= react-slideshow-image/dist/styles.css 보다 아래에 선언되어야 함
+=============================================================
+=============================================================
+=============================================================*/
+
+@import 'abstracts/variables', 'abstracts/mixin';
+
+/*---------------------
+--- 메인화면 section 2
+--------------------- */
+.react-slideshow-container .nav {
+    position: relative !important;
+    top: 9px;
+}
+
+.react-slideshow-wrapper.slide {
+    height: 290px; /* slide shadow디자인을 위해 높이값 지정 */
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+
+    &__arrow {
+        display: block;
+        width: 44px;
+        height: 44px;
+        font-size: 0;
+        border-radius: 100%;
+        background-image: url('#{$path-image}/ico-slide_arrow.svg');
+        @include shadowSm04;
+
+        &.prev {
+            background-position: top;
+        }
+
+        &.next {
+            background-position: bottom;
+        }
+    }
+
+    &__item {
+        margin: 0 10px;
+        padding: 16px;
+        background-color: $c-white;
+        border-radius: 6px;
+        border: 1px solid $c-d9;
+        @include shadowSm04;
+        cursor: pointer;
+    }
+
+    &__contents {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__thumb {
+        $size: 120px;
+
+        width: $size;
+        height: $size;
+        @include flexCenter(center);
+        // padding: 6px;
+        border-radius: 6px;
+        border: 1px solid $c-fa;
+        overflow: hidden;
+
+        &--img {
+            width: 100%;
+            border-radius: 6px;
+        }
+    }
+
+    &__text {
+        flex: 1;
+        margin-left: 12px;
+
+        &--title {
+            color: $c-black;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+            @include ellipsisMulti(2);
+        }
+
+        &--sub {
+            max-width: 198px;
+            margin-top: 4px;
+            padding-left: 24px;
+            color: $c-59;
+            font-size: 14px;
+            line-height: 20px;
+            @include ellipsis;
+            background-image: url('#{$path-image}/ico-slide.svg');
+            background-repeat: no-repeat;
+            background-position: left top;
+
+            &.material {
+                background-position: left bottom;
+            }
+        }
+    }
+
+    &__keyword {
+        $keywordHeight: 32px;
+        $keywordGap: 8px;
+
+        height: $keywordHeight;
+        display: flex;
+        gap: $keywordGap;
+        flex-wrap: wrap;
+        margin: 12px 0;
+        overflow: hidden;
+
+        .keyword {
+            height: $keywordHeight;
+            padding: 4px 12px;
+            color: $c-43;
+            font-size: 14px;
+            border: 1px solid $c-d9;
+            border-radius: 99px;
+
+            &:hover {
+                background-color: $c-f5;
+                transition: $duration;
+            }
+
+            @include safari-pc {
+                & + .keyword {
+                    margin-left: $keywordGap;
+                }
+            }
+        }
+    }
+
+    &__desc {
+        height: 62px;
+        padding: 8px;
+        border-radius: 12px;
+        background-color: $c-f5;
+
+        &--text {
+            color: $c-59;
+            font-size: 14px;
+            @include ellipsisMulti(2);
+        }
+    }
+}
+
+.indicators {
+    $dotGap: 8px;
+    gap: $dotGap;
+
+    @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
+            li + li {
+                margin-left: 8px !important;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 공장 포트폴리오
+--------------------- */
+
+.portfolio {
+    $size: 490px;
+
+    .slide-area {
+        @include flexCenter(space-between);
+        position: relative;
+        padding: 16px 20px;
+
+        img {
+            width: 100%;
+            height: 100%; // 정방형이 아닌 이미지 대응
+            object-fit: cover;
+            border-radius: 6px;
+        }
+    }
+
+    .react-slideshow-wrapper.slide {
+        width: $size;
+        height: $size;
+    }
+
+    .slide-arrow {
+        width: 40px;
+        height: 40px;
+        position: absolute !important;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba($color: $c-black, $alpha: 0.4);
+        background-image: icon(arrow, 'FFFFFF');
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 8px;
+        z-index: 100;
+
+        &.prev {
+            left: 8px !important;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        &.next {
+            right: 8px !important;
+        }
+
+        &:hover {
+            background-color: rgba($color: $c-black, $alpha: 0.6);
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 공장 포트폴리오 팝업 - 포트폴리오 업로드
+--------------------- */
+.popup.portfolio-upload {
+    $thumbSize: 74px;
+
+    .react-slideshow-wrapper.slide {
+        width: $thumbSize;
+        height: $thumbSize;
+    }
+}

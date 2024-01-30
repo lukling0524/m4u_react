@@ -1,0 +1,316 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= input
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 인풋 박스 디자인
+--------------------- */
+input,
+select,
+textarea {
+    padding: 8px 16px;
+    font-size: 15px;
+    border: 1px solid $c-d9;
+    border-radius: 4px;
+    background-color: $c-white;
+    transition: border $duration;
+    @include ellipsis;
+
+    &::placeholder {
+        color: $c-bf;
+    }
+
+    &.disabled,
+    &:disabled {
+        color: $c-disabled;
+        border: 1px solid $c-f0 !important;
+        background-color: $c-f5;
+        cursor: default;
+    }
+
+    &:focus,
+    &:active {
+        border: 1px solid $c-brand-04;
+    }
+}
+
+input {
+    &.readonly,
+    &:read-only {
+        color: $c-disabled;
+        border: 1px solid $c-f0 !important;
+        background-color: $c-f5;
+        cursor: default;
+    }
+}
+
+select {
+    padding-right: 30px;
+
+    &.readonly {
+        color: $c-disabled;
+        border: 1px solid $c-f0 !important;
+        background-color: $c-f5;
+        cursor: default;
+        background-image: icon(selectboxArrow, '8C8C8C');
+    }
+}
+
+textarea {
+    white-space: pre-wrap;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+}
+/*---------------------
+--- text field 
+--- input, label, help text
+--------------------- */
+.textfield {
+    width: 100%;
+
+    .label {
+        position: relative;
+        display: inline-block;
+        color: $c-43;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    input {
+        min-height: 40px;
+        font-size: 16px;
+        flex: 1;
+    }
+
+    .time-wrap {
+        display: flex;
+        justify-content: space-between;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .help-text {
+        margin-top: 4px;
+        color: $c-8c;
+        line-height: 1.23;
+    }
+
+    &.error {
+        .help-text {
+            color: rgba($color: $c-error, $alpha: 1);
+        }
+    }
+
+    &.success {
+        .help-text {
+            color: rgba($color: $c-positive, $alpha: 1);
+        }
+    }
+
+    input.error {
+        border: 1px solid rgba($color: $c-error, $alpha: 0.55);
+    }
+
+    input.success {
+        border: 1px solid rgba($color: $c-positive, $alpha: 0.55);
+    }
+
+    input.success-icon {
+        padding-right: 32px;
+        color: $c-26;
+        background-size: 24px;
+        background-repeat: no-repeat;
+        background-image: icon(checkIcon, '29CC6A');
+        background-position: right 8px center;
+        background-color: $c-white;
+        border-color: $c-d9 !important;
+    }
+
+    &.disedit {
+        input {
+            color: $c-26 !important;
+            border: 1px solid $c-f0 !important;
+            background-color: $c-f5;
+            cursor: default;
+        }
+    }
+}
+
+/*---------------------
+--- 인풋 라벨
+--------------------- */
+.label {
+    position: relative;
+    display: inline-block;
+    color: $c-43;
+    font-size: 14px;
+    font-weight: 500;
+
+    &.disabled {
+        color: $c-bf;
+    }
+
+    &.required {
+        padding-right: 12px;
+
+        &::after {
+            @include pseudo('*', 10px, 10px);
+            position: absolute;
+            top: -2px;
+            right: 0;
+            color: $c-warning-feature;
+        }
+    }
+}
+
+/*---------------------
+--- 인풋 아이콘
+--------------------- */
+.input-icon {
+    $iconPadding: 40px;
+    $iconPos: 12px;
+
+    &.front {
+        padding-left: $iconPadding;
+        background-repeat: no-repeat;
+        background-position: center left $iconPos;
+    }
+
+    &.back {
+        padding-right: $iconPadding;
+        background-repeat: no-repeat;
+        background-position: center right $iconPos;
+    }
+}
+
+/*---------------------
+--- 인풋영역 도움말 (Help text)
+--------------------- */
+.help-text {
+    display: block;
+    margin-top: 2px;
+    color: $c-8c;
+    font-size: 13px;
+
+    &.hide {
+        display: none;
+    }
+
+    &.error {
+        color: rgba($color: $c-error, $alpha: 1);
+
+        &-icon {
+            padding-left: 20px;
+            background-size: 16px;
+            background-repeat: no-repeat;
+            background-image: icon(errorIcon, 'F90000');
+            background-position: left center;
+        }
+    }
+
+    &.success {
+        color: rgba($color: $c-positive, $alpha: 1);
+
+        &-icon {
+            padding-left: 20px;
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-image: icon(checkIcon, '29CC6A');
+            background-position: left center;
+        }
+    }
+
+    &.time {
+        margin-left: 16px;
+        color: $c-secondary;
+    }
+}
+
+/*---------------------
+--- Search field
+--------------------- */
+input[type='text'].search-field {
+    min-height: 48px;
+    padding: 12px 16px 12px 44px;
+    font-size: 16px;
+    background-image: url('#{$path-image}/ico-search.svg');
+    background-repeat: no-repeat;
+    background-position: center left 16px;
+    border-radius: 8px;
+
+    &__round {
+        border-radius: 100px;
+    }
+}
+
+/*---------------------
+--- 커스텀 필드
+--- 업로드, 다운로드, 링크
+--------------------- */
+.field-custom {
+    max-width: 216px;
+    height: 36px;
+    padding: 8px 10px;
+    @include flexCenter(space-between);
+    font-size: 15px;
+    border: 1px solid $c-d9;
+    border-radius: 4px;
+    background-color: $c-white;
+    transition: border $duration;
+
+    &__text {
+        flex: 1;
+        margin: 0 6px;
+        color: $c-in-progress;
+        text-decoration: underline;
+        @include ellipsis;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.75;
+            transition: $duration;
+        }
+    }
+
+    &__icon {
+        $size: 20px;
+
+        width: $size;
+        height: $size;
+        margin: 0 6px;
+        font-size: 0;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        &.upload {
+            background-image: url('#{$path-image}/ico-upload.svg');
+        }
+
+        &.download {
+            background-image: icon(downloadIcon, '000000');
+        }
+
+        &.link {
+            background-image: url('#{$path-image}/ico-link.svg');
+        }
+    }
+}
+
+/*---------------------
+--- input type=number 화살표 삭제
+--------------------- */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

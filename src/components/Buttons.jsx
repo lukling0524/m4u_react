@@ -48,6 +48,10 @@ const CommonBtn = styled.button`
             color: #ffffff;
             border: 1px solid #6a27d8;
             background-color: #6a27d8;
+
+            &:hover {
+                background-color: #551fad;
+            }
         `}
 
     ${({ btnstyle }) =>

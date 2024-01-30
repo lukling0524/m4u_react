@@ -1,0 +1,739 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / estimate
+= 견적서 작성
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- 레이아웃 - 공통
+--------------------- */
+$flexGap: 24px;
+$estimatePadding: 36px;
+$filterHeight: 200px;
+
+.estimate {
+    &.contents {
+        margin-left: 0;
+        padding: $estimatePadding;
+    }
+
+    .contents__wrap {
+        display: flex;
+        justify-content: center;
+        gap: $flexGap;
+
+        .textfield {
+            // width: 50%;
+            margin-top: 32px;
+        }
+
+        .filter-tag__wrap {
+            height: $filterHeight;
+        }
+
+        .filter-tag {
+            // width: 50%;
+            max-height: $filterHeight;
+            margin-top: 8px;
+        }
+    }
+
+    .recommend-needed {
+        margin-top: 6px;
+    }
+}
+
+/*---------------------
+--- 견적서 작성 - 레이아웃
+--------------------- */
+.estimate-info {
+    width: 500px;
+
+    // flex: 1;
+    background-color: $c-white;
+    border-radius: 8px;
+    overflow: hidden;
+    @include shadowSm02;
+}
+
+/*---------------------
+--- 견적서 작성 - header
+--------------------- */
+.estimate-info {
+    &__header {
+        padding: 16px 24px;
+        border-bottom: 1px solid $c-f0;
+
+        &--title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+    &__step {
+        $stapGap: 48px;
+
+        display: flex;
+        justify-content: center;
+        gap: $stapGap;
+        margin-top: 16px;
+
+        &--list {
+            position: relative;
+            color: $c-bf;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.195px;
+
+            &.is-active {
+                color: $c-brand-04;
+            }
+            & + & {
+                &::before {
+                    $size: 16px;
+
+                    @include pseudo('', $size, $size);
+                    position: absolute;
+                    top: 50%;
+                    left: -32px;
+                    transform: translateY(-50%);
+                    background-image: icon(sidebarArrow, '8C8C8C');
+                    background-position: center;
+                    background-size: $size;
+                }
+
+                @include safari-pc {
+                    margin-left: $stapGap;
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 견적서 작성 - body
+--------------------- */
+.estimate-info {
+    &__body {
+        padding: 24px 24px 56px;
+    }
+
+    .label {
+        font-size: 16px;
+    }
+
+    .help-text {
+        margin: 0 0 8px;
+    }
+
+    .textfield + .textfield {
+        margin-top: 32px;
+    }
+
+    .attach-btn {
+        /* 첨부파일 업로드 버튼 - 파일 업로드 전 */
+        padding-right: 36px;
+        background-image: icon(plusIcon, 'FF7009');
+        background-position: center right 12px;
+        background-repeat: no-repeat;
+
+        span {
+            position: relative;
+            top: -1px;
+            color: $c-bf;
+            font-size: 13px;
+        }
+    }
+
+    .input-wrap {
+        /* input type=number의 단위 지정을 위한 디자인 */
+        position: relative;
+        flex: 1;
+
+        input[type='number'] {
+            padding-right: 36px;
+            // text-align: right;
+        }
+
+        &::after {
+            @include pseudo(attr(data-unit), 20px, 20px);
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            color: $c-8c;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+    }
+
+    .addFile-btn {
+        /* 업로드 버튼 */
+
+        padding: 8px 16px 8px 36px;
+        color: $c-8c;
+        font-size: 13px;
+        background-color: $c-white;
+        background-image: url('#{$path-image}/ico-add_file.svg');
+        background-repeat: no-repeat;
+        background-position: center left 12px;
+        border: 1px solid $c-d9;
+        border-radius: 2px;
+
+        &:hover {
+            background-color: $c-fa;
+            transition: $duration;
+        }
+    }
+
+    .drop-area {
+        /* 파일 드래그 드롭 영역 */
+        $gap: 4px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $gap;
+        padding: 18px 10px 10px;
+        background: $c-fa;
+        border: 1px dashed $c-d9;
+        border-radius: 4px;
+        // cursor: pointer;
+
+        * {
+            color: $c-8c;
+            font-size: 13px;
+
+            &:not(:first-child) {
+                @include safari-pc {
+                    margin-top: $gap;
+                }
+            }
+        }
+
+        .color-purple {
+            color: $c-brand-06;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .addFile-btn {
+            margin-bottom: 16px;
+        }
+    }
+
+    .uploaded-area {
+        /* 파일 업로드 후 리스트 영역 */
+
+        .uploaded {
+            max-height: 200px;
+            margin: 8px 4px 8px 0;
+            padding-right: 4px;
+            overflow-y: auto;
+
+            @include scrollbar(4px);
+
+            &__list {
+                height: 40px;
+                display: flex;
+                align-items: center;
+
+                &:not(:first-child) {
+                    border-top: 1px solid $c-f0;
+                }
+
+                * {
+                    color: $c-8c;
+                    font-size: 13px;
+                }
+            }
+
+            &__index {
+                width: 36px;
+                text-align: center;
+            }
+
+            &__file-name {
+                flex: 1;
+                padding: 4px 8px;
+                color: $c-59;
+                @include ellipsis;
+            }
+
+            &__size {
+                width: 60px;
+                padding: 4px 8px;
+                text-align: right;
+            }
+        }
+
+        .delete-btn {
+            $size: 36px;
+
+            width: $size;
+            height: $size;
+            font-size: 0;
+            background-image: url('#{$path-image}/ico-delete.svg');
+            background-size: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            &:hover {
+                background-color: $c-f5;
+                border-radius: 4px;
+                transition: $duration;
+            }
+        }
+
+        .button-area {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .payment {
+        /* 최종결제금액 */
+        margin-top: 24px;
+
+        &__title {
+            font-size: 16px;
+        }
+
+        &__list {
+            @include flexCenter(space-between);
+            margin-top: 8px;
+        }
+
+        &__num {
+            font-weight: 600;
+        }
+    }
+
+    .final-payment {
+        @include flexCenter(space-between);
+        margin: 16px 0;
+
+        &__num {
+            color: $c-secondary;
+            font-size: 18px;
+            font-weight: 700;
+        }
+    }
+}
+
+/*---------------------
+--- 견적서 작성 - footer
+--------------------- */
+.estimate-info {
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-top: 1px solid $c-f0;
+
+        .next-btn {
+            min-width: 120px;
+        }
+    }
+}
+
+/*---------------------
+--- 파트너정보
+--------------------- */
+// .estimate {
+.partner-info {
+    width: 376px;
+    height: fit-content;
+    position: sticky;
+    top: calc($h-header + $estimate-padding);
+    @include safari-pc {
+        margin-left: $flexGap;
+    }
+    padding: 24px;
+    background-color: $c-white;
+    border-radius: 8px;
+    @include shadowSm02;
+
+    &__header {
+        @include flexCenter(space-between);
+    }
+
+    &__title {
+        text-align: left;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &__profile {
+        $profileGap: 8px;
+
+        @include flexCenter(flex-start);
+        gap: $profileGap;
+        margin: 12px 0 16px;
+
+        &--name {
+            color: $c-43;
+            font-weight: 600;
+        }
+    }
+
+    &__table {
+        width: 100%;
+        font-size: 15px;
+        line-height: 1.46;
+
+        th {
+            width: 120px;
+            text-align: left;
+            color: $c-8c;
+            vertical-align: top;
+        }
+
+        td {
+            text-align: right;
+            color: $c-59;
+        }
+
+        tr:not(:first-child) {
+            th,
+            td {
+                padding-top: 16px;
+            }
+        }
+    }
+
+    .chat-btn {
+        width: 100%;
+        margin-top: 24px;
+    }
+}
+// }
+
+/*---------------------
+--- 견적서 작성 - 2. 견적정보
+--------------------- */
+.estimate_01 {
+    .numner {
+        padding-right: 38px;
+        text-align: right;
+    }
+}
+
+/*---------------------
+--- 견적서 작성 - 3.불량기준 (estimate_02.html)
+--------------------- */
+.estimate_02 {
+    .text-form {
+        height: 280px;
+    }
+}
+
+/*---------------------
+--- 최종 견적서 (estimate_04.html)
+--------------------- */
+.estimate_04 {
+    .contents__wrap {
+        justify-content: center;
+    }
+
+    .estimate-info {
+        $width: 780px;
+
+        width: $width;
+        max-width: $width;
+
+        &__header {
+            background-color: $c-59;
+
+            &--title {
+                text-align: center;
+                color: $c-fa;
+            }
+        }
+
+        &__body {
+            padding: 32px 24px;
+            background-color: $c-f5;
+        }
+    }
+
+    .info-box {
+        &__title {
+            color: $c-black;
+        }
+    }
+
+    .partner-info {
+        &__table {
+            width: 100%;
+
+            td {
+                color: $c-26;
+            }
+        }
+    }
+}
+
+.estimate {
+    .file-btn {
+        padding: 10px 16px 10px 36px;
+        color: $c-59;
+        background-image: icon(fileIcon, 'FF7009');
+        background-repeat: no-repeat;
+        background-position: center left 12px;
+
+        .num {
+            vertical-align: baseline;
+            color: $c-59;
+            font-weight: 600;
+            line-height: 1;
+        }
+    }
+
+    @at-root {
+        .estimate-confirm {
+            .flex-center {
+                @include flexCenter(space-between);
+            }
+
+            .file {
+                display: flex;
+                align-items: center;
+
+                &-image {
+                    $size: 32px;
+
+                    width: $size;
+                    height: $size;
+                    margin-right: 8px;
+                    font-size: 0;
+                    background-image: url('#{$path-image}/ico-file.svg');
+                    background-size: $size;
+                    background-repeat: no-repeat;
+                }
+
+                &-name {
+                    display: inline-block;
+                    max-width: 420px;
+                    @include ellipsis;
+                }
+
+                &-text {
+                    color: $c-43;
+                    font-size: 18px;
+                    font-weight: 600;
+
+                    span {
+                        vertical-align: bottom;
+                        color: $c-43;
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            &__wrap {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                margin-top: 16px;
+                padding: 12px;
+                border: 1px solid $c-f0;
+                border-radius: 4px;
+            }
+
+            &__label {
+                color: $c-8c;
+                width: 200px;
+
+                &--desc {
+                    color: $c-8c;
+                    font-size: 14px;
+                    vertical-align: baseline;
+                }
+            }
+
+            &__items {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                flex: 1;
+
+                li {
+                    position: relative;
+                    padding-left: 10px;
+                    padding-right: 14px;
+
+                    &::before {
+                        $size: 3px;
+
+                        @include pseudo('', $size, $size);
+                        position: absolute;
+                        top: 12px;
+                        left: 0;
+                        background-color: $c-26;
+                        border-radius: 100%;
+                    }
+                }
+            }
+
+            input[type='number'] {
+                text-align: right;
+                color: $c-59;
+            }
+
+            .payment {
+                margin-top: 24px;
+
+                &__title {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+
+                &__list {
+                    @include flexCenter(space-between);
+                    margin-top: 8px;
+                }
+
+                &__num {
+                    font-weight: 600;
+                }
+            }
+
+            &__footer {
+                margin-top: 16px;
+                border-top: 1px solid $c-f0;
+            }
+
+            .final-payment {
+                @include flexCenter(space-between);
+                margin: 16px 0;
+
+                &__num {
+                    color: $c-secondary;
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    @at-root {
+        .alert-info {
+            padding: 16px 16px 16px 42px;
+            color: $c-59;
+            font-size: 13px;
+            background-color: $c-f5;
+            background-image: icon(errorIcon, 'F90000');
+            background-repeat: no-repeat;
+            background-position: left 16px top 18px;
+            border: 1px solid $c-d9;
+            border-radius: 8px;
+
+            &__title {
+                color: $c-59;
+                font-size: 14px;
+                font-weight: 600;
+
+                &--main {
+                    font-size: 16px;
+                }
+
+                & ~ p {
+                    line-height: 1.5;
+
+                    & + p {
+                        margin-top: 4px;
+                    }
+                }
+            }
+
+            &__text {
+                margin-top: 6px;
+                color: $c-8c;
+                font-size: 13px;
+                line-height: 1.2;
+            }
+
+            &.partner {
+                .text-box {
+                    margin: 8px 0 16px 14px;
+
+                    * {
+                        color: $c-59;
+                    }
+
+                    ul + ul {
+                        margin-top: 8px;
+                    }
+
+                    &__sub {
+                        margin-left: 10px;
+
+                        span {
+                            vertical-align: baseline;
+                        }
+
+                        .final {
+                            font-weight: 800;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .user-info__table {
+        font-size: 15px;
+        line-height: 1.46;
+
+        th {
+            width: 120px;
+            color: $c-8c;
+            vertical-align: top;
+        }
+
+        td {
+            color: $c-black;
+        }
+
+        tr:not(:first-child) {
+            th,
+            td {
+                padding-top: 16px;
+            }
+        }
+
+        select {
+            width: fit-content;
+            border: 1px solid $c-d9 !important;
+        }
+    }
+
+    .price-calc {
+        align-items: flex-end;
+
+        & > div {
+            flex: 1;
+        }
+    }
+
+    .price-icon {
+        $size: 20px;
+
+        width: $size;
+        height: $size;
+        margin-bottom: 10px;
+        font-size: 0;
+        background-image: url('#{$path-image}/ico-math.svg');
+        background-repeat: no-repeat;
+
+        &.plus {
+            background-position: top center;
+        }
+        &.equal {
+            background-position: bottom center;
+        }
+    }
+}

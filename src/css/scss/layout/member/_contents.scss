@@ -1,0 +1,254 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= member/contents
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 레이아웃
+--------------------- */
+.member {
+    min-width: $user-min-width;
+
+    .container {
+        margin-top: $h-header;
+    }
+
+    .contents {
+        height: 100%;
+        margin-left: $w-sidebar-close;
+        padding: 40px;
+
+        @include pc-1920 {
+            padding: 32px 40px;
+        }
+
+        @at-root {
+            /*사이드바 토글에 따라 컨텐츠영역 가변 */
+            .sidebar {
+                &.is-open + .contents {
+                    margin-left: $w-sidebar;
+                }
+            }
+        }
+
+        &__wrap {
+            width: 100%;
+            max-width: 1142px;
+            margin: 0 auto;
+        }
+    }
+
+    .btn-box {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+/*---------------------
+--- 그리드박스 레이아웃
+--------------------- */
+.info-box {
+    padding: 24px;
+    border: 1px solid $c-d9;
+    background: $c-white;
+    border-radius: 8px;
+
+    &:not(:first-child) {
+        margin-top: $info-box-gap;
+    }
+
+    &__header {
+        @include flexCenter(space-between);
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        line-height: 1;
+        border-bottom: 1px solid $c-f0;
+    }
+
+    &__title {
+        color: $c-59;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    &__body,
+    &__body * {
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
+
+    &__label {
+        color: $c-59;
+    }
+
+    b {
+        color: $c-black;
+        font-weight: 600;
+    }
+
+    &__table {
+        width: 100%;
+
+        &--list:not(:first-child) {
+            th,
+            td {
+                padding-top: 24px;
+            }
+        }
+
+        th {
+            width: 22%;
+            max-width: 240px;
+        }
+    }
+}
+
+/*---------------------
+---  페이지 타이틀
+--------------------- */
+.page-title__area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    &--text {
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+// /*---------------------
+// --- breadcrumb
+// --------------------- */
+// .breadcrumb {
+//     display: flex;
+//     justify-content: flex-end;
+//     margin-bottom: 24px;
+//     cursor: default;
+//
+//     &__item {
+//         position: relative;
+//         font-size: 13px;
+//         color: $c-bf;
+//         font-weight: 600;
+//
+//         & + & {
+//             margin-left: 20px;
+//
+//             &::before {
+//                 @include pseudo('>', 10px, auto);
+//                 position: absolute;
+//                 top: -1px;
+//                 left: -13px;
+//                 color: $c-bf;
+//             }
+//         }
+//
+//         &.current {
+//             color: $c-primary;
+//         }
+//     }
+// }
+
+// /*---------------------
+// --- 관리자 화면 조회조건 영역
+// --------------------- */
+// $inputMarginBottom: 34px;
+//
+// .input-area {
+//     display: flex;
+//     justify-content: space-between;
+//     margin-bottom: $inputMarginBottom;
+//     border-radius: 4px;
+//     border: 1px solid $c-f0;
+//
+//     table {
+//         border-right: 1px solid $c-f0;
+//         text-align: left;
+//     }
+//
+//     tr + tr {
+//         border-top: 1px solid $c-f0;
+//     }
+//
+//     th {
+//         padding: 16px;
+//         background-color: $c-f5;
+//     }
+//
+//     td {
+//         padding: 12px;
+//     }
+//
+//     .checkbox-wrap {
+//         display: flex;
+//         flex-wrap: wrap;
+//         gap: 8px;
+//     }
+//
+//     .checkbox__item--left,
+//     .radio__item--left {
+//         padding-right: 10px;
+//     }
+//
+//     .input-inner {
+//         display: flex;
+//     }
+//
+//     .btn-wrap {
+//         padding: 8px 16px;
+//
+//         .btn {
+//             height: 100%;
+//             padding: 6px 20px 6px 16px;
+//             @include flexCenter(center);
+//         }
+//
+//         .icon {
+//             margin-right: 4px;
+//         }
+//     }
+// }
+//
+// /*---------------------
+// --- 관리자 화면 조회조건 높이값 고정 클래스
+// --------------------- */
+// $height: 62px;
+//
+// @for $line from 1 through 5 {
+//     .input-item__line-#{$line} {
+//         min-height: ($height * $line) - ($line - 1);
+//     }
+// }
+//
+// .input-space {
+//     margin-bottom: $inputMarginBottom;
+// }
+//
+// /*---------------------
+// --- 관리자 화면 데이터 출력 영역
+// --------------------- */
+// .member {
+//     .search-result {
+//         $height: 20px;
+//
+//         height: $height;
+//         font-size: 14px;
+//         line-height: $height;
+//
+//         .num {
+//             position: relative;
+//             top: -1px;
+//             color: $c-secondary;
+//         }
+//     }
+//
+//     .data-area {
+//         margin: 16px 0 24px;
+//     }
+// }

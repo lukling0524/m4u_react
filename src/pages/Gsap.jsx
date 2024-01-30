@@ -23,17 +23,18 @@ function Tweentest() {
     let tl = new gsap.timeline();
 
     useEffect(() => {
-        tl.to('.testtest', { duration: 2, x: 500 }, 'queue').to('.testtest2', { duration: 2, x: 500 }, 'queue+=0.2');
+        // tl.to('.testtest', { duration: 2, x: 500 }, 'queue').to('.testtest2', { duration: 2, x: 500 }, 'queue+=0.2');
 
         const scrollControler = new ScrollMagic.Controller();
 
         let timelineTest = tl
-            .to('.testtest5', { duration: 2, x: 500, overwrite: false, immediateRender: false }, 'queue')
-            .to('.testtest6', { duration: 2, x: 500, overwrite: false, immediateRender: false }, 'queue+=0.2');
+            .fromTo('.testtest5', 2, { duration: 2, x: 0 }, { x: 500, overwrite: false, immediateRender: false }, 'queue')
+            .fromTo('.testtest6', 2, { duration: 2, x: 200 }, { x: 500, overwrite: false, immediateRender: false }, 'queue+=0.2');
 
-        new ScrollMagic.Scene({
+        let scrolltest = new ScrollMagic.Scene({
             triggerElement: '#target',
             triggerHook: 0.2,
+            //duration: 0,
         })
             .setTween(timelineTest)
             .addIndicators({ name: 'section 222' })
@@ -45,7 +46,7 @@ function Tweentest() {
             <Box01 className="testtest"></Box01>
             <Box02 className="testtest2"></Box02>
             <div style={style}></div>
-            <div id="target"></div>
+            <div id="target">TARGET</div>
             {/* <Controller>
                 <Scene triggerElement="#target">
                     {(progress) => (

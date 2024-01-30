@@ -1,0 +1,631 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / partner-process
+= 파트너 승인
+=============================================================
+=============================================================
+=============================================================*/
+.partner-process {
+    &__section {
+        display: flex;
+        justify-content: center;
+
+        .contents {
+            padding: 5% 0;
+        }
+
+        .section {
+            &__summary {
+                margin-bottom: 4 px;
+                color: $c-brand-04;
+                font-size: 24px;
+                font-weight: 700;
+            }
+            &__title {
+                color: $c-black;
+                font-size: 44px;
+                font-weight: 700;
+                line-height: 1.1;
+            }
+            &__desc {
+                color: $c-8c;
+                font-size: 20px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .section-01 {
+        position: relative;
+        height: calc(100vh - 60px);
+        max-height: 900px;
+        background-color: #f9f7fc;
+        overflow: hidden;
+
+        &:has(.step-3) {
+            max-height: none;
+            min-height: 900px;
+            height: fit-content;
+        }
+
+        .block-item {
+            width: 50%;
+            flex: 1;
+        }
+
+        .section {
+            &__title {
+                margin-bottom: 10px;
+                color: $c-30;
+                font-size: 56px;
+                line-height: 1.25;
+            }
+
+            &__desc {
+                font-size: 16px;
+            }
+        }
+
+        .img-area {
+            height: 670px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            img {
+                width: 973px;
+            }
+        }
+
+        .signup-btn {
+            width: 220px;
+            margin-top: 24px;
+            @include shadowMd01;
+        }
+    }
+
+    .section-02 {
+        min-height: 900px;
+        height: 1200px;
+        background-color: $c-fa;
+
+        .contents {
+            @include flexCenter(center);
+            margin: 6% 0;
+            padding: 0;
+            background-image: url('#{$path-image}/img-partner02_1.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        .text-area {
+            width: 100%;
+            text-align: center;
+        }
+
+        .section {
+            &__title {
+                & + .section__title {
+                    margin-top: 16px;
+                }
+            }
+
+            &__desc {
+                margin-bottom: 24px;
+                color: $c-brand-04;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .section-03 {
+        .contents {
+            padding: 0;
+        }
+
+        .flex-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 80px 0;
+
+            &:nth-child(3) {
+                .section-03__icon {
+                    background-position-y: -80px;
+                }
+            }
+
+            &:nth-child(4) {
+                .section-03__icon {
+                    background-position-y: -160px;
+                }
+            }
+        }
+
+        .text-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            &.flex-end {
+                align-items: flex-end;
+
+                .section__desc {
+                    text-align: right;
+                }
+            }
+        }
+
+        .section__desc {
+            margin-top: 24px;
+        }
+
+        &__icon {
+            $size: 80px;
+
+            width: $size;
+            height: $size;
+            font-size: 0;
+            background-image: url('#{$path-image}/img-partner05.png');
+            background-position-x: center;
+        }
+    }
+
+    .section-04 {
+        min-height: 960px;
+        background-color: #f9f7fc;
+        overflow: hidden;
+
+        .contents {
+            position: relative;
+            align-items: center;
+            flex-direction: column;
+            padding-bottom: 0;
+        }
+
+        .text-area {
+            width: 100%;
+            text-align: center;
+        }
+
+        .section__desc {
+            margin-top: 16px;
+        }
+
+        img {
+            border-radius: 12px 12px 0 0;
+            @include shadowLg03;
+        }
+    }
+
+    .section-05 {
+        background-color: $c-fa;
+
+        .contents {
+            padding: 130px 0;
+            text-align: center;
+        }
+
+        .section {
+            &__title {
+                margin-bottom: 10px;
+                font-size: 32px;
+                line-height: 1.25;
+            }
+
+            &__desc {
+                font-size: 20px;
+                line-height: 1.5;
+            }
+        }
+
+        .contact {
+            $flexGap: 24px;
+
+            display: flex;
+            justify-content: center;
+            gap: $flexGap;
+            margin-top: 32px;
+
+            &__box {
+                padding: 68px 24px;
+                flex: 1;
+                @include flexCenter(space-between);
+                border-radius: 12px;
+                @include shadowMd01;
+            }
+
+            &__title {
+                margin-bottom: 8px;
+                text-align: left;
+                color: $c-8c;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            &__info {
+                color: $c-59;
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            &__icon {
+                $size: 168px;
+
+                width: $size;
+                height: $size;
+                @include flexCenter(center);
+                background-color: $c-f5;
+                border-radius: 100%;
+
+                .icon {
+                    $size: 82px;
+
+                    width: $size;
+                    height: $size;
+                    font-size: 0;
+                    background-image: url('#{$path-image}/img-partner07.png');
+                    background-position: top;
+                    background-repeat: no-repeat;
+
+                    &.phone {
+                        background-position: bottom;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 프로세스 진행 상황
+--------------------- */
+.processing {
+    .section-01 {
+        .contents {
+            justify-content: center;
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__step {
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 36px;
+    }
+
+    .step {
+        &__list {
+            position: relative;
+
+            &.is-active {
+                /* 현재 active된 스탭 스타일 */
+                .step {
+                    &__text {
+                        color: $c-brand-03;
+                    }
+
+                    &__num {
+                        font-size: 15px;
+                        background-image: none;
+                        background-color: $c-brand-05;
+                    }
+                }
+            }
+
+            &.is-active ~ .step__list {
+                /* active되기 전 스탭 스타일 */
+                .step {
+                    &__text {
+                        color: $c-8c;
+                    }
+
+                    &__num {
+                        font-size: 15px;
+                        background-image: none;
+                        background-color: $c-d9;
+                    }
+                }
+            }
+
+            &.is-active ~ .step__divider {
+                &::before,
+                &::after {
+                    /* active되기 전 스탭 구분선 */
+                    background-color: $c-d9;
+                }
+            }
+
+            &.is-active + .step__divider {
+                &::after {
+                    /* active되기 전 스탭 fill animation */
+                    width: 50%;
+                    background-color: $c-brand-05;
+                    animation: divider 2.5s both;
+                }
+            }
+
+            @keyframes divider {
+                0% {
+                    width: 0;
+                }
+
+                100% {
+                    width: 50%;
+                }
+            }
+        }
+
+        &__text {
+            /* 완료된 스탭 스타일 */
+            padding: 2px 8px;
+            text-align: center;
+            color: $c-bf;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        &__num {
+            /* 완료된 스탭 스타일 */
+            $size: 26px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 12px;
+            text-align: center;
+            color: $c-white;
+            font-size: 0;
+            font-weight: 700;
+            line-height: $size;
+            border-radius: 100%;
+            background-image: icon(checkCircle, '6A27D8');
+            background-size: $size;
+            background-position: center;
+            border-color: transparent;
+        }
+
+        &__divider {
+            width: 100%;
+            height: 2px;
+            position: relative;
+            top: -8px;
+            font-size: 0;
+            border-radius: 100px;
+
+            &::before,
+            &::after {
+                @include pseudo('', 100%, 2px);
+                position: absolute;
+                left: 0;
+                background-color: $c-brand-05;
+            }
+        }
+    }
+
+    &__box {
+        width: 574px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 42px 102px;
+        background-color: $c-white;
+        border-radius: 12px;
+        @include shadowMd01;
+
+        &--icon {
+            width: 320px;
+            height: 130px;
+            font-size: 0;
+            background-image: url('#{$path-image}/img-partner_process.svg');
+        }
+
+        &--title {
+            font-size: 24px;
+            font-weight: 600;
+
+            .user-name {
+                vertical-align: baseline;
+                color: $c-brand-04;
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+
+        &--sub {
+            color: $c-8c;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        &--msg {
+            margin-top: 6px;
+            padding: 4px 8px;
+            color: $c-secondary;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: $c-f5;
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+
+        &.step-1 {
+            /* 심사 신청 전 */
+            .processing__box--icon {
+                display: none;
+            }
+        }
+
+        &.step-2 {
+            /* 심사 진행중 */
+            .processing__box {
+                &--icon {
+                    background-position: top;
+                }
+
+                &--title {
+                    color: $c-positive;
+                }
+            }
+
+            .message-box__wrap {
+                border-color: $c-positive;
+            }
+        }
+
+        &.step-3 {
+            /* 심사 반려 */
+            .processing__box {
+                &--icon {
+                    background-position: bottom;
+                }
+
+                &--title {
+                    color: $c-error;
+                }
+            }
+
+            .message-box {
+                &__wrap {
+                    padding-right: 6px;
+                    border-color: $c-error;
+                }
+
+                &__reasons--text {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    .message-box {
+        width: 100%;
+        margin: 36px 0;
+
+        background-color: $c-fa;
+        border-radius: 4px;
+        @include shadowSm02;
+        overflow: hidden;
+
+        &__wrap {
+            padding: 12px 16px;
+            border-left: 3px solid $c-brand-03;
+        }
+
+        &__title {
+            padding-left: 26px;
+            margin-bottom: 6px;
+            color: $c-59;
+            font-size: 14px;
+            font-weight: 600;
+            background-image: icon(errorIcon, 'FF7009');
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 20px;
+        }
+
+        &__list {
+            position: relative;
+            padding-left: 20px;
+            color: $c-8c;
+            font-size: 13px;
+
+            &::before {
+                $size: 4px;
+
+                @include pseudo('•', $size, $size);
+                position: absolute;
+                top: 0;
+                left: 6px;
+                color: $c-8c;
+                border-radius: 100%;
+            }
+        }
+
+        &__reasons {
+            max-height: 360px;
+            overflow-y: auto;
+
+            @include scrollbar(4px);
+
+            * {
+                color: $c-8c;
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            &--title {
+                font-weight: 700;
+            }
+
+            &--text {
+                word-break: break-all;
+                white-space: pre-wrap;
+            }
+
+            & + .message-box__reasons {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .tooltip {
+        margin-bottom: 18px;
+        animation: tooltip 1.5s infinite;
+
+        @keyframes tooltip {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(15%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        &__content {
+            padding: 12px 16px;
+            color: $c-43;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: $c-white;
+            opacity: 1;
+
+            &.tail::before {
+                background-image: icon(tooltip, 'FFFFFF');
+            }
+        }
+    }
+
+    .partner-btn {
+        width: 320px;
+        margin-bottom: 24px;
+    }
+
+    .help-btn {
+        color: $c-8c;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: underline;
+
+        &:hover {
+            color: $c-26;
+            transition: $duration;
+        }
+    }
+}

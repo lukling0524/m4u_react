@@ -1,0 +1,186 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= step, timeline
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- step (가로형)
+--------------------- */
+.step.horizontal {
+    display: flex;
+
+    .step {
+        &__line {
+            width: 82px;
+            height: 2px;
+            position: relative;
+            top: 16px;
+            margin: 0 16px;
+        }
+    }
+
+    .step__wrap.done + .step__line {
+        background-color: $c-positive;
+    }
+}
+
+/*---------------------
+--- step (세로형)
+--------------------- */
+.step {
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &.done {
+            .step__process {
+                font-size: 0;
+                background-size: 38px;
+                background-image: url('#{$path-image}/ico-system_alert.svg');
+                background-position: top -3px left -3px;
+            }
+
+            .step__line {
+                background-color: $c-positive;
+            }
+        }
+
+        &.now {
+            &::before {
+                background-color: $c-positive;
+            }
+
+            .step__process {
+                color: $c-white;
+                background-color: $c-positive;
+                border: 2px solid rgba(41, 204, 106, 0.33);
+            }
+        }
+    }
+
+    &__process {
+        $size: 32px;
+
+        width: $size;
+        height: $size;
+        @include flexCenter(center);
+        color: $c-bf;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 100%;
+        background-color: $c-f5;
+        filter: drop-shadow(0px 4px 8px rgba(14, 31, 53, 0.08)) drop-shadow(0px 1px 4px rgba(14, 31, 53, 0.12));
+    }
+
+    &__text {
+        margin: 8px 0;
+        text-align: center;
+
+        .title {
+            font-weight: 600;
+            line-height: 24px;
+        }
+
+        .sub-title {
+            color: $c-8c;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    &__line {
+        width: 2px;
+        height: 82px;
+        margin-bottom: 16px;
+        background-color: $c-d9;
+        border-radius: 1px;
+    }
+}
+
+/*---------------------
+--- timeline
+--------------------- */
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+
+    &__wrap {
+        display: flex;
+
+        & + & {
+            margin-top: 12px;
+        }
+    }
+
+    &__text-box {
+        flex: 1;
+        line-height: 1.2;
+
+        .text {
+            margin-bottom: 20px;
+            color: $c-8c;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .sub-title {
+            color: $c-8c;
+            font-size: 14px;
+        }
+
+        &.left {
+            text-align: right;
+        }
+    }
+
+    &__separator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 16px;
+
+        .dot {
+            $size: 12px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            top: 4px;
+            border-radius: 100%;
+            background-color: $c-white;
+            border: 2px solid $c-brand-02;
+            @include shadowSm03;
+
+            &.active {
+                border-color: $c-brand-04;
+                background-color: $c-brand-04;
+            }
+        }
+
+        .line {
+            width: 2px;
+            min-height: 34px;
+            height: calc(100% - 28px);
+            margin-top: 16px;
+            background-color: $c-d9;
+            border-radius: 1px;
+
+            &.active {
+                background-color: $c-brand-04;
+            }
+        }
+
+        &.active {
+            .dot,
+            .line {
+                background-color: $c-brand-04;
+            }
+        }
+    }
+}

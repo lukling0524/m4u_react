@@ -1,0 +1,484 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= popup, loading spinner
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 팝업창
+--------------------- */
+.popup {
+    .layer {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba($color: $c-black, $alpha: 0.55);
+        z-index: 1200;
+        display: none;
+    }
+
+    &__wrap {
+        width: 360px;
+        padding: 24px 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 8px;
+        background-color: $c-white;
+        @include shadowMd01;
+        z-index: 1300;
+        display: none;
+    }
+
+    &.show {
+        .layer {
+            display: block;
+        }
+
+        .popup__wrap {
+            display: block;
+            animation: popup 0.2s cubic-bezier(0, 0, 0.36, 1.11) 0.1s both;
+
+            &.hide {
+                display: none;
+            }
+        }
+    }
+
+    @keyframes popup {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0);
+        }
+    }
+
+    &__title {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    &__text {
+        color: $c-8c;
+        font-size: 14px;
+    }
+
+    .btn-box {
+        @include flexCenter(space-between);
+        gap: 16px;
+        margin-top: 30px;
+
+        .btn {
+            flex: 1;
+
+            + .btn {
+                margin: unset;
+            }
+        }
+
+        .btn__small.btn__tertiary {
+            font-size: 13px;
+            text-decoration: underline;
+        }
+    }
+}
+
+/*---------------------
+--- 시스템 팜업
+--------------------- */
+.popup.system {
+    .system {
+        &__icon {
+            $size: 56px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            background-image: url('#{$path-image}/ico-system_alert.svg');
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+    }
+
+    &__success .popup__title {
+        color: $c-positive;
+    }
+
+    &__warning {
+        .system__icon {
+            background-position: center;
+        }
+
+        .popup__title {
+            color: $c-warning;
+        }
+    }
+
+    &__danger {
+        .system__icon {
+            background-position: bottom;
+        }
+
+        .popup__title {
+            color: $c-error;
+        }
+    }
+}
+
+/*---------------------
+--- snackbar
+--------------------- */
+.snackbar {
+    min-width: 320px;
+    height: 48px;
+    position: fixed;
+    left: 40px;
+    bottom: 40px;
+    @include flexCenter(space-between);
+    padding: 6px 16px;
+    border-radius: 4px;
+    background-color: $c-1f;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+
+    display: none;
+
+    &.show {
+        animation: snackbarOpen 0.5s cubic-bezier(0, 0, 0.36, 1.11) 0.2s both;
+    }
+
+    &.hide {
+        animation: snackbarClose 0.2s cubic-bezier(0, 0, 0.36, 1.11) both;
+    }
+
+    @keyframes snackbarOpen {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes snackbarClose {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+    }
+
+    &__message {
+        color: $c-white;
+        font-size: 15px;
+        line-height: 22px;
+    }
+
+    &__close {
+        padding: 6px 16px;
+        color: $c-secondary;
+        font-weight: 600;
+
+        &--icon {
+            $size: 20px;
+
+            width: $size;
+            height: $size;
+            margin-left: 20px;
+            padding: 0;
+            text-indent: -9999px;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-image: icon(closeBtn, 'FFFFFF');
+        }
+    }
+}
+
+/*---------------------
+--- snackbar system popup
+--------------------- */
+.snackbar-system {
+    $snackbarSystem: &;
+
+    min-width: 400px;
+    @include flexCenter(space-between);
+    padding: 16px;
+    border-radius: 4px;
+    background-color: $c-white;
+    @include shadowSm04;
+
+    .icon {
+        $size: 42px;
+        width: $size;
+        height: $size;
+
+        background-size: 100%;
+        background-image: url('#{$path-image}/ico-system_alert.svg');
+        background-repeat: no-repeat;
+    }
+
+    .text-box {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    &.success {
+        .icon {
+            background-position: top;
+        }
+
+        .popup__title {
+            color: $c-positive;
+            line-height: 30px;
+        }
+
+        .popup__text {
+            line-height: 20px;
+        }
+    }
+
+    &.warning {
+        .icon {
+            background-position: center;
+        }
+
+        .popup__title {
+            color: $c-warning;
+        }
+    }
+
+    &.danger {
+        .icon {
+            background-position: bottom;
+        }
+
+        .popup__title {
+            color: $c-warning-feature;
+        }
+    }
+
+    .snackbar__close {
+        align-self: flex-start;
+        background-image: icon(closeBtn, '000000');
+    }
+}
+
+/*---------------------
+--- 로딩 스피너
+--------------------- */
+.loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 9999;
+    @include animatedShow;
+
+    &.blur {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+    }
+
+    &.done {
+        @include animatedHide;
+    }
+}
+
+.loading-spinner {
+    width: 100px;
+    @include positionCenter;
+}
+
+/*---------------------
+--- tooltip
+--------------------- */
+.tooltip {
+    $tooltip: &;
+
+    &__content {
+        position: relative;
+        padding: 4px 8px;
+        color: $c-white;
+        font-size: 13px;
+        background-color: $c-primary;
+        border-radius: 2px;
+        @include shadowSm03;
+        opacity: 0;
+        transition: 0.3s;
+
+        @at-root {
+            .tooltip:hover .tooltip__content {
+                opacity: 1;
+            }
+        }
+
+        &.tail {
+            &::before {
+                @include pseudo('', 12px, 6px);
+                position: absolute;
+                background-image: icon(tooltip, '551FAD');
+            }
+
+            &__down::before {
+                left: 50%;
+                bottom: -6px;
+                transform: translateX(-50%);
+                filter: drop-shadow(2px 1px 4px rgba(0, 0, 0, 0.1));
+            }
+
+            &__up::before {
+                left: 50%;
+                top: -6px;
+                transform: translateX(-50%) rotate(180deg);
+            }
+
+            &__left::before {
+                top: 50%;
+                left: -9px;
+                transform: translateY(-50%) rotate(90deg);
+            }
+
+            &__right::before {
+                top: 50%;
+                right: -9px;
+                transform: translateY(-50%) rotate(-90deg);
+            }
+        }
+    }
+
+    &.light {
+        #{$tooltip}__content {
+            color: $c-primary;
+            background-color: $c-primary-light;
+
+            &.tail::before {
+                background-image: icon(tooltip, 'F8F4FF');
+            }
+        }
+    }
+}
+
+/*---------------------
+--- modal popup (관리자화면)
+--------------------- */
+.modal {
+    $height: 70px;
+
+    .popup__wrap {
+        width: 90vw;
+        padding: 0;
+
+        &.block-1 {
+            max-width: 560px;
+        }
+
+        &.block-2 {
+            max-width: 1000px;
+        }
+
+        &.block-3 {
+            max-width: 1480px;
+        }
+    }
+
+    &__cont {
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header {
+        height: $height;
+        @include flexCenter(space-between);
+
+        padding: 16px 20px;
+        border-bottom: 1px solid $c-d9;
+    }
+
+    .tabs {
+        padding: 16px 20px 0;
+
+        & + .modal__body {
+            /* 탭메뉴 있는 모달창 레이아웃 */
+            display: block;
+        }
+    }
+
+    .page-title__text {
+        font-size: 24px;
+    }
+
+    &__body {
+        display: flex;
+        gap: 8px;
+        padding: 10px 14px 10px 20px;
+        margin: 10px 6px 10px 0;
+
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+            border-radius: 10px;
+        }
+    }
+
+    &__box {
+        white-space: pre-wrap;
+    }
+
+    .panel {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .input-wrap {
+        height: 100%;
+        flex: 1;
+
+        & + & {
+            border-left: 1px solid red;
+        }
+    }
+
+    .input-area {
+        margin: 0;
+
+        table {
+            width: 100%;
+            border-right: none;
+        }
+    }
+
+    &__footer {
+        height: $height;
+        @include flexCenter(flex-end);
+        padding: 16px 20px;
+    }
+}

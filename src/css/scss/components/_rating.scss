@@ -1,0 +1,50 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= rating
+=============================================================
+=============================================================
+=============================================================*/
+
+.rating {
+    float: none;
+    width: 120px;
+    display: flex;
+
+
+    &__label {
+        width: 12px;
+        overflow: hidden;
+        cursor: pointer;
+
+        .star-icon {
+            width: 12px;
+            height: 24px;
+            display: block;
+            position: relative;
+            left: 0;
+            background-image: url('#{$path-image}/ico-star-empty.svg');
+            background-repeat: no-repeat;
+
+            &.filled {
+                background-image: url('#{$path-image}/ico-star.svg');
+            }
+        }
+
+        &--full .star-icon {
+            background-position: right;
+        }
+
+        &--half .star-icon {
+            background-position: left;
+        }
+    }
+
+    &.readonly {
+        .star-icon {
+            opacity: 0.7;
+            cursor: default;
+        }
+    }
+}

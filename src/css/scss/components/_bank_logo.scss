@@ -1,0 +1,194 @@
+@use 'sass:math';
+
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= bank logo
+= (23.12.27)sprite image의 순서는 [코드정의서_v2.8_20231227] - 기관유형 순서대로 지정되었습니다. 
+=============================================================
+=============================================================
+=============================================================*/
+$sizeLarge: 67px;
+$sizeSmall: 24px;
+
+/*---------------------
+--- 금융사 선택 핍업
+--------------------- */
+/*---------------------
+--- 공통
+--------------------- */
+.financial {
+    &__type {
+        .financial__icon {
+            display: block;
+            font-size: 0;
+            background-repeat: no-repeat;
+
+            &.small {
+                width: $sizeSmall;
+                height: $sizeSmall;
+            }
+
+            &.large {
+                width: $sizeLarge;
+                height: $sizeLarge;
+            }
+        }
+    }
+
+    &__item {
+        text-align: left;
+        line-height: 1.3;
+    }
+}
+
+/*---------------------
+--- 은행 로고
+--------------------- */
+.financial__type {
+    &.bank {
+        .financial__icon.small {
+            background-image: url('#{$path-image}/ico-bank_small.svg');
+        }
+
+        .financial__icon.large {
+            background-image: url('#{$path-image}/ico-bank_large.svg');
+        }
+
+        $image-rows: 4;
+        $image-cols: 7;
+        $total-index: $image-rows * $image-cols;
+
+        @function sprite-position($index, $iconWidth, $iconHeight) {
+            $rowCalc: math.div($index, $image-rows);
+            $row: math.ceil($rowCalc);
+            $column: $index - ($image-rows * ($row - 1));
+            $x: ($column - 1) * -$iconWidth;
+            $y: ($row - 1) * -$iconHeight;
+            @return $x $y;
+        }
+
+        @for $i from 1 through $total-index {
+            .financial__list:nth-child(#{$i}) {
+                .financial__icon.small {
+                    background-position: sprite-position($i, $sizeSmall, $sizeSmall);
+                }
+            }
+        }
+
+        @for $i from 1 through $total-index {
+            .financial__list:nth-child(#{$i}) {
+                .financial__icon.large {
+                    background-position: sprite-position($i, $sizeLarge, $sizeLarge);
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 증권사 로고
+--------------------- */
+.financial__type {
+    &.stock {
+        .financial__icon.small {
+            background-image: url('#{$path-image}/ico-stock_small.svg');
+        }
+
+        .financial__icon.large {
+            background-image: url('#{$path-image}/ico-stock_large.svg');
+        }
+
+        $image-rows: 4;
+        $image-cols: 7;
+        $total-index: $image-rows * $image-cols;
+
+        @function sprite-position($index, $iconWidth, $iconHeight) {
+            $rowCalc: math.div($index, $image-rows);
+            $row: math.ceil($rowCalc);
+            $column: $index - ($image-rows * ($row - 1));
+            $x: ($column - 1) * -$iconWidth;
+            $y: ($row - 1) * -$iconHeight;
+            @return $x $y;
+        }
+
+        @for $i from 1 through $total-index {
+            .financial__list:nth-child(#{$i}) {
+                .financial__icon.small {
+                    background-position: sprite-position($i, $sizeSmall, $sizeSmall);
+                }
+            }
+        }
+
+        @for $i from 1 through $total-index {
+            .financial__list:nth-child(#{$i}) {
+                .financial__icon.large {
+                    background-position: sprite-position($i, $sizeLarge, $sizeLarge);
+                }
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 금융사 아이콘
+--------------------- */
+.financial {
+    &__icon {
+        display: block;
+        font-size: 0;
+        background-repeat: no-repeat;
+
+        $image-rows: 4;
+        $image-cols: 7;
+        $total-index: $image-rows * $image-cols;
+
+        @function sprite-position($index, $iconWidth, $iconHeight) {
+            $rowCalc: math.div($index, $image-rows);
+            $row: math.ceil($rowCalc);
+            $column: $index - ($image-rows * ($row - 1));
+            $x: ($column - 1) * -$iconWidth;
+            $y: ($row - 1) * -$iconHeight;
+            @return $x $y;
+        }
+
+        &.small {
+            width: $sizeSmall;
+            height: $sizeSmall;
+
+            &.bank {
+                background-image: url('#{$path-image}/ico-bank_small.svg');
+            }
+
+            &.stock {
+                background-image: url('#{$path-image}/ico-stock_small.svg');
+            }
+
+            @for $i from 1 through $total-index {
+                &.icon-#{$i} {
+                    background-position: sprite-position($i, $sizeSmall, $sizeSmall);
+                }
+            }
+        }
+
+        &.large {
+            width: $sizeLarge;
+            height: $sizeLarge;
+
+            &.bank {
+                background-image: url('#{$path-image}/ico-bank_large.svg');
+            }
+
+            &.stock {
+                background-image: url('#{$path-image}/ico-stock_large.svg');
+            }
+
+            @for $i from 1 through $total-index {
+                &.icon-#{$i} {
+                    background-position: sprite-position($i, $sizeLarge, $sizeLarge);
+                }
+            }
+        }
+    }
+}

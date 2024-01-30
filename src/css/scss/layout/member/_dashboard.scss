@@ -1,0 +1,64 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= member/dashboard
+=============================================================
+=============================================================
+=============================================================*/
+
+.dashboard {
+    .list-area__container {
+        padding: 16px;
+    }
+}
+
+.dash-grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    &__item {
+        height: 100%;
+        padding: 4px;
+        border: 1px solid $c-f0;
+        border-radius: 6px;
+    }
+}
+
+// .dashboard2 {
+//     max-width: 1600px !important;
+//     min-height: 900px;
+//     display: flex;
+//     flex-direction: column;
+//
+//     .dash-grid {
+//         flex: 1;
+//
+//         &__item {
+//             background-color: $c-white;
+//         }
+//     }
+// }
+//
+// .dashboard {
+//     &__title {
+//         // height: 82px;
+//         padding: 24px 16px 0;
+//         font-size: 20px;
+//         font-weight: 700;
+//
+//         @include pc-1920 {
+//             // height: 64px;
+//             padding: 16px 16px 0;
+//         }
+//     }
+//
+//     &__container {
+//         display: flex;
+//         flex-direction: column;
+//         flex: 1;
+//         padding: 16px;
+//     }
+// }

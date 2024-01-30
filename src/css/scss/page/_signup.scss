@@ -1,0 +1,510 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= page / signup
+= 회원가입
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- 회원가입 공통
+--------------------- */
+.signup {
+    .box-layout {
+        width: 502px;
+        margin: 56px 0;
+        padding: 56px;
+        border: 1px solid $c-f0;
+        background-color: $c-white;
+        border-radius: 12px;
+    }
+
+    &__step {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        &--wrap {
+            display: flex;
+            gap: 12px;
+        }
+
+        &--num {
+            $size: 26px;
+
+            width: $size;
+            height: $size;
+            color: $c-d9;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 100%;
+            background-color: $c-f0;
+
+            &.is-done {
+                font-size: 0;
+                background-image: icon(checkCircle, '6A27D8');
+                background-size: $size;
+            }
+
+            &.is-active {
+                color: $c-white;
+                background-color: $c-brand-05;
+            }
+        }
+    }
+
+    &__title {
+        color: $c-30;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    &__subtitle {
+        font-size: 18px;
+        font-weight: 600;
+
+        & + .textfield {
+            margin-top: 16px !important;
+        }
+    }
+
+    &__desc {
+        color: $c-8c;
+        font-size: 15px;
+    }
+
+    &__body {
+        margin-top: 24px;
+    }
+
+    &__footer {
+        margin-top: 36px;
+
+        button {
+            height: 50px;
+            font-size: 18px;
+        }
+    }
+
+    .textfield {
+        margin-top: 24px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .signup__subtitle + .textfield {
+        margin-top: 16px;
+    }
+
+    .select-type {
+        display: flex;
+        gap: 24px;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        &__text {
+            margin-bottom: 2px;
+            color: $c-59;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        &__title-area {
+            @include flexCenter(space-between);
+        }
+
+        &__title {
+            color: $c-43;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.2;
+
+            &.user-type {
+                color: $c-secondary;
+            }
+        }
+
+        &__icon {
+            $size: 20px;
+
+            width: $size;
+            height: $size;
+            font-size: 0;
+            background-image: icon(checkCircle, 'D9D9D9');
+            background-position: top;
+            background-size: 20px;
+        }
+
+        &__box {
+            display: block;
+            min-width: 260px;
+            height: 100%;
+            padding: 24px 16px 42px;
+            border: 1px solid $c-d9;
+            border-radius: 4px;
+
+            &:hover {
+                border: 1px solid $c-brand-04;
+                transition: $duration;
+
+                .select-type__icon {
+                    background-image: icon(checkCircle, '8852E0');
+                    transition: $duration;
+                }
+            }
+        }
+        .help-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 8px;
+            color: $c-59;
+            font-size: 13px;
+            background-color: $c-f5;
+            border-radius: 4px;
+        }
+
+        &__desc {
+            margin-top: 24px;
+        }
+
+        &__list {
+            padding-left: 24px;
+            background-image: icon(checkIcon, '29cc6a');
+            background-repeat: no-repeat;
+
+            & + .select-type__list {
+                margin-top: 16px;
+            }
+        }
+    }
+}
+
+.signup_00,
+.signup_01,
+#wrap.login {
+    // min-height: 100vh;
+    background-color: $c-f0;
+
+    .section {
+        height: calc(100vh - $h-header);
+        margin-top: 0;
+        align-items: center;
+
+        @media (max-height: 778px) {
+            height: 778px;
+        }
+    }
+
+    .box-layout {
+        display: inline-block;
+        width: auto;
+        @include shadowMd01;
+    }
+
+    .signup__title {
+        font-size: 32px;
+    }
+}
+
+.section.login {
+    min-height: calc(100vh - $h-header);
+    align-items: center;
+    background-color: $c-f0;
+
+    @media (max-height: 778px) {
+        height: 778px;
+    }
+
+    .box-layout {
+        display: inline-block;
+        width: 560px;
+        height: fit-content;
+        @include shadowMd01;
+    }
+
+    .signup__title {
+        font-size: 32px;
+    }
+}
+
+/*---------------------
+--- 컨텐츠 하단의 로그인/회원가입 이동 영역
+--------------------- */
+.signin {
+    &__box {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 28px;
+    }
+
+    &__text {
+        color: $c-8c;
+        font-size: 14px;
+    }
+
+    &__link {
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: $c-8c;
+            transition: $duration;
+        }
+    }
+}
+
+.id-verification {
+    margin-left: 0 !important;
+
+    &:disabled {
+        display: flex;
+        justify-content: center;
+        color: $c-positive !important;
+        background-color: $c-fa;
+        border: 1px solid $c-d9;
+
+        > * {
+            color: $c-positive !important;
+        }
+
+        &:hover {
+            background-color: $c-fa;
+        }
+    }
+}
+
+/*---------------------
+--- 기본정보 입력 화면
+--------------------- */
+.signup_03 {
+    .account-verification {
+        /* 계좌 등록하기 */
+        display: flex;
+        justify-content: center;
+        margin-left: 0 !important;
+
+        > * {
+            color: $c-brand-04 !important;
+        }
+
+        .ico-plus {
+            background-image: icon(plusIcon, '8852e0');
+            background-position: center;
+        }
+
+        &:disabled {
+            color: $c-positive !important;
+            background-color: $c-fa;
+            border: 1px solid $c-d9;
+
+            > * {
+                color: $c-positive !important;
+            }
+
+            &:hover {
+                background-color: $c-fa;
+            }
+        }
+    }
+
+    .account {
+        /* 계좌등록 후 */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin: 0 0 36px;
+
+        &__text {
+            width: 100%;
+            padding: 16px;
+            background-color: $c-fa;
+            border: 1px solid $c-d9;
+            border-radius: 4px;
+        }
+
+        .label {
+            margin-bottom: 0;
+            color: $c-8c;
+        }
+
+        &__info {
+            color: $c-59;
+            font-size: 15px;
+
+            & + .account__info {
+                margin-left: 6px;
+            }
+        }
+
+        /* 계좌 수정 */
+        &__edit {
+            width: fit-content;
+            margin-top: 8px;
+            padding-left: 40px;
+            background-image: icon(editIcon, '8852E0');
+            background-position: center left 16px;
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+/*---------------------
+--- 기업정보 입력 화면
+--------------------- */
+.signup_04 {
+    .select-type {
+        $selectGap: 8px;
+        gap: $selectGap;
+
+        &__item {
+            flex: 1;
+        }
+
+        @include safari-pc {
+            .select-type__item + .select-type__item {
+                margin-left: $selectGap;
+            }
+        }
+
+        &__box {
+            min-width: 0;
+            padding: 20px 8px 20px 16px;
+
+            &:hover {
+                border-color: $c-d9;
+
+                .select-type__icon {
+                    background-image: icon(checkCircle, 'D9D9D9');
+                }
+            }
+        }
+
+        &__title {
+            font-size: 15px;
+        }
+
+        &__item {
+            cursor: pointer;
+        }
+
+        input:checked + .select-type__item {
+            .select-type__box {
+                border-color: $c-brand-04;
+            }
+
+            .select-type__icon {
+                background-image: icon(checkCircle, '8852E0');
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 약관동의 화면
+--------------------- */
+.signup_05 {
+    .armt {
+        &__all {
+            padding: 16px 8px;
+            font-weight: 600;
+            background-color: $c-fa;
+            border: 1px solid $c-f0;
+            border-radius: 4px;
+
+            * {
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+
+        &__list {
+            @include flexCenter(space-between);
+            margin-top: 16px;
+            padding-left: 10px;
+
+            .arrow {
+                $size: 30px;
+
+                display: block;
+                width: $size;
+                height: $size;
+                font-size: 0;
+                background-image: icon(sidebarArrow, '8C8C8C');
+                background-size: 18px;
+                background-position: center;
+                background-repeat: no-repeat;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: rgba($color: $c-d9, $alpha: 0.33);
+                    transition: $duration;
+                }
+            }
+        }
+    }
+
+    .color-orange {
+        color: $c-secondary;
+        font-size: 15px;
+    }
+
+    .popup {
+        &__wrap {
+            width: 520px;
+        }
+
+        .modal__cont {
+            height: 90vh;
+            max-height: 640px;
+        }
+    }
+}
+
+/*---------------------
+--- 로그인
+--------------------- */
+.login {
+    .signup__header {
+        margin-bottom: 44px;
+        text-align: center;
+    }
+
+    .box-layout {
+        width: 560px;
+        padding: 56px 120px;
+    }
+
+    &__item {
+        @include flexCenter(space-between);
+        margin-top: 8px;
+
+        * {
+            color: $c-59;
+        }
+    }
+
+    .find-id {
+        padding-right: 24px;
+        font-size: 14px;
+        background-image: icon(sidebarArrow, '595959');
+        background-repeat: no-repeat;
+        background-position: right center;
+
+        &:hover {
+            color: $c-8c;
+            background-image: icon(sidebarArrow, '8C8C8C');
+        }
+    }
+}

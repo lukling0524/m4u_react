@@ -1,0 +1,707 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= user/header
+=============================================================
+=============================================================
+=============================================================*/
+/*---------------------
+--- header (user page)
+--------------------- */
+.user {
+    .header {
+        width: 100%;
+        min-width: $admin-min-width;
+        display: flex;
+        justify-content: center;
+        position: sticky;
+        top: 0;
+        background-color: $c-white;
+        @include shadowSm01;
+        z-index: 100;
+
+        &__wrap {
+            @include flexCenter(space-between);
+        }
+    }
+}
+
+/*---------------------
+--- header top
+--------------------- */
+.header {
+    &__top {
+        width: 100%;
+        height: $h-header;
+        padding: 16px 0;
+    }
+
+    &__items {
+        position: relative;
+        @include flexCenter(space-between);
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .login {
+        .btn {
+            margin-left: 0;
+            color: $c-8c;
+
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+    }
+
+    .user-box {
+        $headerTopGap: 20px;
+
+        gap: $headerTopGap;
+
+        @include safari-pc {
+            > div + div {
+                margin-left: $headerTopGap;
+            }
+        }
+    }
+
+    .items {
+        &__box {
+            $size: 36px;
+
+            width: $size;
+            height: $size;
+            position: relative;
+            @include flexCenter(center);
+            border-radius: 4px;
+            border: 1px solid transparent;
+
+            &:hover {
+                background-color: $c-f5;
+                transition: $duration;
+            }
+
+            .bedge {
+                position: absolute;
+                top: -2px;
+                left: 16px;
+                border: 1px solid #fff;
+                height: 18px;
+            }
+
+            &--alarm {
+                &.is-active,
+                &:focus {
+                    background-color: $c-f5;
+                    border-color: $c-brand-04;
+                }
+            }
+        }
+
+        &__btn {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            @include flexCenter(center);
+        }
+
+        &__profile {
+            width: 66px;
+            height: 36px;
+            padding: 2px 32px 2px 4px;
+            background-position: center right 4px;
+            background-repeat: no-repeat;
+            background-image: url('#{$path-image}/arrow-down.svg');
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: background-color, border-color $duration;
+
+            .user-img {
+                $size: 30px;
+
+                width: $size;
+                height: $size;
+            }
+
+            &:hover {
+                background-color: $c-f5;
+            }
+
+            &.is-active,
+            &:focus {
+                background-color: $c-f5;
+                border-color: $c-brand-04;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 헤더 팝업창 공통
+--------------------- */
+.header {
+    &__modal {
+        position: absolute;
+        top: calc(#{$h-header} - 16px);
+        right: 0;
+
+        display: none;
+
+        &--wrap {
+            position: relative;
+        }
+
+        &.show {
+            display: block;
+        }
+    }
+}
+
+.modal {
+    background-color: $c-white;
+    border-radius: 6px;
+    @include shadowSm04;
+    overflow: hidden;
+
+    &__head {
+        @include flexCenter(space-between);
+        padding: 16px;
+        border-bottom: 1px solid $c-f0;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+/*---------------------
+--- 알림 팝업
+--------------------- */
+.notification {
+    $notiBoxGap: 8px;
+
+    width: 400px;
+
+    &__box {
+        display: flex;
+        gap: $notiBoxGap;
+    }
+
+    &__action {
+        padding: 4px 6px;
+        color: $c-43;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 16px;
+
+        &:hover {
+            color: $c-8c;
+            transition: $duration;
+        }
+
+        &.all {
+            padding-right: 26px;
+            background-position: center right;
+            background-repeat: no-repeat;
+            background-image: icon(sidebarArrow, '595959');
+
+            &:hover {
+                background-image: icon(sidebarArrow, '8C8C8C');
+                transition: $duration;
+            }
+
+            @include safari-pc {
+                margin-left: $notiBoxGap;
+            }
+        }
+    }
+
+    .modal__contents {
+        height: 430px;
+        padding: 16px 4px 16px 16px;
+        overflow: hidden;
+
+        &--wrap {
+            height: 100%;
+            padding-top: 2px; // new icon을 위한 공간
+            overflow-y: auto;
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $c-d9;
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: $c-f0;
+            }
+        }
+    }
+
+    .item {
+        margin-right: 12px;
+
+        & + .item {
+            margin-top: 24px;
+        }
+
+        &__head {
+            $itemheadGap: 6px;
+
+            display: flex;
+            align-items: flex-end;
+            gap: $itemheadGap;
+            margin-bottom: 4px;
+
+            &--title {
+                display: inline-block;
+                position: relative;
+            }
+
+            &--text {
+                color: $c-brand-04;
+                font-size: 15px;
+                font-weight: 600;
+
+                &.text-purple {
+                    color: $c-brand-04;
+                }
+
+                &.text-red {
+                    color: $c-error;
+                }
+
+                &.text-gray {
+                    color: $c-59;
+                }
+            }
+
+            .dot {
+                position: absolute;
+                top: -2px;
+                right: -5px;
+            }
+
+            .date {
+                color: $c-8c;
+                font-size: 14px;
+
+                @include safari-pc {
+                    margin-left: $itemheadGap;
+                }
+            }
+        }
+
+        &__contents {
+            display: block;
+            padding: 16px;
+            background-color: $c-fa;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: $c-f5;
+                transition: $duration;
+            }
+
+            &--title {
+                @include flexCenter(flex-start);
+                padding-right: 32px;
+                color: $c-59;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 24px;
+                background-position: center right;
+                background-repeat: no-repeat;
+                background-image: icon(sidebarArrow, '8C8C8C');
+
+                > span {
+                    color: $c-59;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+            &--desc {
+                @include ellipsisMulti(2);
+                font-size: 13px;
+                color: $c-8c;
+                line-height: 16px;
+            }
+
+            .company {
+                display: inline-block;
+                max-width: 100px; // 8자부터 말줄임
+                @include ellipsis;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- 프로필 팝업
+--------------------- */
+.mypage {
+    width: fit-content;
+    min-width: 260px;
+    white-space: nowrap;
+
+    &__wrap {
+        padding: 16px;
+    }
+
+    &__profile {
+        @include flexCenter(flex-start);
+        padding: 8px 36px 8px 8px;
+        background-position: center right 8px;
+        background-repeat: no-repeat;
+        background-image: icon(sidebarArrow, '595959');
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $c-f5;
+            transition: $duration;
+        }
+
+        &--wrap {
+            margin-left: 8px;
+        }
+
+        &--name {
+            display: inline-block;
+            max-width: 100px;
+            margin-right: 6px;
+            font-size: 15px;
+            @include ellipsis;
+        }
+
+        &--text {
+            color: $c-8c;
+            font-size: 13px;
+            line-height: 16px;
+        }
+    }
+
+    .user-img {
+        $size: 38px;
+
+        width: $size;
+        height: $size;
+    }
+
+    &__link {
+        margin: 16px 0;
+        padding: 16px 0;
+        border-top: 1px solid $c-f0;
+        border-bottom: 1px solid $c-f0;
+
+        li + li {
+            margin-top: 2px;
+        }
+
+        &--item {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 10px 8px;
+            font-size: 14px;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: $c-f5;
+                transition: $duration;
+            }
+        }
+    }
+
+    .new-icon {
+        display: block;
+        height: 18px;
+        margin-left: 8px;
+        padding: 2px 6px;
+        color: $c-white;
+        font-size: 13px;
+        line-height: 14px;
+        background-color: $c-secondary;
+        border-radius: 100px;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    .page-change {
+        $iconGap: 4px;
+
+        width: 100%;
+        height: 40px;
+        @include flexCenter(center);
+        gap: $iconGap;
+        padding: 10px 16px;
+        border: 1px solid $c-d9;
+        border-radius: 4px;
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-image: icon(refreshIcon, '6A27D8');
+
+            @include safari-pc {
+                margin-right: $iconGap;
+            }
+        }
+
+        &__text {
+            text-align: center;
+            color: $c-brand-04;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        &:hover {
+            background-color: $c-f5;
+            transition: $duration;
+        }
+    }
+
+    .logout {
+        display: block;
+        width: 100%;
+        height: 52px;
+        font-size: 14px;
+        color: $c-8c;
+        text-align: center;
+        line-height: 52px;
+        background-color: $c-f5;
+
+        &:hover {
+            color: $c-43;
+            background-color: $c-f0;
+            transition: $duration;
+        }
+    }
+}
+
+/*---------------------
+--- 멤버 뱃지
+--------------------- */
+.member-bedge {
+    width: fit-content;
+    padding: 2px 8px;
+    color: $c-f5;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 2px;
+
+    &.partner {
+        background-color: $c-brand-03;
+    }
+
+    &.person {
+        color: $c-8c;
+        background-color: $c-f0;
+    }
+
+    &.enterprise {
+        background-color: $c-59;
+    }
+}
+
+/*---------------------
+--- header bottom
+--------------------- */
+
+$header-bottom: 50px;
+
+.header {
+    &__bottom {
+        height: $header-bottom;
+    }
+
+    .gnb {
+        $gnbGap: 24px;
+
+        display: flex;
+        gap: $gnbGap;
+
+        &__item {
+            position: relative;
+            color: $c-59;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: $header-bottom;
+            transition: $duration;
+
+            @include safari-pc {
+                & + .gnb__item {
+                    margin-left: $gnbGap;
+                }
+            }
+
+            &:hover {
+                color: $c-brand-04;
+            }
+
+            &.is-active {
+                color: $c-brand-04;
+
+                &::after {
+                    @include pseudo('', 100%, 2px);
+                    position: absolute;
+                    bottom: 0;
+                    background-color: $c-brand-04;
+                    transition: $duration;
+                }
+            }
+        }
+    }
+
+    .partner-link {
+        display: flex;
+        align-items: center;
+
+        &.hide {
+            display: none;
+        }
+
+        &__text {
+            margin-right: 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        &__btn {
+            padding: 6px 16px;
+            border-color: $c-d9;
+            transition: background-color $duration;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background-color: $c-f5;
+            }
+        }
+    }
+}
+
+/*---------------------
+--- footer
+--------------------- */
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+    background-color: $c-30;
+
+    * {
+        color: $c-bf !important;
+        font-size: 12px;
+        font-weight: 300;
+    }
+
+    .contents {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__list + &__list {
+        margin-top: 8px;
+    }
+
+    &__flex {
+        $footerGap: 17px;
+
+        display: flex;
+        gap: $footerGap;
+
+        li {
+            position: relative;
+
+            & + li {
+                @include safari-pc {
+                    margin-left: $footerGap;
+                }
+
+                &::before {
+                    @include pseudo('', 1px, 10px);
+                    position: absolute;
+                    top: 4px;
+                    left: -8px;
+                    background-color: $c-bf;
+                }
+            }
+        }
+
+        &.contact {
+            margin-left: 24px;
+        }
+    }
+
+    .terms {
+        margin-bottom: 24px;
+
+        li::before {
+            height: 14px;
+        }
+
+        .link {
+            font-size: 14px;
+            font-weight: 700;
+
+            &::after {
+                @include pseudo('', 100%, 1px);
+                background-color: $c-bf;
+                opacity: 0;
+            }
+
+            &:hover::after {
+                opacity: 1;
+                transition: $duration;
+            }
+        }
+    }
+
+    .copyright {
+        margin-top: 24px;
+    }
+
+    .sns {
+        $snsGap: 12px;
+
+        display: flex;
+        gap: $snsGap;
+
+        &__item {
+            $size: 36px;
+
+            width: $size;
+            height: $size;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-image: url('#{$path-image}/ico-sns.svg');
+
+            &.instagram {
+                background-position: top;
+            }
+
+            &.blog {
+                background-position: center;
+            }
+
+            &.youtube {
+                background-position: bottom;
+            }
+
+            @include safari-pc {
+                & + .sns__item {
+                    margin-left: $snsGap;
+                }
+            }
+        }
+    }
+}

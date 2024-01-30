@@ -1,0 +1,150 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= base
+= space
+=============================================================
+=============================================================
+=============================================================*/
+
+/*---------------------
+--- padding
+--------------------- */
+
+$space-direction: top, right, bottom, left;
+
+@for $space from 0 through 8 {
+    $space: $space * 8;
+
+    @each $direction in $space-direction {
+        .pd__#{$direction}--#{$space} {
+            padding-#{$direction}: #{$space}px !important;
+        }
+    }
+}
+
+/*---------------------
+--- margin
+--------------------- */
+
+@for $space from 0 through 8 {
+    $space: $space * 8;
+
+    @each $direction in $space-direction {
+        .mg__#{$direction}--#{$space} {
+            margin-#{$direction}: #{$space}px !important;
+        }
+    }
+}
+
+/*---------------------
+--- flex
+--------------------- */
+
+.flex {
+    display: flex;
+
+    &__column {
+        flex-direction: column;
+    }
+
+    &__none {
+        flex: none;
+    }
+}
+
+/* flex item 가로정렬 */
+.flex {
+    &__horizontal {
+        &--start {
+            justify-content: flex-start !important;
+        }
+
+        &--center {
+            justify-content: center !important;
+        }
+
+        &--end {
+            justify-content: flex-end !important;
+        }
+
+        &--around {
+            justify-content: space-around !important;
+        }
+
+        &--between {
+            justify-content: space-between !important;
+        }
+    }
+}
+
+/* flex item 세로정렬 */
+.flex {
+    &__vertical {
+        &--top {
+            align-items: flex-start !important;
+        }
+
+        &--center {
+            align-items: center !important;
+        }
+
+        &--end {
+            align-items: flex-end !important;
+        }
+    }
+}
+
+/* flex 간격 설정*/
+@for $flex from 1 through 6 {
+    .flex#{$flex} {
+        flex: #{$flex} !important;
+    }
+}
+
+/* width */
+@for $width from 0 through 20 {
+    $width: $width * 5;
+
+    .width-#{$width}p {
+        width: #{$width}#{'%'} !important;
+    }
+}
+
+/* 컨텐츠 너비에 따라서 가변 */
+.width-fit {
+    width: fit-content;
+}
+
+.width-auto {
+    width: auto !important;
+}
+
+/* 높이값 */
+.height-100p {
+    height: 100% !important;
+}
+
+/* 컨텐츠 길이에 따라서 가변 */
+.height-fit {
+    height: fit-content;
+}
+
+.maxheight-fit {
+    max-height: fit-content !important;
+}
+
+/* 텍스트 정렬 */
+.text {
+    &-left {
+        text-align: left !important;
+    }
+
+    &-center {
+        text-align: center !important;
+    }
+
+    &-right {
+        text-align: right !important;
+    }
+}

@@ -1,0 +1,93 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= layout
+= admin/header
+=============================================================
+=============================================================
+=============================================================*/
+
+.admin {
+    .header {
+        width: 100%;
+        min-width: $admin-min-width;
+        height: $h-header;
+        @include flexCenter(space-between);
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 16px;
+        background-color: $c-white;
+        @include shadowSm01;
+        z-index: 1000;
+
+        .logo {
+            width: 194px;
+            @include flexCenter(center);
+
+            &__img {
+                display: block;
+            }
+        }
+
+        &__wrap {
+            width: 100%;
+            @include flexCenter(space-between);
+            margin-right: 100px;
+
+            @include laptop {
+                margin-right: 50px;
+            }
+        }
+
+        &__items {
+            @include flexCenter(space-between);
+
+            &--alarm {
+                position: relative;
+
+                .alarm {
+                    &__btn {
+                        padding: 8px;
+                        border-radius: 4px;
+                        transition: background-color $duration;
+
+                        &:hover {
+                            background-color: $c-fa;
+                        }
+
+                        &:active,
+                        &:focus {
+                            background-color: $c-f5;
+                        }
+                    }
+                }
+            }
+
+            &--message {
+                display: flex;
+                align-items: center;
+                margin-left: 16px;
+                margin-right: 24px;
+
+                >* {
+                    color: $c-59;
+                }
+            }
+        }
+    }
+}
+
+.alarm-popup {
+    width: 270px;
+    position: absolute;
+    top: 50px;
+    left: -115px;
+    background-color: $c-white;
+    @include shadowMd01;
+    z-index: 50;
+
+    .list__main--title {
+        font-weight: 500;
+    }
+}

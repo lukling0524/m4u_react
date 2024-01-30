@@ -1,0 +1,98 @@
+/* ==========================================================
+=============================================================
+=============================================================
+= components
+= tab menu
+=============================================================
+=============================================================
+=============================================================*/
+.tabs {
+    display: flex;
+
+    &__btn {
+        position: relative;
+        padding: 10px 16px;
+        color: $c-59;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 2px;
+
+
+        &:after {
+            @include pseudo('', 100%, 2px);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: transparent;
+        }
+
+        &.is-active {
+            color: $c-primary;
+            transition: 0.2s;
+
+            &:after {
+                background-color: $c-primary;
+                transition: 0.2s;
+            }
+        }
+
+        &:disabled,
+        &.disabled {
+            color: $c-bf;
+            cursor: default;
+
+            &:hover {
+                background-color: transparent;
+            }
+
+            &:after {
+                background-color: transparent;
+            }
+        }
+
+        &:hover {
+            background-color: $c-primary-light;
+            transition: 0.1s;
+        }
+    }
+}
+
+/*---------------------
+--- segment tab
+--------------------- */
+
+.segment-tab {
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid $c-d9;
+    overflow: hidden;
+
+    &__wrap {
+        display: flex;
+
+        &+& {
+            border-top: 1px solid $c-d9;
+        }
+    }
+
+    &__list {
+        &+& {
+            border-left: 1px solid $c-d9;
+        }
+    }
+
+    &__item {
+        min-width: 94px;
+        padding: 8px 12px;
+
+        &:hover {
+            background-color: $c-primary-light;
+            transition: $duration;
+        }
+
+        &.is-active {
+            color: #fff;
+            background-color: $c-brand-05;
+        }
+    }
+}
